@@ -45,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         ChessPiece currentPiece = mChess.getPiece(square);
 
-        if(selectedPiece != null){ // move to other space
+        if (selectedPiece != null
+                && (currentPiece == null || selectedPiece.getPieceColor() != currentPiece.getPieceColor())
+        ) { // move to other space
             mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
 
             currentPiece = selectedPiece;
@@ -56,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
             resetColors();
             mChess.setChessPieces(currentPiece, square);
             mChess.updateBoard();
-        }else if(currentPiece != null){
+        } else if (currentPiece != null) {
             selectedPiece = currentPiece;
-        }else{Log.wtf("wtf", "help");}
+        } else {
+            Log.wtf("wtf", "help");
+        }
     }
 
     @SuppressLint("DiscouragedApi")
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         mChess.newGame();
     }
 
-    private void resetColors(){ // resets all colors to the standard black and white
+    private void resetColors() { // resets all colors to the standard black and white
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((i + j) % 2 == 0) {
