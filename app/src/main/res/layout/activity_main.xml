@@ -9,6 +9,7 @@
     <!--col A-->
     <ImageView
         android:id="@+id/a1"
+        android:contentDescription="@string/a1"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -20,6 +21,7 @@
 
     <ImageView
         android:id="@+id/a2"
+        android:contentDescription="@string/a2"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -31,6 +33,7 @@
 
     <ImageView
         android:id="@+id/a3"
+        android:contentDescription="@string/a3"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -42,6 +45,7 @@
 
     <ImageView
         android:id="@+id/a4"
+        android:contentDescription="@string/a4"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -53,6 +57,7 @@
 
     <ImageView
         android:id="@+id/a5"
+        android:contentDescription="@string/a5"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -64,6 +69,7 @@
 
     <ImageView
         android:id="@+id/a6"
+        android:contentDescription="@string/a6"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -75,6 +81,7 @@
 
     <ImageView
         android:id="@+id/a7"
+        android:contentDescription="@string/a7"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -86,6 +93,7 @@
 
     <ImageView
         android:id="@+id/a8"
+        android:contentDescription="@string/a8"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -98,6 +106,7 @@
     <!--col B-->
     <ImageView
         android:id="@+id/b1"
+        android:contentDescription="@string/b1"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -109,6 +118,7 @@
 
     <ImageView
         android:id="@+id/b2"
+        android:contentDescription="@string/b2"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -120,6 +130,7 @@
 
     <ImageView
         android:id="@+id/b3"
+        android:contentDescription="@string/b3"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -131,6 +142,7 @@
 
     <ImageView
         android:id="@+id/b4"
+        android:contentDescription="@string/b4"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -142,6 +154,7 @@
 
     <ImageView
         android:id="@+id/b5"
+        android:contentDescription="@string/b5"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -153,6 +166,7 @@
 
     <ImageView
         android:id="@+id/b6"
+        android:contentDescription="@string/b6"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -164,6 +178,7 @@
 
     <ImageView
         android:id="@+id/b7"
+        android:contentDescription="@string/b7"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -175,6 +190,7 @@
 
     <ImageView
         android:id="@+id/b8"
+        android:contentDescription="@string/b8"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -187,6 +203,7 @@
     <!--col C-->
     <ImageView
         android:id="@+id/c1"
+        android:contentDescription="@string/c1"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -198,6 +215,7 @@
 
     <ImageView
         android:id="@+id/c2"
+        android:contentDescription="@string/c2"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -209,6 +227,7 @@
 
     <ImageView
         android:id="@+id/c3"
+        android:contentDescription="@string/c3"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -220,6 +239,7 @@
 
     <ImageView
         android:id="@+id/c4"
+        android:contentDescription="@string/c4"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -231,6 +251,7 @@
 
     <ImageView
         android:id="@+id/c5"
+        android:contentDescription="@string/c5"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -242,6 +263,7 @@
 
     <ImageView
         android:id="@+id/c6"
+        android:contentDescription="@string/c6"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -253,6 +275,7 @@
 
     <ImageView
         android:id="@+id/c7"
+        android:contentDescription="@string/c7"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -264,6 +287,7 @@
 
     <ImageView
         android:id="@+id/c8"
+        android:contentDescription="@string/c8"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -276,6 +300,7 @@
     <!--col D-->
     <ImageView
         android:id="@+id/d1"
+        android:contentDescription="@string/d1"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -287,6 +312,7 @@
 
     <ImageView
         android:id="@+id/d2"
+        android:contentDescription="@string/d2"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -298,6 +324,7 @@
 
     <ImageView
         android:id="@+id/d3"
+        android:contentDescription="@string/d3"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -309,6 +336,7 @@
 
     <ImageView
         android:id="@+id/d4"
+        android:contentDescription="@string/d4"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -320,6 +348,7 @@
 
     <ImageView
         android:id="@+id/d5"
+        android:contentDescription="@string/d5"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -331,6 +360,7 @@
 
     <ImageView
         android:id="@+id/d6"
+        android:contentDescription="@string/d6"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -342,6 +372,7 @@
 
     <ImageView
         android:id="@+id/d7"
+        android:contentDescription="@string/d7"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -353,6 +384,7 @@
 
     <ImageView
         android:id="@+id/d8"
+        android:contentDescription="@string/d8"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -365,6 +397,7 @@
     <!--col E-->
     <ImageView
         android:id="@+id/e1"
+        android:contentDescription="@string/e1"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -376,6 +409,7 @@
 
     <ImageView
         android:id="@+id/e2"
+        android:contentDescription="@string/e2"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -387,6 +421,7 @@
 
     <ImageView
         android:id="@+id/e3"
+        android:contentDescription="@string/e3"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -398,6 +433,7 @@
 
     <ImageView
         android:id="@+id/e4"
+        android:contentDescription="@string/e4"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -409,6 +445,7 @@
 
     <ImageView
         android:id="@+id/e5"
+        android:contentDescription="@string/e5"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -420,6 +457,7 @@
 
     <ImageView
         android:id="@+id/e6"
+        android:contentDescription="@string/e6"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -431,6 +469,7 @@
 
     <ImageView
         android:id="@+id/e7"
+        android:contentDescription="@string/e7"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -442,6 +481,7 @@
 
     <ImageView
         android:id="@+id/e8"
+        android:contentDescription="@string/e8"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -454,6 +494,7 @@
     <!--col F-->
     <ImageView
         android:id="@+id/f1"
+        android:contentDescription="@string/f1"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -465,6 +506,7 @@
 
     <ImageView
         android:id="@+id/f2"
+        android:contentDescription="@string/f2"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -476,6 +518,7 @@
 
     <ImageView
         android:id="@+id/f3"
+        android:contentDescription="@string/f3"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -487,6 +530,7 @@
 
     <ImageView
         android:id="@+id/f4"
+        android:contentDescription="@string/f4"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -498,6 +542,7 @@
 
     <ImageView
         android:id="@+id/f5"
+        android:contentDescription="@string/f5"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -509,6 +554,7 @@
 
     <ImageView
         android:id="@+id/f6"
+        android:contentDescription="@string/f6"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -520,6 +566,7 @@
 
     <ImageView
         android:id="@+id/f7"
+        android:contentDescription="@string/f7"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -531,6 +578,7 @@
 
     <ImageView
         android:id="@+id/f8"
+        android:contentDescription="@string/f8"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -543,6 +591,7 @@
     <!--col G-->
     <ImageView
         android:id="@+id/g1"
+        android:contentDescription="@string/g1"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -554,6 +603,7 @@
 
     <ImageView
         android:id="@+id/g2"
+        android:contentDescription="@string/g2"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -565,6 +615,7 @@
 
     <ImageView
         android:id="@+id/g3"
+        android:contentDescription="@string/g3"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -576,6 +627,7 @@
 
     <ImageView
         android:id="@+id/g4"
+        android:contentDescription="@string/g4"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -587,6 +639,7 @@
 
     <ImageView
         android:id="@+id/g5"
+        android:contentDescription="@string/g5"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -598,6 +651,7 @@
 
     <ImageView
         android:id="@+id/g6"
+        android:contentDescription="@string/g6"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -609,6 +663,7 @@
 
     <ImageView
         android:id="@+id/g7"
+        android:contentDescription="@string/g7"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -620,6 +675,7 @@
 
     <ImageView
         android:id="@+id/g8"
+        android:contentDescription="@string/g8"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -632,6 +688,7 @@
     <!--col H-->
     <ImageView
         android:id="@+id/h1"
+        android:contentDescription="@string/h1"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -643,6 +700,7 @@
 
     <ImageView
         android:id="@+id/h2"
+        android:contentDescription="@string/h2"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -654,6 +712,7 @@
 
     <ImageView
         android:id="@+id/h3"
+        android:contentDescription="@string/h3"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -665,6 +724,7 @@
 
     <ImageView
         android:id="@+id/h4"
+        android:contentDescription="@string/h4"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -676,6 +736,7 @@
 
     <ImageView
         android:id="@+id/h5"
+        android:contentDescription="@string/h5"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -687,6 +748,7 @@
 
     <ImageView
         android:id="@+id/h6"
+        android:contentDescription="@string/h6"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -698,6 +760,7 @@
 
     <ImageView
         android:id="@+id/h7"
+        android:contentDescription="@string/h7"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
@@ -709,6 +772,7 @@
 
     <ImageView
         android:id="@+id/h8"
+        android:contentDescription="@string/h8"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
