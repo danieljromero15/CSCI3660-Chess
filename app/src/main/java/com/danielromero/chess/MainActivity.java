@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         //Log.d("square", square); // prints ID of sqare selected
 
         ChessPiece currentPiece = mChess.getPiece(square);
-        if(currentPiece == null && selectedPiece != null){ // move to empty space
+
+        if(selectedPiece != null){ // move to other space
             mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
 
             currentPiece = selectedPiece;
@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
             resetColors();
             mChess.setChessPieces(currentPiece, square);
             mChess.updateBoard();
-        }else if(currentPiece != null && selectedPiece != null){ // TODO: destroying another piece
-
         }else if(currentPiece != null){
             selectedPiece = currentPiece;
         }else{Log.wtf("wtf", "help");}

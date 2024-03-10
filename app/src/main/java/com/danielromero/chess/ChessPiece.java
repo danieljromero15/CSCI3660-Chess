@@ -3,9 +3,9 @@ package com.danielromero.chess;
 public class ChessPiece extends Chess {
     private int column;
     private int row;
-    private String pieceName;
+    private final String pieceName;
     private int pieceImage;
-    private int pieceColor;
+    private final int pieceColor;
 
     ChessPiece(int column, int row, String pieceName, int pieceColor) {
         this.column = column;
