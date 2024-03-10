@@ -1,75 +1,116 @@
 package com.danielromero.chess;
 
 import android.media.Image;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-class chessPiece{
-    int column;
-    int row;
-
-    private void setPosition(int x, int y){}
-
-    private void getPositon(ImageView view){}
-
-}
-
 public class Chess {
     ImageView[][] chessGrid = new ImageView[8][8];
+    ChessPiece[][] chessPieces = new ChessPiece[8][8];
 
-    public void setChessSquare(ImageView view, int x, int y){
+    public void updateBoard(){
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                ImageView view = getChessSquare(i, j);
+                ChessPiece piece = getPiece(i, j);
+                if(piece != null){
+                    setPiece(piece);
+                }else{
+                    view.setImageDrawable(null);
+                }
+            }
+        }
+    }
+
+    public void setChessSquare(ImageView view, int x, int y) { // adds view to the array
         chessGrid[x][y] = view;
     }
 
-    public ImageView getChessSquare(int x, int y) {
+    public ImageView getChessSquare(int x, int y) { // gets a view from the array
         return chessGrid[x][y];
     }
 
-    public void newGame(View view) {
-        newGame();
+    public void setChessPieces(ChessPiece piece, int x, int y) { // adds piece to the array
+        chessPieces[x][y] = piece;
     }
 
-    public void newGame(){
-        // initial setup
+    public void setChessPieces(ChessPiece piece, String pos){
+        setChessPieces(piece, getNumsfromID(pos)[0], getNumsfromID(pos)[1]);
+    }
+
+    public static String getIDfromNums(int x, int y) { // converts ints to string, eg. 0, 0 to "a1"
+        return String.valueOf((char) (x + 97)) + String.valueOf(y + 1);
+    }
+
+    public static int[] getNumsfromID(String ID) { // converts string to ints, eg. "h8" to {7, 7}
+        return new int[]{ID.charAt(0) - 97, Integer.parseInt(String.valueOf(ID.charAt(1))) - 1};
+    }
+
+    public void setPiece(ChessPiece piece) { // sets a piece to a specific square
+        if (piece != null) {
+            int x = piece.getColumn();
+            int y = piece.getRow();
+            setChessPieces(piece, x, y); // sets into array
+            getChessSquare(x, y).setImageResource(piece.getPieceImage()); // sets onto imageview
+        }
+    }
+
+    public ChessPiece getPiece(int x, int y) {
+        return chessPieces[x][y];
+    }
+
+    public ChessPiece getPiece(String pos){
+        return getPiece(getNumsfromID(pos)[0], getNumsfromID(pos)[1]);
+    }
+
+    public void newGame() {
+        // initial setup, adds all pieces to board
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
+                // clears any previous pieces on selected tiles in the loop (so every tile)
+                setChessPieces(null, i, j); // sets into array
+                getChessSquare(i, j).setImageDrawable(null); // sets onto imageview
+
+
+                ChessPiece currentPiece = null;
                 String currentSquare = getIDfromNums(i, j);
-                switch(currentSquare){
+                switch (currentSquare) {
                     case "a1":
                     case "h1":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_rook_white);
+                        currentPiece = new ChessPiece(currentSquare, "rook", R.color.white);
                         break;
                     case "a8":
                     case "h8":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_rook_black);
+                        currentPiece = new ChessPiece(currentSquare, "rook", R.color.black);
                         break;
                     case "b1":
                     case "g1":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_knight_white);
+                        currentPiece = new ChessPiece(currentSquare, "knight", R.color.white);
                         break;
                     case "b8":
                     case "g8":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_knight_black);
+                        currentPiece = new ChessPiece(currentSquare, "knight", R.color.black);
                         break;
                     case "c1":
                     case "f1":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_bishop_white);
+                        currentPiece = new ChessPiece(currentSquare, "bishop", R.color.white);
                         break;
                     case "c8":
                     case "f8":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_bishop_black);
+                        currentPiece = new ChessPiece(currentSquare, "bishop", R.color.black);
                         break;
                     case "d1":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_queen_white);
+                        currentPiece = new ChessPiece(currentSquare, "queen", R.color.white);
                         break;
                     case "d8":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_queen_black);
+                        currentPiece = new ChessPiece(currentSquare, "queen", R.color.black);
                         break;
                     case "e1":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_king_white);
+                        currentPiece = new ChessPiece(currentSquare, "king", R.color.white);
                         break;
                     case "e8":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_king_black);
+                        currentPiece = new ChessPiece(currentSquare, "king", R.color.black);
                         break;
                     case "a2":
                     case "b2":
@@ -79,7 +120,7 @@ public class Chess {
                     case "f2":
                     case "g2":
                     case "h2":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_pawn_white);
+                        currentPiece = new ChessPiece(currentSquare, "pawn", R.color.white);
                         break;
                     case "a7":
                     case "b7":
@@ -89,18 +130,12 @@ public class Chess {
                     case "f7":
                     case "g7":
                     case "h7":
-                        getChessSquare(i, j).setImageResource(R.drawable.chess_piece_pawn_black);
+                        currentPiece = new ChessPiece(currentSquare, "pawn", R.color.black);
                         break;
                 }
+
+                setPiece(currentPiece); // sets piece onto board
             }
         }
-    }
-
-    public static String getIDfromNums(int x, int y) {
-        return String.valueOf((char) (x + 97)) + String.valueOf(y + 1);
-    }
-
-    public static int[] getNumsfromID(String ID){
-        return new int[]{ID.charAt(0) - 97, Integer.parseInt(String.valueOf(ID.charAt(1))) - 1};
     }
 }
