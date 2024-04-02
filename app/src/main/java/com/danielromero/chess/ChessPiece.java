@@ -3,54 +3,54 @@ package com.danielromero.chess;
 public class ChessPiece extends Chess {
     private int column;
     private int row;
-    private final String pieceName;
+    private final pieceName name;
     private int pieceImage;
     private final int pieceColor;
 
-    ChessPiece(int column, int row, String pieceName, int pieceColor) {
+    ChessPiece(int column, int row, pieceName name, int pieceColor) {
         this.column = column;
         this.row = row;
-        this.pieceName = pieceName;
+        this.name = name;
         this.pieceColor = pieceColor;
         if (this.pieceColor == R.color.white) { // white
-            switch (this.pieceName) {
-                case "pawn":
+            switch (this.name) {
+                case PAWN:
                     this.pieceImage = R.drawable.chess_piece_pawn_white;
                     break;
-                case "rook":
+                case ROOK:
                     this.pieceImage = R.drawable.chess_piece_rook_white;
                     break;
-                case "knight":
+                case KNIGHT:
                     this.pieceImage = R.drawable.chess_piece_knight_white;
                     break;
-                case "bishop":
+                case BISHOP:
                     this.pieceImage = R.drawable.chess_piece_bishop_white;
                     break;
-                case "queen":
+                case QUEEN:
                     this.pieceImage = R.drawable.chess_piece_queen_white;
                     break;
-                case "king":
+                case KING:
                     this.pieceImage = R.drawable.chess_piece_king_white;
                     break;
             }
         } else { // black
-            switch (this.pieceName) {
-                case "pawn":
+            switch (this.name) {
+                case PAWN:
                     this.pieceImage = R.drawable.chess_piece_pawn_black;
                     break;
-                case "rook":
+                case ROOK:
                     this.pieceImage = R.drawable.chess_piece_rook_black;
                     break;
-                case "knight":
+                case KNIGHT:
                     this.pieceImage = R.drawable.chess_piece_knight_black;
                     break;
-                case "bishop":
+                case BISHOP:
                     this.pieceImage = R.drawable.chess_piece_bishop_black;
                     break;
-                case "queen":
+                case QUEEN:
                     this.pieceImage = R.drawable.chess_piece_queen_black;
                     break;
-                case "king":
+                case KING:
                     this.pieceImage = R.drawable.chess_piece_king_black;
                     break;
             }
@@ -59,8 +59,8 @@ public class ChessPiece extends Chess {
 
     }
 
-    ChessPiece(String pos, String pieceName, int pieceColor) {
-        this(Chess.getNumsfromID(pos)[0], Chess.getNumsfromID(pos)[1], pieceName, pieceColor);
+    ChessPiece(String pos, pieceName name, int pieceColor) {
+        this(Chess.getNumsfromID(pos)[0], Chess.getNumsfromID(pos)[1], name, pieceColor);
     }
 
     public int getColumn() {
@@ -96,7 +96,7 @@ public class ChessPiece extends Chess {
         return pieceImage;
     }
 
-    public String getPieceName() {
-        return pieceName;
+    public pieceName getPieceName() {
+        return name;
     }
 }

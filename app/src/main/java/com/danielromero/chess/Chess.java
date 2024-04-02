@@ -6,6 +6,15 @@ public class Chess {
     ImageView[][] chessGrid = new ImageView[8][8];
     ChessPiece[][] chessPieces = new ChessPiece[8][8];
 
+    public enum pieceName {
+        PAWN,
+        ROOK,
+        KNIGHT,
+        BISHOP,
+        QUEEN,
+        KING
+    }
+
     public void updateBoard(){
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -75,39 +84,39 @@ public class Chess {
                 switch (currentSquare) {
                     case "a1":
                     case "h1":
-                        currentPiece = new ChessPiece(currentSquare, "rook", R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.ROOK, R.color.white);
                         break;
                     case "a8":
                     case "h8":
-                        currentPiece = new ChessPiece(currentSquare, "rook", R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.ROOK, R.color.black);
                         break;
                     case "b1":
                     case "g1":
-                        currentPiece = new ChessPiece(currentSquare, "knight", R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.KNIGHT, R.color.white);
                         break;
                     case "b8":
                     case "g8":
-                        currentPiece = new ChessPiece(currentSquare, "knight", R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.KNIGHT, R.color.black);
                         break;
                     case "c1":
                     case "f1":
-                        currentPiece = new ChessPiece(currentSquare, "bishop", R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.BISHOP, R.color.white);
                         break;
                     case "c8":
                     case "f8":
-                        currentPiece = new ChessPiece(currentSquare, "bishop", R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.BISHOP, R.color.black);
                         break;
                     case "d1":
-                        currentPiece = new ChessPiece(currentSquare, "queen", R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.QUEEN, R.color.white);
                         break;
                     case "d8":
-                        currentPiece = new ChessPiece(currentSquare, "queen", R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.QUEEN, R.color.black);
                         break;
                     case "e1":
-                        currentPiece = new ChessPiece(currentSquare, "king", R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.KING, R.color.white);
                         break;
                     case "e8":
-                        currentPiece = new ChessPiece(currentSquare, "king", R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.KING, R.color.black);
                         break;
                     case "a2":
                     case "b2":
@@ -117,7 +126,7 @@ public class Chess {
                     case "f2":
                     case "g2":
                     case "h2":
-                        currentPiece = new ChessPiece(currentSquare, "pawn", R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.PAWN, R.color.white);
                         break;
                     case "a7":
                     case "b7":
@@ -127,7 +136,7 @@ public class Chess {
                     case "f7":
                     case "g7":
                     case "h7":
-                        currentPiece = new ChessPiece(currentSquare, "pawn", R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.PAWN, R.color.black);
                         break;
                 }
 
