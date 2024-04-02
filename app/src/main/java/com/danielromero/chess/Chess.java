@@ -7,12 +7,8 @@ public class Chess {
     ChessPiece[][] chessPieces = new ChessPiece[8][8];
 
     public enum pieceName {
-        PAWN,
-        ROOK,
-        KNIGHT,
-        BISHOP,
-        QUEEN,
-        KING
+        wPAWN, wROOK, wKNIGHT, wBISHOP, wQUEEN, wKING,
+        bPAWN, bROOK, bKNIGHT, bBISHOP, bQUEEN, bKING
     }
 
     public void updateBoard(){
@@ -84,39 +80,39 @@ public class Chess {
                 switch (currentSquare) {
                     case "a1":
                     case "h1":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.ROOK, R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.wROOK);
                         break;
                     case "a8":
                     case "h8":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.ROOK, R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.bROOK);
                         break;
                     case "b1":
                     case "g1":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.KNIGHT, R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.wKNIGHT);
                         break;
                     case "b8":
                     case "g8":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.KNIGHT, R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.bKNIGHT);
                         break;
                     case "c1":
                     case "f1":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.BISHOP, R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.wBISHOP);
                         break;
                     case "c8":
                     case "f8":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.BISHOP, R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.bBISHOP);
                         break;
                     case "d1":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.QUEEN, R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.wQUEEN);
                         break;
                     case "d8":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.QUEEN, R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.bQUEEN);
                         break;
                     case "e1":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.KING, R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.wKING);
                         break;
                     case "e8":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.KING, R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.bKING);
                         break;
                     case "a2":
                     case "b2":
@@ -126,7 +122,7 @@ public class Chess {
                     case "f2":
                     case "g2":
                     case "h2":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.PAWN, R.color.white);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.wPAWN);
                         break;
                     case "a7":
                     case "b7":
@@ -136,7 +132,7 @@ public class Chess {
                     case "f7":
                     case "g7":
                     case "h7":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.PAWN, R.color.black);
+                        currentPiece = new ChessPiece(currentSquare, pieceName.bPAWN);
                         break;
                 }
 
