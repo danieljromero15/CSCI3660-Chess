@@ -1,5 +1,6 @@
 package com.danielromero.chess;
 
+import android.util.Log;
 import android.widget.ImageView;
 
 public class Chess {
@@ -67,6 +68,8 @@ public class Chess {
     }
 
     public void newGame() {
+        Log.d("newGame", "New Game started");
+
         // initial setup, adds all pieces to board
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
