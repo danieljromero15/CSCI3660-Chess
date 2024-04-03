@@ -9,787 +9,787 @@
     <!--col A-->
     <ImageView
         android:id="@+id/a1"
-        android:contentDescription="@string/a1"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/a2"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/a1"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/a2"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/a2"
-        android:contentDescription="@string/a2"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/a3"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/a2"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/a3"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/a3"
-        android:contentDescription="@string/a3"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/a4"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/a3"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/a4"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/a4"
-        android:contentDescription="@string/a4"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/a5"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/a4"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/a5"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/a5"
-        android:contentDescription="@string/a5"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/a6"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/a5"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/a6"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/a6"
-        android:contentDescription="@string/a6"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/a7"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/a6"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/a7"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/a7"
-        android:contentDescription="@string/a7"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/a8"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/a7"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/a8"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/a8"
-        android:contentDescription="@string/a8"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/a8"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".125" />
 
     <!--col B-->
     <ImageView
         android:id="@+id/b1"
-        android:contentDescription="@string/b1"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/b2"
-        app:layout_constraintLeft_toRightOf="@id/a1"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/b1"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/a1"
+        app:layout_constraintTop_toBottomOf="@id/b2"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/b2"
-        android:contentDescription="@string/b2"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/b3"
-        app:layout_constraintLeft_toRightOf="@id/a2"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/b2"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/a2"
+        app:layout_constraintTop_toBottomOf="@id/b3"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/b3"
-        android:contentDescription="@string/b3"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/b4"
-        app:layout_constraintLeft_toRightOf="@id/a3"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/b3"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/a3"
+        app:layout_constraintTop_toBottomOf="@id/b4"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/b4"
-        android:contentDescription="@string/b4"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/b5"
-        app:layout_constraintLeft_toRightOf="@id/a4"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/b4"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/a4"
+        app:layout_constraintTop_toBottomOf="@id/b5"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/b5"
-        android:contentDescription="@string/b5"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/b6"
-        app:layout_constraintLeft_toRightOf="@id/a5"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/b5"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/a5"
+        app:layout_constraintTop_toBottomOf="@id/b6"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/b6"
-        android:contentDescription="@string/b6"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/b7"
-        app:layout_constraintLeft_toRightOf="@id/a6"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/b6"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/a6"
+        app:layout_constraintTop_toBottomOf="@id/b7"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/b7"
-        android:contentDescription="@string/b7"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/b8"
-        app:layout_constraintLeft_toRightOf="@id/a7"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/b7"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/a7"
+        app:layout_constraintTop_toBottomOf="@id/b8"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/b8"
-        android:contentDescription="@string/b8"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/a8"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/b8"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/a8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".125" />
 
     <!--col C-->
     <ImageView
         android:id="@+id/c1"
-        android:contentDescription="@string/c1"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/c2"
-        app:layout_constraintLeft_toRightOf="@id/b1"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/c1"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/b1"
+        app:layout_constraintTop_toBottomOf="@id/c2"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/c2"
-        android:contentDescription="@string/c2"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/c3"
-        app:layout_constraintLeft_toRightOf="@id/b2"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/c2"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/b2"
+        app:layout_constraintTop_toBottomOf="@id/c3"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/c3"
-        android:contentDescription="@string/c3"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/c4"
-        app:layout_constraintLeft_toRightOf="@id/b3"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/c3"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/b3"
+        app:layout_constraintTop_toBottomOf="@id/c4"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/c4"
-        android:contentDescription="@string/c4"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/c5"
-        app:layout_constraintLeft_toRightOf="@id/b4"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/c4"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/b4"
+        app:layout_constraintTop_toBottomOf="@id/c5"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/c5"
-        android:contentDescription="@string/c5"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/c6"
-        app:layout_constraintLeft_toRightOf="@id/b5"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/c5"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/b5"
+        app:layout_constraintTop_toBottomOf="@id/c6"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/c6"
-        android:contentDescription="@string/c6"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/c7"
-        app:layout_constraintLeft_toRightOf="@id/b6"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/c6"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/b6"
+        app:layout_constraintTop_toBottomOf="@id/c7"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/c7"
-        android:contentDescription="@string/c7"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/c8"
-        app:layout_constraintLeft_toRightOf="@id/b7"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/c7"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/b7"
+        app:layout_constraintTop_toBottomOf="@id/c8"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/c8"
-        android:contentDescription="@string/c8"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/b8"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/c8"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/b8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".125" />
 
     <!--col D-->
     <ImageView
         android:id="@+id/d1"
-        android:contentDescription="@string/d1"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/d2"
-        app:layout_constraintLeft_toRightOf="@id/c1"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/d1"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/c1"
+        app:layout_constraintTop_toBottomOf="@id/d2"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/d2"
-        android:contentDescription="@string/d2"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/d3"
-        app:layout_constraintLeft_toRightOf="@id/c2"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/d2"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/c2"
+        app:layout_constraintTop_toBottomOf="@id/d3"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/d3"
-        android:contentDescription="@string/d3"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/d4"
-        app:layout_constraintLeft_toRightOf="@id/c3"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/d3"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/c3"
+        app:layout_constraintTop_toBottomOf="@id/d4"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/d4"
-        android:contentDescription="@string/d4"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/d5"
-        app:layout_constraintLeft_toRightOf="@id/c4"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/d4"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/c4"
+        app:layout_constraintTop_toBottomOf="@id/d5"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/d5"
-        android:contentDescription="@string/d5"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/d6"
-        app:layout_constraintLeft_toRightOf="@id/c5"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/d5"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/c5"
+        app:layout_constraintTop_toBottomOf="@id/d6"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/d6"
-        android:contentDescription="@string/d6"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/d7"
-        app:layout_constraintLeft_toRightOf="@id/c6"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/d6"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/c6"
+        app:layout_constraintTop_toBottomOf="@id/d7"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/d7"
-        android:contentDescription="@string/d7"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/d8"
-        app:layout_constraintLeft_toRightOf="@id/c7"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/d7"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/c7"
+        app:layout_constraintTop_toBottomOf="@id/d8"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/d8"
-        android:contentDescription="@string/d8"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/c8"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/d8"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/c8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".125" />
 
     <!--col E-->
     <ImageView
         android:id="@+id/e1"
-        android:contentDescription="@string/e1"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/e2"
-        app:layout_constraintLeft_toRightOf="@id/d1"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/e1"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/d1"
+        app:layout_constraintTop_toBottomOf="@id/e2"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/e2"
-        android:contentDescription="@string/e2"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/e3"
-        app:layout_constraintLeft_toRightOf="@id/d2"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/e2"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/d2"
+        app:layout_constraintTop_toBottomOf="@id/e3"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/e3"
-        android:contentDescription="@string/e3"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/e4"
-        app:layout_constraintLeft_toRightOf="@id/d3"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/e3"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/d3"
+        app:layout_constraintTop_toBottomOf="@id/e4"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/e4"
-        android:contentDescription="@string/e4"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/e5"
-        app:layout_constraintLeft_toRightOf="@id/d4"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/e4"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/d4"
+        app:layout_constraintTop_toBottomOf="@id/e5"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/e5"
-        android:contentDescription="@string/e5"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/e6"
-        app:layout_constraintLeft_toRightOf="@id/d5"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/e5"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/d5"
+        app:layout_constraintTop_toBottomOf="@id/e6"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/e6"
-        android:contentDescription="@string/e6"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/e7"
-        app:layout_constraintLeft_toRightOf="@id/d6"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/e6"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/d6"
+        app:layout_constraintTop_toBottomOf="@id/e7"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/e7"
-        android:contentDescription="@string/e7"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/e8"
-        app:layout_constraintLeft_toRightOf="@id/d7"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/e7"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/d7"
+        app:layout_constraintTop_toBottomOf="@id/e8"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/e8"
-        android:contentDescription="@string/e8"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/d8"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/e8"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/d8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".125" />
 
     <!--col F-->
     <ImageView
         android:id="@+id/f1"
-        android:contentDescription="@string/f1"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/f2"
-        app:layout_constraintLeft_toRightOf="@id/e1"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/f1"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/e1"
+        app:layout_constraintTop_toBottomOf="@id/f2"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/f2"
-        android:contentDescription="@string/f2"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/f3"
-        app:layout_constraintLeft_toRightOf="@id/e2"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/f2"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/e2"
+        app:layout_constraintTop_toBottomOf="@id/f3"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/f3"
-        android:contentDescription="@string/f3"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/f4"
-        app:layout_constraintLeft_toRightOf="@id/e3"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/f3"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/e3"
+        app:layout_constraintTop_toBottomOf="@id/f4"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/f4"
-        android:contentDescription="@string/f4"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/f5"
-        app:layout_constraintLeft_toRightOf="@id/e4"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/f4"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/e4"
+        app:layout_constraintTop_toBottomOf="@id/f5"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/f5"
-        android:contentDescription="@string/f5"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/f6"
-        app:layout_constraintLeft_toRightOf="@id/e5"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/f5"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/e5"
+        app:layout_constraintTop_toBottomOf="@id/f6"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/f6"
-        android:contentDescription="@string/f6"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/f7"
-        app:layout_constraintLeft_toRightOf="@id/e6"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/f6"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/e6"
+        app:layout_constraintTop_toBottomOf="@id/f7"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/f7"
-        android:contentDescription="@string/f7"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/f8"
-        app:layout_constraintLeft_toRightOf="@id/e7"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/f7"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/e7"
+        app:layout_constraintTop_toBottomOf="@id/f8"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/f8"
-        android:contentDescription="@string/f8"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/e8"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/f8"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/e8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".125" />
 
     <!--col G-->
     <ImageView
         android:id="@+id/g1"
-        android:contentDescription="@string/g1"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/g2"
-        app:layout_constraintLeft_toRightOf="@id/f1"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/g1"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/f1"
+        app:layout_constraintTop_toBottomOf="@id/g2"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/g2"
-        android:contentDescription="@string/g2"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/g3"
-        app:layout_constraintLeft_toRightOf="@id/f2"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/g2"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/f2"
+        app:layout_constraintTop_toBottomOf="@id/g3"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/g3"
-        android:contentDescription="@string/g3"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/g4"
-        app:layout_constraintLeft_toRightOf="@id/f3"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/g3"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/f3"
+        app:layout_constraintTop_toBottomOf="@id/g4"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/g4"
-        android:contentDescription="@string/g4"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/g5"
-        app:layout_constraintLeft_toRightOf="@id/f4"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/g4"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/f4"
+        app:layout_constraintTop_toBottomOf="@id/g5"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/g5"
-        android:contentDescription="@string/g5"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/g6"
-        app:layout_constraintLeft_toRightOf="@id/f5"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/g5"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/f5"
+        app:layout_constraintTop_toBottomOf="@id/g6"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/g6"
-        android:contentDescription="@string/g6"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/g7"
-        app:layout_constraintLeft_toRightOf="@id/f6"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/g6"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/f6"
+        app:layout_constraintTop_toBottomOf="@id/g7"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/g7"
-        android:contentDescription="@string/g7"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/g8"
-        app:layout_constraintLeft_toRightOf="@id/f7"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/g7"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/f7"
+        app:layout_constraintTop_toBottomOf="@id/g8"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/g8"
-        android:contentDescription="@string/g8"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/f8"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/g8"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/f8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".125" />
 
     <!--col H-->
     <ImageView
         android:id="@+id/h1"
-        android:contentDescription="@string/h1"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/h2"
-        app:layout_constraintLeft_toRightOf="@id/g1"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/h1"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/g1"
+        app:layout_constraintTop_toBottomOf="@id/h2"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/h2"
-        android:contentDescription="@string/h2"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/h3"
-        app:layout_constraintLeft_toRightOf="@id/g2"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/h2"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/g2"
+        app:layout_constraintTop_toBottomOf="@id/h3"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/h3"
-        android:contentDescription="@string/h3"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/h4"
-        app:layout_constraintLeft_toRightOf="@id/g3"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/h3"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/g3"
+        app:layout_constraintTop_toBottomOf="@id/h4"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/h4"
-        android:contentDescription="@string/h4"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/h5"
-        app:layout_constraintLeft_toRightOf="@id/g4"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/h4"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/g4"
+        app:layout_constraintTop_toBottomOf="@id/h5"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/h5"
-        android:contentDescription="@string/h5"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/h6"
-        app:layout_constraintLeft_toRightOf="@id/g5"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/h5"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/g5"
+        app:layout_constraintTop_toBottomOf="@id/h6"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/h6"
-        android:contentDescription="@string/h6"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/h7"
-        app:layout_constraintLeft_toRightOf="@id/g6"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/h6"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/g6"
+        app:layout_constraintTop_toBottomOf="@id/h7"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/h7"
-        android:contentDescription="@string/h7"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/h8"
-        app:layout_constraintLeft_toRightOf="@id/g7"
         android:background="@color/white"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/h7"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/g7"
+        app:layout_constraintTop_toBottomOf="@id/h8"
+        app:layout_constraintWidth_percent=".125" />
 
     <ImageView
         android:id="@+id/h8"
-        android:contentDescription="@string/h8"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent=".125"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/g8"
         android:background="@color/black"
-        android:orientation="horizontal" />
+        android:contentDescription="@string/h8"
+        android:orientation="horizontal"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toRightOf="@id/g8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".125" />
 
     <Button
         android:id="@+id/new_game_button"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginBottom="5dp"
         android:layout_marginStart="5dp"
-        android:text="@string/new_game" />
+        android:layout_marginBottom="5dp"
+        android:text="@string/new_game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

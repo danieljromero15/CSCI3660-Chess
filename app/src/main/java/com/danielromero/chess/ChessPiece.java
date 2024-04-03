@@ -50,7 +50,7 @@ public class ChessPiece extends Chess {
                 this.pieceImage = R.drawable.chess_piece_king_black;
                 break;
         }
-}
+    }
 
     ChessPiece(String pos, pieceName name) {
         this(Chess.getNumsfromID(pos)[0], Chess.getNumsfromID(pos)[1], name);

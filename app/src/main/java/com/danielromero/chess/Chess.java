@@ -8,18 +8,17 @@ public class Chess {
     ChessPiece[][] chessPieces = new ChessPiece[8][8];
 
     public enum pieceName {
-        wPAWN, wROOK, wKNIGHT, wBISHOP, wQUEEN, wKING,
-        bPAWN, bROOK, bKNIGHT, bBISHOP, bQUEEN, bKING
+        wPAWN, wROOK, wKNIGHT, wBISHOP, wQUEEN, wKING, bPAWN, bROOK, bKNIGHT, bBISHOP, bQUEEN, bKING
     }
 
-    public void updateBoard(){
+    public void updateBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 ImageView view = getChessSquare(i, j);
                 ChessPiece piece = getPiece(i, j);
-                if(piece != null){
+                if (piece != null) {
                     setPiece(piece);
-                }else{
+                } else {
                     view.setImageDrawable(null);
                 }
             }
@@ -38,7 +37,7 @@ public class Chess {
         chessPieces[x][y] = piece;
     }
 
-    public void setChessPieces(ChessPiece piece, String pos){
+    public void setChessPieces(ChessPiece piece, String pos) {
         setChessPieces(piece, getNumsfromID(pos)[0], getNumsfromID(pos)[1]);
     }
 
@@ -63,7 +62,7 @@ public class Chess {
         return chessPieces[x][y];
     }
 
-    public ChessPiece getPiece(String pos){
+    public ChessPiece getPiece(String pos) {
         return getPiece(getNumsfromID(pos)[0], getNumsfromID(pos)[1]);
     }
 
