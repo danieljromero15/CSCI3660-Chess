@@ -83,8 +83,10 @@ public class MainActivity extends AppCompatActivity {
             } // TODO: Add rules for all the other pieces
 
             for (View selection : possibleSelections) { // sets all views in the arraylist to be a certain color and selectable
-                setColor(selection, possibleSelectColor);
-                selection.setTag("possibleMove");
+                if (selection != null) {
+                    setColor(selection, possibleSelectColor);
+                    selection.setTag("possibleMove");
+                }
             }
         } else {
             Log.wtf("wtf", "help");
@@ -93,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("DiscouragedApi")
     public ImageView getSquareView(int x, int y) { // gets the square from activity main, used for adding all views to the array
-        if (x < 8 && y < 8) return findViewById(getResources().getIdentifier(Chess.getIDfromNums(x, y), "id", getPackageName()));
+        if (x < 8 && y < 8)
+            return findViewById(getResources().getIdentifier(Chess.getIDfromNums(x, y), "id", getPackageName()));
         else return null;
     }
 
@@ -117,9 +120,11 @@ public class MainActivity extends AppCompatActivity {
     public void setColor(View view, int color) { // sets the color for a single view
         if (view != null) view.setBackgroundColor(ContextCompat.getColor(this, color));
     }
-    
-    public void clearSelections(){ // clears selections array and resets all tags
-        for(View view : possibleSelections) view.setTag(null);
+
+    public void clearSelections() { // clears selections array and resets all tags
+        for (View view : possibleSelections) {
+            if (view != null) view.setTag(null);
+        }
         possibleSelections.clear();
     }
 }
