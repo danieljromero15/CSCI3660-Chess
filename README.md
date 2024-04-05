@@ -1,4 +1,4 @@
-CSCI 3660 - Mobile Application Development Final Project
+Mobile Application Development Final Project, Spring 2024
 
 Group 3
 
