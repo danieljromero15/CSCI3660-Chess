@@ -142,4 +142,50 @@ public class Chess {
             }
         }
     }
+
+    public void debug_printChess() {
+        StringBuilder out = new StringBuilder();
+        out.append("--------------------------------------------------------").append(System.lineSeparator());
+        for (int i = 7; i >= 0; i--) {
+            for (int j = 0; j < 8; j++) {
+                ChessPiece piece = chessPieces[j][i];
+                if (piece != null) {
+                    //out.append(chessPieces[j][i].getPieceName()).append(" ");
+                    String name = String.valueOf(piece.getPieceName());
+                    switch (name.length()) { // awful code btw
+                        case 0:
+                            out.append("").append(name).append("       ");
+                            break;
+                        case 1:
+                            out.append("   ").append(name).append("   ");
+                            break;
+                        case 2:
+                            out.append("  ").append(name).append("   ");
+                            break;
+                        case 3:
+                            out.append("  ").append(name).append("  ");
+                            break;
+                        case 4:
+                            out.append(" ").append(name).append("  ");
+                            break;
+                        case 5:
+                            out.append(" ").append(name).append(" ");
+                            break;
+                        case 6:
+                            out.append("").append(name).append(" ");
+                            break;
+                        case 7:
+                            out.append(name);
+                            break;
+                    }
+                } else {
+                    out.append("       ");
+                }
+            }
+            out.append(System.lineSeparator());
+        }
+
+        out.append("--------------------------------------------------------");
+        Log.d("Chess", out.toString());
+    }
 }

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    boolean debug_printing = true;
 
     Chess mChess;
     ChessPiece selectedPiece = null;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         mChess.newGame(); // starts game
         clearSelections();
-
+        if (debug_printing) mChess.debug_printChess();
     }
 
     private void selectSquare(View view) { // code for when a square is tapped
@@ -54,9 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         ChessPiece currentPiece = mChess.getPiece(square);
 
-        if (selectedPiece != null
-                && (currentPiece == null || selectedPiece.getPieceColor() != currentPiece.getPieceColor())
-        ) { // move to other space
+        if (selectedPiece != null && (currentPiece == null || selectedPiece.getPieceColor() != currentPiece.getPieceColor())) { // move to other space
             if ((view.getTag() != null) && (view.getTag() == "possibleMove")) {
                 mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
 
@@ -69,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
                 mChess.updateBoard();
                 clearSelections();
+
+                if (debug_printing) mChess.debug_printChess();
             }
         } else if (currentPiece != null) {
             selectedPiece = currentPiece;
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
     private void newGame(View view) { // starts new game
         resetColors();
         mChess.newGame();
+        if (debug_printing) mChess.debug_printChess();
     }
 
     private void resetColors() { // resets all colors to the standard black and white
