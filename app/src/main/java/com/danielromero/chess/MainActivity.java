@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (debug_printing) mChess.debug_printChess();
 
-                player2_move();
+                // player2_move();
             }
         } else if (currentPiece != null) {
             selectedPiece = currentPiece;
