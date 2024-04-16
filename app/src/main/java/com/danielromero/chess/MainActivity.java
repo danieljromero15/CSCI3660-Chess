@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     boolean debug_printing = true;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         mChess.newGame(); // starts game
         clearSelections();
+
         if (debug_printing) mChess.debug_printChess();
     }
 
@@ -64,12 +66,15 @@ public class MainActivity extends AppCompatActivity {
 
                 selectedPiece = null; // removes old piece (either other color or none) from board
 
+                // end of turn
                 resetColors();
                 mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
                 mChess.updateBoard();
                 clearSelections();
 
                 if (debug_printing) mChess.debug_printChess();
+
+                // player2_move();
             }
         } else if (currentPiece != null) {
             selectedPiece = currentPiece;
@@ -128,5 +133,19 @@ public class MainActivity extends AppCompatActivity {
             if (view != null) view.setTag(null);
         }
         possibleSelections.clear();
+    }
+
+    private void player2_move(){
+        Random randy = new Random();
+
+        int randyX = randy.nextInt(8);
+        int randyY = randy.nextInt(8);
+        ChessPiece randyPiece = mChess.getPiece(randyX, randyY);
+
+        if(randyPiece != null && randyPiece.getPieceColor() == R.color.black){
+            setColor(getSquareView(randyPiece.getX(), randyPiece.getY()), R.color.red);
+        }else{
+            player2_move();
+        }
     }
 }
