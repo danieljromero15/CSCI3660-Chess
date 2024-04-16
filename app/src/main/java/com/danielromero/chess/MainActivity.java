@@ -16,7 +16,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     boolean debug_printing = true;
 
-    protected static Chess mChess;
+    Chess mChess;
     ChessPiece selectedPiece = null;
     ArrayList<View> possibleSelections = new ArrayList<>();
 
