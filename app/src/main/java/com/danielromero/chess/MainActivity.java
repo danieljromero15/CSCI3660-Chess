@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        //Initialized storage and leaves a test message in log to see if it works
+        // !! Log will only work on my phone rn because I was testing persistance
+        Storage.make(this.getApplicationContext());
+        //Log.w( "please",Storage.getString("test", "defaultValue"));
+
         mChess.newGame(); // starts game
         clearSelections();
 
