@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Chess mChess;
     ChessPiece selectedPiece = null;
     ArrayList<View> possibleSelections = new ArrayList<>();
+
 
     // Defines colors for the selection, we should probably change these since I just chose them since they were easy to write
     final int pieceSelectColor = R.color.yellow;
@@ -39,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
                 getSquareView(i, j).setTag(null); // Shouldn't need this but it's there just in case
             }
         }
+
+        //Initialized storage and leaves a test message in log to see if it works
+        // !! Will only work on my phone rn
+        Storage.make(this.getApplicationContext());
+        Log.w( "please",Storage.getString("test", "defaultValue"));
 
         mChess.newGame(); // starts game
         clearSelections();
