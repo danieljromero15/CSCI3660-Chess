@@ -79,9 +79,12 @@ public class MainActivity extends AppCompatActivity {
                 if (debug_printing) mChess.debug_printChess();
 
                 // player2_move();
-            }
+
+            } else clearSelections();
         } else if (currentPiece != null) {
             selectedPiece = currentPiece;
+
+            Log.d("selected", String.valueOf(selectedPiece));
 
             clearSelections(); // reset selections
 
@@ -105,27 +108,35 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case wKNIGHT:
-                    /*for(int i = -2; i <= 2; i++){
-                        if(i == 0) continue;
-                        if(Math.abs(i) == 2)
-                    }*/
-                    possibleSelections.add(getViewFromPos(x - 2, y + 1));
-                    possibleSelections.add(getViewFromPos(x - 2, y - 1));
-                    possibleSelections.add(getViewFromPos(x - 1, y + 2));
-                    possibleSelections.add(getViewFromPos(x - 1, y - 2));
-
-                    possibleSelections.add(getViewFromPos(x + 1, y + 2));
-                    possibleSelections.add(getViewFromPos(x + 1, y - 2));
-                    possibleSelections.add(getViewFromPos(x + 2, y + 1));
-                    possibleSelections.add(getViewFromPos(x + 2, y - 1));
+                    for (int i = -2; i <= 2; i++) {
+                        int j = 0;
+                        if (i == 0) continue;
+                        if (Math.abs(i) == 2) j = 1;
+                        if (Math.abs(i) == 1) j = 2;
+                        possibleSelections.add(getViewFromPos(x - i, y - j));
+                        possibleSelections.add(getViewFromPos(x - i, y + j));
+                    }
                     break;
                 case wBISHOP:
+                    /*for (int i = 0; i < 8; i++) {
+                        possibleSelections.add(getViewFromPos(x + i, y + i)); // top right
+                        possibleSelections.add(getViewFromPos(x + i, y - i)); // bottom right
+                        possibleSelections.add(getViewFromPos(x - i, y - i)); // bottom left
+                        possibleSelections.add(getViewFromPos(x - i, y + i)); // top left
+                    }*/
                     for (int i = 0; i < 8; i++) {
                         possibleSelections.add(getViewFromPos(x + i, y + i));
-                        possibleSelections.add(getViewFromPos(x - i, y - i));
+                    }
+                    for (int i = 0; i < 8; i++) {
                         possibleSelections.add(getViewFromPos(x + i, y - i));
+                    }
+                    for (int i = 0; i < 8; i++) {
                         possibleSelections.add(getViewFromPos(x - i, y + i));
                     }
+                    for (int i = 0; i < 8; i++) {
+                        possibleSelections.add(getViewFromPos(x - i, y - i));
+                    }
+
                     break;
                 case wROOK:
                     for (int i = 0; i < 8; i++) {
