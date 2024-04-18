@@ -109,54 +109,54 @@ public class MainActivity extends AppCompatActivity {
                         if(i == 0) continue;
                         if(Math.abs(i) == 2)
                     }*/
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 2, selectedPiece.getRow() + 1));
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 2, selectedPiece.getRow() - 1));
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 1, selectedPiece.getRow() + 2));
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 1, selectedPiece.getRow() - 2));
+                    possibleSelections.add(getViewFromPos(x - 2, y + 1));
+                    possibleSelections.add(getViewFromPos(x - 2, y - 1));
+                    possibleSelections.add(getViewFromPos(x - 1, y + 2));
+                    possibleSelections.add(getViewFromPos(x - 1, y - 2));
 
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 1, selectedPiece.getRow() + 2));
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 1, selectedPiece.getRow() - 2));
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 2, selectedPiece.getRow() + 1));
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 2, selectedPiece.getRow() - 1));
+                    possibleSelections.add(getViewFromPos(x + 1, y + 2));
+                    possibleSelections.add(getViewFromPos(x + 1, y - 2));
+                    possibleSelections.add(getViewFromPos(x + 2, y + 1));
+                    possibleSelections.add(getViewFromPos(x + 2, y - 1));
                     break;
                 case wBISHOP:
                     for (int i = 0; i < 8; i++) {
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() + i));
+                        possibleSelections.add(getViewFromPos(x + i, y + i));
+                        possibleSelections.add(getViewFromPos(x - i, y - i));
+                        possibleSelections.add(getViewFromPos(x + i, y - i));
+                        possibleSelections.add(getViewFromPos(x - i, y + i));
                     }
                     break;
                 case wROOK:
                     for (int i = 0; i < 8; i++) {
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() - i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow()));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow()));
+                        possibleSelections.add(getViewFromPos(x, y + i));
+                        possibleSelections.add(getViewFromPos(x, y - i));
+                        possibleSelections.add(getViewFromPos(x + i, y));
+                        possibleSelections.add(getViewFromPos(x - i, y));
                     }
                     break;
                 case wQUEEN:
                     for (int i = 0; i < 8; i++) {
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() + i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() - i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow()));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow()));
+                        possibleSelections.add(getViewFromPos(x + i, y + i));
+                        possibleSelections.add(getViewFromPos(x - i, y - i));
+                        possibleSelections.add(getViewFromPos(x + i, y - i));
+                        possibleSelections.add(getViewFromPos(x - i, y + i));
+                        possibleSelections.add(getViewFromPos(x, y + i));
+                        possibleSelections.add(getViewFromPos(x, y - i));
+                        possibleSelections.add(getViewFromPos(x + i, y));
+                        possibleSelections.add(getViewFromPos(x - i, y));
                     }
                     break;
                 case wKING:
                     for (int i = 0; i < 2; i++) {
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() - i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow()));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow()));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() + i));
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
+                        possibleSelections.add(getViewFromPos(x, y + i));
+                        possibleSelections.add(getViewFromPos(x, y - i));
+                        possibleSelections.add(getViewFromPos(x + i, y));
+                        possibleSelections.add(getViewFromPos(x - i, y));
+                        possibleSelections.add(getViewFromPos(x + i, y + i));
+                        possibleSelections.add(getViewFromPos(x + i, y - i));
+                        possibleSelections.add(getViewFromPos(x - i, y + i));
+                        possibleSelections.add(getViewFromPos(x - i, y - i));
                     }
             } // TODO: Add rules for all the other pieces
 
