@@ -60,12 +60,20 @@ public class ChessPiece extends Chess {
         return column;
     }
 
+    public int getX(){
+        return getColumn();
+    }
+
     private void setColumn(int x) {
         this.column = x;
     }
 
     public int getRow() {
         return row;
+    }
+
+    public int getY(){
+        return getRow();
     }
 
     private void setRow(int y) {
