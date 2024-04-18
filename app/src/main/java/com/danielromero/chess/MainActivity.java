@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                mChess.setChessSquare(getSquareView(i, j), i, j); // assigns imageview widgets to the array backend
+                mChess.setChessSquare(getViewFromPos(i, j), i, j); // assigns imageview widgets to the array backend
                 mChess.getChessSquare(i, j).setOnClickListener(this::selectSquare); // makes each tile clickable
-                getSquareView(i, j).setTag(null); // Shouldn't need this but it's there just in case
+                getViewFromPos(i, j).setTag(null); // Shouldn't need this but it's there just in case
             }
         }
 
@@ -87,58 +87,58 @@ public class MainActivity extends AppCompatActivity {
 
             switch (selectedPiece.getPieceName()) { // highlights where the piece can move
                 case wPAWN:
-                    possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + 1)); // adds views to an arraylist
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + 1)); // adds views to an arraylist
                     if (selectedPiece.getY() == 1)
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + 2));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + 2));
                     break;
                 case wKNIGHT:
-                    possibleSelections.add(getSquareView(selectedPiece.getColumn() + 2, selectedPiece.getRow() + 1));
-                    possibleSelections.add(getSquareView(selectedPiece.getColumn() - 2, selectedPiece.getRow() + 1));
-                    possibleSelections.add(getSquareView(selectedPiece.getColumn() + 1, selectedPiece.getRow() + 2));
-                    possibleSelections.add(getSquareView(selectedPiece.getColumn() - 1, selectedPiece.getRow() + 2));
-                    possibleSelections.add(getSquareView(selectedPiece.getColumn() - 2, selectedPiece.getRow() - 1));
-                    possibleSelections.add(getSquareView(selectedPiece.getColumn() + 2, selectedPiece.getRow() - 1));
-                    possibleSelections.add(getSquareView(selectedPiece.getColumn() - 1, selectedPiece.getRow() - 2));
-                    possibleSelections.add(getSquareView(selectedPiece.getColumn() + 1, selectedPiece.getRow() - 2));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 2, selectedPiece.getRow() + 1));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 2, selectedPiece.getRow() + 1));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 1, selectedPiece.getRow() + 2));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 1, selectedPiece.getRow() + 2));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 2, selectedPiece.getRow() - 1));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 2, selectedPiece.getRow() - 1));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 1, selectedPiece.getRow() - 2));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 1, selectedPiece.getRow() - 2));
                     break;
                 case wBISHOP:
                     for (int i = 0; i < 8; i++) {
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow() + i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() + i));
                     }
                     break;
                 case wROOK:
                     for (int i = 0; i < 8; i++) {
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() - i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow()));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow()));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() - i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow()));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow()));
                     }
                     break;
                 case wQUEEN:
                     for (int i = 0; i < 8; i++) {
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow() + i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() - i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow()));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow()));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() + i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() - i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow()));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow()));
                     }
                     break;
                 case wKING:
                     for (int i = 0; i < 2; i++) {
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() - i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow()));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow()));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow() + i));
-                        possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() - i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow()));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow()));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() + i));
+                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
                     }
             } // TODO: Add rules for all the other pieces
 
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("DiscouragedApi")
-    public ImageView getSquareView(int x, int y) { // gets the square from activity main, used for adding all views to the array
+    public ImageView getViewFromPos(int x, int y) { // gets the square from activity main, used for adding all views to the array
         if (x < 8 && y < 8)
             return findViewById(getResources().getIdentifier(Chess.getIDfromNums(x, y), "id", getPackageName()));
         else return null;
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         ChessPiece randyPiece = mChess.getPiece(randyX, randyY);
 
         if (randyPiece != null && randyPiece.getPieceColor() == R.color.black) {
-            View currentView = getSquareView(randyPiece.getX(), randyPiece.getY());
+            View currentView = getViewFromPos(randyPiece.getX(), randyPiece.getY());
             setColor(currentView, R.color.red);
             //selectSquare(currentView);
         } else {
@@ -215,5 +215,10 @@ public class MainActivity extends AppCompatActivity {
     public ChessPiece getPieceFromView(View view) {
         int[] currentNums = Chess.getNumsfromID(getIDfromView(view));
         return mChess.getPiece(currentNums[0], currentNums[1]);
+    }
+
+    public ChessPiece getPieceFromPos(int x, int y){
+        View square = getViewFromPos(x, y);
+        return getPieceFromView(square);
     }
 }
