@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import com.danielromero.chess.ChessPiece;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -41,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        //Initialized storage and leaves a test message in log to see if it works
+        // !! Log will only work on my phone rn because I was testing persistance
+        Storage.make(this.getApplicationContext());
+        //Log.w( "please",Storage.getString("test", "defaultValue"));
+
         mChess.newGame(); // starts game
         clearSelections();
 
@@ -51,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
         resetColors();
         setColor(view, pieceSelectColor); // sets square color to yellow
 
-        String viewString = String.valueOf(view);
-        String square = viewString.substring(viewString.lastIndexOf("app:id/") + 7, viewString.length() - 1);
+        String square = getIDfromView(view);
         //Log.d("square", square); // prints ID of square selected
 
         ChessPiece currentPiece = mChess.getPiece(square);
@@ -96,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                             possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + 2));
                             break;
                     }
-
                     break;
                 case wKNIGHT:
                     possibleSelections.add(getSquareView(selectedPiece.getColumn() + 2, selectedPiece.getRow() + 1));
@@ -153,8 +155,11 @@ public class MainActivity extends AppCompatActivity {
 
             for (View selection : possibleSelections) { // sets all views in the arraylist to be a certain color and selectable
                 if (selection != null) {
-                    setColor(selection, possibleSelectColor);
-                    selection.setTag("possibleMove");
+                    int[] currentNums = Chess.getNumsfromID(getIDfromView(selection));
+                    if(mChess.getPiece(currentNums[0], currentNums[1]) == null){
+                        setColor(selection, possibleSelectColor);
+                        selection.setTag("possibleMove");
+                    }
                 }
             }
         } else {
@@ -206,9 +211,16 @@ public class MainActivity extends AppCompatActivity {
         ChessPiece randyPiece = mChess.getPiece(randyX, randyY);
 
         if(randyPiece != null && randyPiece.getPieceColor() == R.color.black){
-            setColor(getSquareView(randyPiece.getX(), randyPiece.getY()), R.color.red);
+            View currentView = getSquareView(randyPiece.getX(), randyPiece.getY());
+            setColor(currentView, R.color.red);
+            //selectSquare(currentView);
         }else{
             player2_move();
         }
+    }
+
+    public String getIDfromView(View view){
+        String viewString = view.toString();
+        return viewString.substring(viewString.lastIndexOf("app:id/") + 7, viewString.length() - 1);
     }
 }
