@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -87,7 +88,8 @@ public class MainActivity extends AppCompatActivity {
             switch (selectedPiece.getPieceName()) { // highlights where the piece can move
                 case wPAWN:
                     possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + 1)); // adds views to an arraylist
-                    if (selectedPiece.getY() == 1) possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + 2));
+                    if (selectedPiece.getY() == 1)
+                        possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + 2));
                     break;
                 case wKNIGHT:
                     possibleSelections.add(getSquareView(selectedPiece.getColumn() + 2, selectedPiece.getRow() + 1));
@@ -100,15 +102,15 @@ public class MainActivity extends AppCompatActivity {
                     possibleSelections.add(getSquareView(selectedPiece.getColumn() + 1, selectedPiece.getRow() - 2));
                     break;
                 case wBISHOP:
-                    for(int i = 0; i < 8; i++){
+                    for (int i = 0; i < 8; i++) {
                         possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
                         possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
                         possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
                         possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow() + i));
-                }
+                    }
                     break;
                 case wROOK:
-                    for(int i = 0; i < 8; i++){
+                    for (int i = 0; i < 8; i++) {
                         possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + i));
                         possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() - i));
                         possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow()));
@@ -116,8 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case wQUEEN:
-                    for(int i = 0; i < 8; i++)
-                    {
+                    for (int i = 0; i < 8; i++) {
                         possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow() + i));
                         possibleSelections.add(getSquareView(selectedPiece.getColumn() - i, selectedPiece.getRow() - i));
                         possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow() - i));
@@ -129,8 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case wKING:
-                    for(int i = 0; i < 2; i++)
-                    {
+                    for (int i = 0; i < 2; i++) {
                         possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + i));
                         possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() - i));
                         possibleSelections.add(getSquareView(selectedPiece.getColumn() + i, selectedPiece.getRow()));
@@ -144,8 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
             for (View selection : possibleSelections) { // sets all views in the arraylist to be a certain color and selectable
                 if (selection != null) {
-                    int[] currentNums = Chess.getNumsfromID(getIDfromView(selection));
-                    if(mChess.getPiece(currentNums[0], currentNums[1]) == null){
+                    if (getPieceFromView(selection) == null) {
                         setColor(selection, possibleSelectColor);
                         selection.setTag("possibleMove");
                     }
@@ -192,24 +191,29 @@ public class MainActivity extends AppCompatActivity {
         possibleSelections.clear();
     }
 
-    private void player2_move(){
+    private void player2_move() {
         Random randy = new Random();
 
         int randyX = randy.nextInt(8);
         int randyY = randy.nextInt(8);
         ChessPiece randyPiece = mChess.getPiece(randyX, randyY);
 
-        if(randyPiece != null && randyPiece.getPieceColor() == R.color.black){
+        if (randyPiece != null && randyPiece.getPieceColor() == R.color.black) {
             View currentView = getSquareView(randyPiece.getX(), randyPiece.getY());
             setColor(currentView, R.color.red);
             //selectSquare(currentView);
-        }else{
+        } else {
             player2_move();
         }
     }
 
-    public String getIDfromView(View view){
+    public static String getIDfromView(View view) {
         String viewString = view.toString();
         return viewString.substring(viewString.lastIndexOf("app:id/") + 7, viewString.length() - 1);
+    }
+
+    public ChessPiece getPieceFromView(View view) {
+        int[] currentNums = Chess.getNumsfromID(getIDfromView(view));
+        return mChess.getPiece(currentNums[0], currentNums[1]);
     }
 }
