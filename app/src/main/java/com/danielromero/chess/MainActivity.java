@@ -118,24 +118,52 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case wBISHOP:
-                    /*for (int i = 0; i < 8; i++) {
-                        possibleSelections.add(getViewFromPos(x + i, y + i)); // top right
-                        possibleSelections.add(getViewFromPos(x + i, y - i)); // bottom right
-                        possibleSelections.add(getViewFromPos(x - i, y - i)); // bottom left
-                        possibleSelections.add(getViewFromPos(x - i, y + i)); // top left
-                    }*/
-                    for (int i = 0; i < 8; i++) {
+                    int[] end = new int[2];
+                    // There's probably a way to reduce this but it works for now
+                    // TODO: reduce this horrible messy code to something readable
+                    for (int i = 1; getPieceFromPos(x + i, y + i) == null && i < 8; i++) {
                         possibleSelections.add(getViewFromPos(x + i, y + i));
+                        end = new int[]{x + i, y + i};
                     }
-                    for (int i = 0; i < 8; i++) {
+                    try {
+                        if (getPieceFromPos(end[0] + 1, end[1] + 1).getPieceColor() != selectedPiece.getPieceColor())
+                            possibleSelections.add(getViewFromPos(end[0] + 1, end[1] + 1));
+                    } catch (NullPointerException ignored) {
+                    }
+
+
+                    for (int i = 1; getPieceFromPos(x + i, y - i) == null && i < 8; i++) {
                         possibleSelections.add(getViewFromPos(x + i, y - i));
+                        end = new int[]{x + i, y - i};
                     }
-                    for (int i = 0; i < 8; i++) {
+                    try {
+                        if (getPieceFromPos(end[0] + 1, end[1] - 1).getPieceColor() != selectedPiece.getPieceColor())
+                            possibleSelections.add(getViewFromPos(end[0] + 1, end[1] - 1));
+                    } catch (NullPointerException ignored) {
+                    }
+
+
+                    for (int i = 1; getPieceFromPos(x - i, y + i) == null && i < 8; i++) {
                         possibleSelections.add(getViewFromPos(x - i, y + i));
+                        end = new int[]{x - i, y + i};
                     }
-                    for (int i = 0; i < 8; i++) {
+                    try {
+                        if (getPieceFromPos(end[0] - 1, end[1] + 1).getPieceColor() != selectedPiece.getPieceColor())
+                            possibleSelections.add(getViewFromPos(end[0] - 1, end[1] + 1));
+                    } catch (NullPointerException ignored) {
+                    }
+
+
+                    for (int i = 1; getPieceFromPos(x - i, y - i) == null && i < 8; i++) {
                         possibleSelections.add(getViewFromPos(x - i, y - i));
+                        end = new int[]{x - i, y - i};
                     }
+                    try {
+                        if (getPieceFromPos(end[0] - 1, end[1] - 1).getPieceColor() != selectedPiece.getPieceColor())
+                            possibleSelections.add(getViewFromPos(end[0] - 1, end[1] - 1));
+                    } catch (NullPointerException ignored) {
+                    }
+
 
                     break;
                 case wROOK:
