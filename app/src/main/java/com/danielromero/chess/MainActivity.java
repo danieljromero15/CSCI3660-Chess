@@ -102,21 +102,37 @@ public class MainActivity extends AppCompatActivity {
 
             switch (selectedPiece.getPieceName()) { // highlights where the piece can move
                 case wPAWN:
-                    int movement = 1;
-                    if (y == 1) movement = 2;
-                    for (int i = 1; i <= movement; i++) {
+                    int wMovement = 1;
+                    if (y == 1) wMovement = 2;
+                    for (int i = 1; i <= wMovement; i++) {
                         if (getPieceFromPos(x, y + i) == null) {
                             possibleSelections.add(getViewFromPos(x, y + i));
                         } else break;
                     }
 
-                    ChessPiece[] piecesToKill = {getPieceFromPos(x + 1, y + 1), getPieceFromPos(x - 1, y + 1)};
-                    for (ChessPiece piece : piecesToKill) {
+                    ChessPiece[] wPiecesToKill = {getPieceFromPos(x + 1, y + 1), getPieceFromPos(x - 1, y + 1)};
+                    for (ChessPiece piece : wPiecesToKill) {
+                        if (piece != null)
+                            possibleSelections.add(getViewFromPos(piece.getX(), piece.getY()));
+                    }
+                    break;
+                case bPAWN:
+                    int bMovement = 1;
+                    if (y == 6) bMovement = 2;
+                    for (int i = 1; i <= bMovement; i++) {
+                        if (getPieceFromPos(x, y - i) == null) {
+                            possibleSelections.add(getViewFromPos(x, y - i));
+                        } else break;
+                    }
+
+                    ChessPiece[] bPiecesToKill = {getPieceFromPos(x + 1, y - 1), getPieceFromPos(x - 1, y - 1)};
+                    for (ChessPiece piece : bPiecesToKill) {
                         if (piece != null)
                             possibleSelections.add(getViewFromPos(piece.getX(), piece.getY()));
                     }
                     break;
                 case wKNIGHT:
+                case bKNIGHT:
                     for (int i = -2; i <= 2; i++) {
                         int j = 0;
                         if (i == 0) continue;
@@ -127,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case wBISHOP:
+                case bBISHOP:
                     // I hate this but it works so well
                     for (int i = 0; i < 2; i++) {
                         ArrayList<View> possible = new ArrayList<>();
@@ -163,42 +180,110 @@ public class MainActivity extends AppCompatActivity {
 
                     break;
                 case wROOK:
-                    for (int i = 0; i < 8; i++) {
-                        possibleSelections.add(getViewFromPos(x, y + i));
-                        possibleSelections.add(getViewFromPos(x, y - i));
-                        possibleSelections.add(getViewFromPos(x + i, y));
-                        possibleSelections.add(getViewFromPos(x - i, y));
+                case bROOK:
+                    // this is just the same code as bishop lmao
+                    for (int i = 0; i < 2; i++) {
+                        ArrayList<View> possible = new ArrayList<>();
+                        for (int j = -8; j < 8; j++) {
+                            int posX;
+                            int posY;
+
+                            if (i == 0) {
+                                posX = x;
+                                posY = y + j;
+                            } else {
+                                posX = x + j;
+                                posY = y;
+                            }
+
+                            if (isWithinBoard(posX, posY)) {
+                                View tempView = getViewFromPos(posX, posY);
+                                possible.add(tempView);
+                            }
+                        }
+
+                        int currentIndex = possible.indexOf(getViewFromPiece(currentPiece));
+
+                        int a = currentIndex - 1;
+                        int b = currentIndex + 1;
+
+                        while (a > 0 && getPieceFromView(possible.get(a)) == null) {
+                            possibleSelections.add(possible.get(a));
+                            a--;
+                        }
+                        while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
+                            possibleSelections.add(possible.get(b));
+                            b++;
+                        }
+
+                        if (a >= 0) possibleSelections.add(possible.get(a));
+                        if (b < possible.size()) possibleSelections.add(possible.get(b));
                     }
                     break;
                 case wQUEEN:
-                    for (int i = 0; i < 8; i++) {
-                        possibleSelections.add(getViewFromPos(x + i, y + i));
-                        possibleSelections.add(getViewFromPos(x - i, y - i));
-                        possibleSelections.add(getViewFromPos(x + i, y - i));
-                        possibleSelections.add(getViewFromPos(x - i, y + i));
-                        possibleSelections.add(getViewFromPos(x, y + i));
-                        possibleSelections.add(getViewFromPos(x, y - i));
-                        possibleSelections.add(getViewFromPos(x + i, y));
-                        possibleSelections.add(getViewFromPos(x - i, y));
+                case bQUEEN:
+                    for (int i = 0; i < 4; i++) {
+                        ArrayList<View> possible = new ArrayList<>();
+                        for (int j = -8; j < 8; j++) {
+                            int posX = x;
+                            int posY = y;
+
+                            switch (i) {
+                                case 0: // rook code
+                                    //posX = x;
+                                    posY = y + j;
+                                    break;
+                                case 1: // rook code
+                                    posX = x + j;
+                                    //posY = y;
+                                    break;
+                                case 2: // bishop code
+                                    posX = x + j;
+                                    posY = y + j;
+                                    break;
+                                case 3: // bishop code
+                                    posX = x - j;
+                                    posY = y + j;
+                                    break;
+                            }
+
+                            if (isWithinBoard(posX, posY)) {
+                                View tempView = getViewFromPos(posX, posY);
+                                possible.add(tempView);
+                            }
+                        }
+
+                        int currentIndex = possible.indexOf(getViewFromPiece(currentPiece));
+
+                        int a = currentIndex - 1;
+                        int b = currentIndex + 1;
+
+                        while (a > 0 && getPieceFromView(possible.get(a)) == null) {
+                            possibleSelections.add(possible.get(a));
+                            a--;
+                        }
+                        while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
+                            possibleSelections.add(possible.get(b));
+                            b++;
+                        }
+
+                        if (a >= 0) possibleSelections.add(possible.get(a));
+                        if (b < possible.size()) possibleSelections.add(possible.get(b));
                     }
                     break;
                 case wKING:
-                    for (int i = 0; i < 2; i++) {
-                        possibleSelections.add(getViewFromPos(x, y + i));
-                        possibleSelections.add(getViewFromPos(x, y - i));
-                        possibleSelections.add(getViewFromPos(x + i, y));
-                        possibleSelections.add(getViewFromPos(x - i, y));
-                        possibleSelections.add(getViewFromPos(x + i, y + i));
-                        possibleSelections.add(getViewFromPos(x + i, y - i));
-                        possibleSelections.add(getViewFromPos(x - i, y + i));
-                        possibleSelections.add(getViewFromPos(x - i, y - i));
+                case bKING:
+                    for(int offsetX = -1; offsetX <= 1; offsetX++){
+                        for(int offsetY = -1; offsetY <= 1; offsetY++){
+                            possibleSelections.add(getViewFromPos(x + offsetX, y + offsetY));
+                        }
                     }
                     break;
                 default:
                     clearSelections();
                     selectedPiece = null;
                     return;
-            } // TODO: Add rules for all the other pieces
+            }
 
             for (View selection : possibleSelections) { // sets all views in the arraylist to be a certain color and selectable
                 if (selection != null) {
