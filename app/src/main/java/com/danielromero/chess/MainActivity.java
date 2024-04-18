@@ -90,6 +90,15 @@ public class MainActivity extends AppCompatActivity {
                     possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + 1)); // adds views to an arraylist
                     if (selectedPiece.getY() == 1)
                         possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + 2));
+
+                    ChessPiece[] piecesToKill = {getPieceFromPos(selectedPiece.getX() + 1, selectedPiece.getY() + 1), getPieceFromPos(selectedPiece.getX() - 1, selectedPiece.getY() + 1)};
+                    if (getPieceFromPos(selectedPiece.getX() + 1, selectedPiece.getY() + 1) != null) {
+                        setColor(getViewFromPos(selectedPiece.getX() + 1, selectedPiece.getY() + 1), R.color.red);
+                    }
+                    for (ChessPiece piece : piecesToKill) {
+                        if (piece != null)
+                            possibleSelections.add(getViewFromPos(piece.getX(), piece.getY()));
+                    }
                     break;
                 case wKNIGHT:
                     possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 2, selectedPiece.getRow() + 1));
@@ -144,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
             for (View selection : possibleSelections) { // sets all views in the arraylist to be a certain color and selectable
                 if (selection != null) {
-                    if (getPieceFromView(selection) == null) {
+                    if (getPieceFromView(selection) == null || getPieceFromView(selection).getPieceColor() != selectedPiece.getPieceColor()) {
                         setColor(selection, possibleSelectColor);
                         selection.setTag("possibleMove");
                     }
@@ -217,8 +226,12 @@ public class MainActivity extends AppCompatActivity {
         return mChess.getPiece(currentNums[0], currentNums[1]);
     }
 
-    public ChessPiece getPieceFromPos(int x, int y){
-        View square = getViewFromPos(x, y);
-        return getPieceFromView(square);
+    public ChessPiece getPieceFromPos(int x, int y) {
+        try {
+            View square = getViewFromPos(x, y);
+            return getPieceFromView(square);
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 }
