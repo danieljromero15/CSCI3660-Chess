@@ -85,30 +85,39 @@ public class MainActivity extends AppCompatActivity {
 
             clearSelections(); // reset selections
 
+            int x = selectedPiece.getX();
+            int y = selectedPiece.getY();
+
             switch (selectedPiece.getPieceName()) { // highlights where the piece can move
                 case wPAWN:
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + 1)); // adds views to an arraylist
-                    if (selectedPiece.getY() == 1)
-                        possibleSelections.add(getViewFromPos(selectedPiece.getColumn(), selectedPiece.getRow() + 2));
-
-                    ChessPiece[] piecesToKill = {getPieceFromPos(selectedPiece.getX() + 1, selectedPiece.getY() + 1), getPieceFromPos(selectedPiece.getX() - 1, selectedPiece.getY() + 1)};
-                    if (getPieceFromPos(selectedPiece.getX() + 1, selectedPiece.getY() + 1) != null) {
-                        setColor(getViewFromPos(selectedPiece.getX() + 1, selectedPiece.getY() + 1), R.color.red);
+                    int movement = 1;
+                    if (y == 1) movement = 2;
+                    for (int i = 1; i <= movement; i++) {
+                        if (getPieceFromPos(x, y + i) == null) {
+                            possibleSelections.add(getViewFromPos(x, y + i));
+                        } else break;
                     }
+
+                    ChessPiece[] piecesToKill = {getPieceFromPos(x + 1, y + 1), getPieceFromPos(x - 1, y + 1)};
                     for (ChessPiece piece : piecesToKill) {
                         if (piece != null)
                             possibleSelections.add(getViewFromPos(piece.getX(), piece.getY()));
                     }
                     break;
                 case wKNIGHT:
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 2, selectedPiece.getRow() + 1));
+                    /*for(int i = -2; i <= 2; i++){
+                        if(i == 0) continue;
+                        if(Math.abs(i) == 2)
+                    }*/
                     possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 2, selectedPiece.getRow() + 1));
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 1, selectedPiece.getRow() + 2));
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 1, selectedPiece.getRow() + 2));
                     possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 2, selectedPiece.getRow() - 1));
-                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 2, selectedPiece.getRow() - 1));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 1, selectedPiece.getRow() + 2));
                     possibleSelections.add(getViewFromPos(selectedPiece.getColumn() - 1, selectedPiece.getRow() - 2));
+
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 1, selectedPiece.getRow() + 2));
                     possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 1, selectedPiece.getRow() - 2));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 2, selectedPiece.getRow() + 1));
+                    possibleSelections.add(getViewFromPos(selectedPiece.getColumn() + 2, selectedPiece.getRow() - 1));
                     break;
                 case wBISHOP:
                     for (int i = 0; i < 8; i++) {
