@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         String square = getIDfromView(view);
         //Log.d("square", square); // prints ID of square selected
+        //Log.d("withinBounds", String.valueOf(isWithinBoard(Chess.getNumsfromID(square)[0], Chess.getNumsfromID(square)[1])));
 
         ChessPiece currentPiece = mChess.getPiece(square);
 
@@ -118,52 +119,39 @@ public class MainActivity extends AppCompatActivity {
                     }
                     break;
                 case wBISHOP:
-                    int[] end = new int[2];
-                    // There's probably a way to reduce this but it works for now
-                    // TODO: reduce this horrible messy code to something readable
-                    for (int i = 1; getPieceFromPos(x + i, y + i) == null && i < 8; i++) {
-                        possibleSelections.add(getViewFromPos(x + i, y + i));
-                        end = new int[]{x + i, y + i};
-                    }
-                    try {
-                        if (getPieceFromPos(end[0] + 1, end[1] + 1).getPieceColor() != selectedPiece.getPieceColor())
-                            possibleSelections.add(getViewFromPos(end[0] + 1, end[1] + 1));
-                    } catch (NullPointerException ignored) {
-                    }
+                    // I hate this but it works so well
+                    for (int i = 0; i < 2; i++) {
+                        ArrayList<View> possible = new ArrayList<>();
+                        for (int j = -8; j < 8; j++) {
+                            int posX;
+                            int posY = y + j;
 
+                            if (i == 0) posX = x + j;
+                            else posX = x - j;
 
-                    for (int i = 1; getPieceFromPos(x + i, y - i) == null && i < 8; i++) {
-                        possibleSelections.add(getViewFromPos(x + i, y - i));
-                        end = new int[]{x + i, y - i};
-                    }
-                    try {
-                        if (getPieceFromPos(end[0] + 1, end[1] - 1).getPieceColor() != selectedPiece.getPieceColor())
-                            possibleSelections.add(getViewFromPos(end[0] + 1, end[1] - 1));
-                    } catch (NullPointerException ignored) {
-                    }
+                            if (isWithinBoard(posX, posY)) {
+                                View tempView = getViewFromPos(posX, posY);
+                                possible.add(tempView);
+                            }
+                        }
 
+                        int currentIndex = possible.indexOf(getViewFromPiece(currentPiece));
 
-                    for (int i = 1; getPieceFromPos(x - i, y + i) == null && i < 8; i++) {
-                        possibleSelections.add(getViewFromPos(x - i, y + i));
-                        end = new int[]{x - i, y + i};
-                    }
-                    try {
-                        if (getPieceFromPos(end[0] - 1, end[1] + 1).getPieceColor() != selectedPiece.getPieceColor())
-                            possibleSelections.add(getViewFromPos(end[0] - 1, end[1] + 1));
-                    } catch (NullPointerException ignored) {
-                    }
+                        int a = currentIndex - 1;
+                        int b = currentIndex + 1;
 
+                        while (a > 0 && getPieceFromView(possible.get(a)) == null) {
+                            possibleSelections.add(possible.get(a));
+                            a--;
+                        }
+                        while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
+                            possibleSelections.add(possible.get(b));
+                            b++;
+                        }
 
-                    for (int i = 1; getPieceFromPos(x - i, y - i) == null && i < 8; i++) {
-                        possibleSelections.add(getViewFromPos(x - i, y - i));
-                        end = new int[]{x - i, y - i};
+                        if(a >= 0)possibleSelections.add(possible.get(a));
+                        if(b < possible.size()) possibleSelections.add(possible.get(b));
                     }
-                    try {
-                        if (getPieceFromPos(end[0] - 1, end[1] - 1).getPieceColor() != selectedPiece.getPieceColor())
-                            possibleSelections.add(getViewFromPos(end[0] - 1, end[1] - 1));
-                    } catch (NullPointerException ignored) {
-                    }
-
 
                     break;
                 case wROOK:
@@ -281,5 +269,19 @@ public class MainActivity extends AppCompatActivity {
         } catch (NullPointerException e) {
             return null;
         }
+    }
+
+    public boolean isWithinBoard(int x, int y) {
+        if (x < 0) return false;
+        if (y < 0) return false;
+        if (x > 7) return false;
+        if (y > 7) return false;
+        return true;
+    }
+
+    public View getViewFromPiece(ChessPiece piece) {
+        int x = piece.getX();
+        int y = piece.getY();
+        return getViewFromPos(x, y);
     }
 }
