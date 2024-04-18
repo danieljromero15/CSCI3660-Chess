@@ -87,18 +87,7 @@ public class MainActivity extends AppCompatActivity {
             switch (selectedPiece.getPieceName()) { // highlights where the piece can move
                 case wPAWN:
                     possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + 1)); // adds views to an arraylist
-                    switch(selectedPiece.getPosition()){
-                        case "a2":
-                        case "b2":
-                        case "c2":
-                        case "d2":
-                        case "e2":
-                        case "f2":
-                        case "g2":
-                        case "h2":
-                            possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + 2));
-                            break;
-                    }
+                    if (selectedPiece.getY() == 1) possibleSelections.add(getSquareView(selectedPiece.getColumn(), selectedPiece.getRow() + 2));
                     break;
                 case wKNIGHT:
                     possibleSelections.add(getSquareView(selectedPiece.getColumn() + 2, selectedPiece.getRow() + 1));
