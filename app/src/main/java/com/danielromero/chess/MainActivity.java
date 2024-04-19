@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Chess mChess;
     ChessPiece selectedPiece = null;
     ArrayList<View> possibleSelections = new ArrayList<>();
+    ArrayList<View> possibleSelectionsFinal = new ArrayList<>();
 
     // Defines colors for the selection, we should probably change these since I just chose them since they were easy to write
     final int pieceSelectColor = R.color.yellow;
@@ -71,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
         ChessPiece currentPiece = mChess.getPiece(square);
 
-        if (selectedPiece != null && (currentPiece == null || selectedPiece.getPieceColor() != currentPiece.getPieceColor())) { // move to other space
-            if ((view.getTag() != null) && (view.getTag() == "possibleMove")) {
+        if (selectedPiece != null && (currentPiece == null || selectedPiece.getPieceColor() != currentPiece.getPieceColor())) { // if previous selection exists, then if the square is either empty or a different color than previous selection
+            if ((view.getTag() != null) && (view.getTag() == "possibleMove")) { // if it has a tag and the tag is possibleMove
                 mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
 
-                currentPiece = selectedPiece;
-                currentPiece.setPosition(square);
+                currentPiece = selectedPiece; // copies old piece into new location
+                currentPiece.setPosition(square); // moves copy onto new position in piece data
 
                 selectedPiece = null; // removes old piece (either other color or none) from board
 
@@ -88,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (debug_printing) mChess.debug_printChess();
 
-                //player2_move();
+                p2turn = !p2turn;
+                if(p2turn) player2_move();
 
             } else clearSelections();
         } else if (currentPiece != null) {
@@ -290,6 +292,7 @@ public class MainActivity extends AppCompatActivity {
                     if (getPieceFromView(selection) == null || getPieceFromView(selection).getPieceColor() != selectedPiece.getPieceColor()) {
                         setColor(selection, possibleSelectColor);
                         selection.setTag("possibleMove");
+                        possibleSelectionsFinal.add(selection);
                     }
                 }
             }
@@ -327,25 +330,37 @@ public class MainActivity extends AppCompatActivity {
             if (view != null) view.setTag(null);
         }
         possibleSelections.clear();
+        possibleSelectionsFinal.clear();
     }
 
     private void player2_move() {
-        p2turn = true;
         Log.d("p2", "p2 move");
-        selectSquare(getViewFromPos(0, 7));
-        /*Random randy = new Random();
+        //selectSquare(getViewFromPos(0, 7));
+        Random randy = new Random();
 
         int randyX = randy.nextInt(8);
         int randyY = randy.nextInt(8);
         ChessPiece randyPiece = mChess.getPiece(randyX, randyY);
 
         if (randyPiece != null && randyPiece.getPieceColor() == R.color.black) {
-            View currentView = getViewFromPos(randyPiece.getX(), randyPiece.getY());
-            setColor(currentView, R.color.red);
-            //selectSquare(currentView);
+            View currentView = getViewFromPiece(randyPiece);
+            //setColor(currentView, R.color.red);
+            selectSquare(currentView);
+
+            /*for(View view : possibleSelectionsFinal){
+                Log.d("select", getIDfromView(view));
+            }*/
+            if(!possibleSelectionsFinal.isEmpty()){ // if there are possible moves
+                int rand = randy.nextInt(possibleSelectionsFinal.size());
+                selectSquare(possibleSelectionsFinal.get(rand));
+                //setColor(possibleSelectionsFinal.get(rand), R.color.red);
+            }else{
+                player2_move(); // if there are no possible moves with that piece run again
+            }
+
         } else {
             player2_move();
-        }*/
+        }
         p2turn = false;
     }
 
