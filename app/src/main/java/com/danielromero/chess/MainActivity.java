@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    boolean debug_printing = false;
+    final boolean debug_printing = false;
 
     Chess mChess;
     ChessPiece selectedPiece = null;
