@@ -347,17 +347,12 @@ public class MainActivity extends AppCompatActivity {
             //setColor(currentView, R.color.red);
             selectSquare(currentView);
 
-            /*for(View view : possibleSelectionsFinal){
-                Log.d("select", getIDfromView(view));
-            }*/
             if(!possibleSelectionsFinal.isEmpty()){ // if there are possible moves
                 int rand = randy.nextInt(possibleSelectionsFinal.size());
                 selectSquare(possibleSelectionsFinal.get(rand));
-                //setColor(possibleSelectionsFinal.get(rand), R.color.red);
             }else{
                 player2_move(); // if there are no possible moves with that piece run again
             }
-
         } else {
             player2_move();
         }
