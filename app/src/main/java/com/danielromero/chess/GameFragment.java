@@ -18,6 +18,8 @@ import java.util.Random;
 
 public class GameFragment extends Fragment {
     private View rootView;
+
+    // for logging board state after each turn
     final boolean debug_printing = false;
 
     Chess mChess;
@@ -28,11 +30,11 @@ public class GameFragment extends Fragment {
     // Defines colors for the selection, we should probably change these since I just chose them since they were easy to write
     final int pieceSelectColor = R.color.yellow;
     final int possibleSelectColor = R.color.blue;
+    // defines whether or not it's the second player's turn
     boolean p2turn;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_game, container, false);
 
         mChess = new Chess();
@@ -40,6 +42,7 @@ public class GameFragment extends Fragment {
         Button new_game = rootView.findViewById(R.id.new_game_button);
         new_game.setOnClickListener(this::newGame); // sets New Game button
 
+        // sets listeners to each tile
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 mChess.setChessSquare(getViewFromPos(i, j), i, j); // assigns imageview widgets to the array backend
@@ -123,6 +126,7 @@ public class GameFragment extends Fragment {
         }
     }
 
+    // awful method using a discouraged API but it works well so I don't wanna touch it
     @SuppressLint("DiscouragedApi")
     public ImageView getViewFromPos(int x, int y) { // gets the square from activity main, used for adding all views to the array
         if (x < 8 && y < 8)
@@ -146,7 +150,7 @@ public class GameFragment extends Fragment {
         if (view != null) view.setBackgroundColor(ContextCompat.getColor(requireActivity(), color));
     }
 
-    public void clearSelections() { // clears selections array and resets all tags
+    public void clearSelections() { // clears selections arrays and resets all tags
         for (View view : possibleSelections) {
             if (view != null) view.setTag(null);
         }
@@ -154,6 +158,9 @@ public class GameFragment extends Fragment {
         possibleSelectionsFinal.clear();
     }
 
+    // player 2 movement method
+    // generates random numbers and checks if that square has a valid piece, otherwise runs again
+    // once it finds a valid piece, it chooses a random possible selection, and moves there.
     private void player2_move() {
         Log.d("p2", "p2 move");
         //selectSquare(getViewFromPos(0, 7));
@@ -180,25 +187,7 @@ public class GameFragment extends Fragment {
         p2turn = false;
     }
 
-    public static String getIDfromView(View view) {
-        String viewString = view.toString();
-        return viewString.substring(viewString.lastIndexOf("app:id/") + 7, viewString.length() - 1);
-    }
-
-    public ChessPiece getPieceFromView(View view) {
-        int[] currentNums = Chess.getNumsfromID(getIDfromView(view));
-        return mChess.getPiece(currentNums[0], currentNums[1]);
-    }
-
-    public ChessPiece getPieceFromPos(int x, int y) {
-        try {
-            View square = getViewFromPos(x, y);
-            return getPieceFromView(square);
-        } catch (NullPointerException e) {
-            return null;
-        }
-    }
-
+    // Checks if a certain position is within the appropriate bounds of a Chess board, and returns a boolean value
     public boolean isWithinBoard(int x, int y) {
         if (x < 0) return false;
         if (y < 0) return false;
@@ -206,12 +195,7 @@ public class GameFragment extends Fragment {
         return y <= 7;
     }
 
-    public View getViewFromPiece(ChessPiece piece) {
-        int x = piece.getX();
-        int y = piece.getY();
-        return getViewFromPos(x, y);
-    }
-
+    // Selection path code (the thing that shows the colored path of possible locations)
     public void pieceSelectionPath(ChessPiece currentPiece) {
         selectedPiece = currentPiece;
 
@@ -415,5 +399,36 @@ public class GameFragment extends Fragment {
                 }
             }
         }
+    }
+
+    //
+    // Getter methods
+    //
+
+    // gets the ID of a certain view, ex. "a1" or "e5"
+    public static String getIDfromView(View view) {
+        String viewString = view.toString();
+        return viewString.substring(viewString.lastIndexOf("app:id/") + 7, viewString.length() - 1);
+    }
+
+    // gets the ChessPiece object that is currently in a specified view
+    public ChessPiece getPieceFromView(View view) {
+        int[] currentNums = Chess.getNumsfromID(getIDfromView(view));
+        return mChess.getPiece(currentNums[0], currentNums[1]);
+    }
+
+    // gets the ChessPiece object that is at a specified position
+    public ChessPiece getPieceFromPos(int x, int y) {
+        try {
+            View square = getViewFromPos(x, y);
+            return getPieceFromView(square);
+        } catch (NullPointerException e) {
+            return null;
+        }
+    }
+
+    // Gets the view that a specified piece is in
+    public View getViewFromPiece(ChessPiece piece) {
+        return getViewFromPos(piece.getX(), piece.getY());
     }
 }
