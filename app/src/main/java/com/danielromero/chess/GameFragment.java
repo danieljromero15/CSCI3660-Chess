@@ -1,8 +1,10 @@
 package com.danielromero.chess;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -36,6 +38,22 @@ public class GameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_game, container, false);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                //Log.w("back", "back pressed in fragment " + getParentFragment());
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext())
+                        .setMessage("Are you sure you want to exit?")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes", (dialog, which) -> requireActivity().finish())
+                        .setNegativeButton("No", (dialog, which) -> dialog.cancel());
+
+                alertBuilder.show();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
 
         mChess = new Chess();
 
