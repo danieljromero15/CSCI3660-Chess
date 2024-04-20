@@ -22,7 +22,7 @@ public class AboutFragment extends Fragment {
         TextView namesView = rootView.findViewById(R.id.contributor_names);
 
         StringBuilder names_list = new StringBuilder();
-        for(String name : contributor_names){
+        for (String name : contributor_names) {
             names_list.append(name).append(System.lineSeparator()).append(System.lineSeparator());
         }
 

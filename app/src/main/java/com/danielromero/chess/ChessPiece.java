@@ -60,7 +60,7 @@ public class ChessPiece extends Chess {
         return column;
     }
 
-    public int getX(){
+    public int getX() {
         return getColumn();
     }
 
@@ -72,7 +72,7 @@ public class ChessPiece extends Chess {
         return row;
     }
 
-    public int getY(){
+    public int getY() {
         return getRow();
     }
 
@@ -89,7 +89,7 @@ public class ChessPiece extends Chess {
         setPosition(getNumsfromID(pos)[0], getNumsfromID(pos)[1]);
     }
 
-    public String getPosition(){
+    public String getPosition() {
         return Chess.getIDfromNums(this.getX(), this.getY());
     }
 
