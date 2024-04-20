@@ -50,7 +50,7 @@ public class GameFragment extends Fragment {
 
         //Initialized storage and leaves a test message in log to see if it works
         // !! Log will only work on my phone rn because I was testing persistance
-        Storage.make(getActivity().getApplicationContext());
+        Storage.make(requireActivity().getApplicationContext());
         //Log.w( "please",Storage.getString("test", "defaultValue"));
 
         newGame(null);
@@ -126,7 +126,7 @@ public class GameFragment extends Fragment {
     @SuppressLint("DiscouragedApi")
     public ImageView getViewFromPos(int x, int y) { // gets the square from activity main, used for adding all views to the array
         if (x < 8 && y < 8)
-            return rootView.findViewById(getResources().getIdentifier(Chess.getIDfromNums(x, y), "id", getActivity().getPackageName()));
+            return rootView.findViewById(getResources().getIdentifier(Chess.getIDfromNums(x, y), "id", requireActivity().getPackageName()));
         else return null;
     }
 
@@ -143,7 +143,7 @@ public class GameFragment extends Fragment {
     }
 
     public void setColor(View view, int color) { // sets the color for a single view
-        if (view != null) view.setBackgroundColor(ContextCompat.getColor(getActivity(), color));
+        if (view != null) view.setBackgroundColor(ContextCompat.getColor(requireActivity(), color));
     }
 
     public void clearSelections() { // clears selections array and resets all tags

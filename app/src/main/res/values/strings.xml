@@ -2,6 +2,24 @@
     <string name="app_name">Chess</string>
     <string name="new_game">New Game</string>
 
+    <string name="game">Game</string>
+    <string name="stats">Stats</string>
+    <string name="about">About</string>
+    <string name="welcome_text">Welcome to Chess!</string>
+    <string name="start_game">Start a Game!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_fragment_content_description">A King chess piece</string>
+    <string name="made_by">Made by:</string>
+    <string-array name="contributor_names">
+        <item>Daniel Romero</item>
+        <item>Aiden Tobin</item>
+        <item>Bailey Ferraro</item>
+        <item>Bailey Day</item>
+    </string-array>
+
+
+
+    <!-- These strings deserve to rot in hell, they have absolutely no purpose except to remove 64 warnings about content descriptions from fragment_game.xml -->
     <string name="a1">a1</string>
     <string name="a2">a2</string>
     <string name="a3">a3</string>
@@ -66,10 +84,4 @@
     <string name="h6">h6</string>
     <string name="h7">h7</string>
     <string name="h8">h8</string>
-    <string name="game">Game</string>
-    <string name="stats">Stats</string>
-    <string name="about">About</string>
-    <string name="welcome_text">Welcome to Chess!</string>
-    <string name="start_game">Start a Game!</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -13,7 +13,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/chess_piece_king_black"
-        android:layout_marginBottom="20dp" />
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/title_fragment_content_description" />
 
     <TextView
         android:id="@+id/textViewTitle"
