@@ -42,7 +42,7 @@ public class Chess {
     }
 
     public static String getIDfromNums(int x, int y) { // converts ints to string, eg. 0, 0 to "a1"
-        return String.valueOf((char) (x + 97)) + (y + 1); // haven't tested if the valueofs are unnecessary like lint says but it works so I'm not going to touch it
+        return String.valueOf((char) (x + 97)) + (y + 1);
     }
 
     public static int[] getNumsfromID(String ID) { // converts string to ints, eg. "h8" to {7, 7}
