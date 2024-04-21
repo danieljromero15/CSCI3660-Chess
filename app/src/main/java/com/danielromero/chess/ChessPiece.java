@@ -1,5 +1,7 @@
 package com.danielromero.chess;
 
+import androidx.annotation.NonNull;
+
 public class ChessPiece extends Chess {
     private int column;
     private int row;
@@ -103,6 +105,12 @@ public class ChessPiece extends Chess {
 
     public pieceName getPieceName() {
         return name;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.valueOf(this.getPieceName());
     }
 
     public void setPieceColor() {
