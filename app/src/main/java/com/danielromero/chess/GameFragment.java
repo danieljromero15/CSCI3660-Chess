@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -111,10 +112,14 @@ public class GameFragment extends Fragment {
                 // Game over code
                 if (currentPiece != null && (currentPiece.getPieceName() == Chess.pieceName.wKING || currentPiece.getPieceName() == Chess.pieceName.bKING)) {
                     Log.d("game over", "its game over man its game over");
+                    TextView textView = rootView.findViewById(R.id.game_over_text);
                     if (currentPiece.getPieceName() == Chess.pieceName.wKING) {
                         // black wins
+                        textView.setText(getString(R.string.game_over, "Black"));
                     } else if (currentPiece.getPieceName() == Chess.pieceName.bKING) {
                         // white wins
+                        textView.setText(getString(R.string.game_over, "White"));
+
                     } else {
                         Log.wtf("help", "Oh god how did this even happen? Is it a tie or something?");
                     }

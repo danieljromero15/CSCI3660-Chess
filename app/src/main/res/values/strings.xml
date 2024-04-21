@@ -17,6 +17,8 @@
         <item>Bailey Day</item>
     </string-array>
 
+    <string name ="game_over">Game Over, %1$s wins </string>
+
 
     <!-- These strings deserve to rot in hell, they have absolutely no purpose except to remove 64 warnings about content descriptions from fragment_game.xml -->
     <string name="a1">a1</string>
