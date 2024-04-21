@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -473,12 +474,66 @@ public class GameFragment extends Fragment {
         }
     }
 
-    //public boolean isKingChecked(){
+    public boolean isKingChecked() {
+        //Use getPieceFromView to find what piece is in the sight of the king,
+        //then pull the possible selection of that piece to make sure it can check the king.
+        ChessPiece[] kings = new ChessPiece[]{wKing, bKing};//Creates an array of the two kings
+        for (ChessPiece king : kings) {
+            //Checks a queens movement from the king to see if there is a piece in sight
+            for (int i = 0; i < 4; i++) {
+                ArrayList<View> possible = new ArrayList<>();
+                for (int j = -8; j < 8; j++) {
+                    int posX = king.getX();
+                    int posY = king.getY();
 
-    //}
+                    switch (i) {
+                        case 0: // rook code
+                            //posX = x;
+                            posY = king.getY() + j;
+                            break;
+                        case 1: // rook code
+                            posX = king.getX() + j;
+                            //posY = y;
+                            break;
+                        case 2: // bishop code
+                            posX = king.getX() + j;
+                            posY = king.getY() + j;
+                            break;
+                        case 3: // bishop code
+                            posX = king.getX() - j;
+                            posY = king.getY() + j;
+                            break;
+                    }
 
-    // Gets the view that a specified piece is in
-    public View getViewFromPiece(ChessPiece piece) {
-        return getViewFromPos(piece.getX(), piece.getY());
+                    if (isWithinBoard(posX, posY)) {
+                        View tempView = getViewFromPos(posX, posY);
+                        possible.add(tempView);
+                    }
+                }
+
+                int currentIndex = possible.indexOf(getViewFromPiece(king));
+
+                int a = currentIndex - 1;
+                int b = currentIndex + 1;
+
+                while (a > 0 && getPieceFromView(possible.get(a)) == null) {
+                    possibleSelections.add(possible.get(a));
+                    a--;
+                }
+                while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
+                    possibleSelections.add(possible.get(b));
+                    b++;
+                }
+
+                if (a >= 0) possibleSelections.add(possible.get(a));
+                if (b < possible.size()) possibleSelections.add(possible.get(b));
+            }
+            return true;
+        }
+        return false;
     }
+        // Gets the view that a specified piece is in
+        public View getViewFromPiece (ChessPiece piece){
+            return getViewFromPos(piece.getX(), piece.getY());
+        }
 }
