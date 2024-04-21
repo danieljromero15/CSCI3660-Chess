@@ -107,13 +107,26 @@ public class GameFragment extends Fragment {
 
         if (selectedPiece != null && (currentPiece == null || selectedPiece.getPieceColor() != currentPiece.getPieceColor())) { // if previous selection exists, then if the square is either empty or a different color than previous selection
             if ((view.getTag() != null) && (view.getTag() == "possibleMove")) { // if it has a tag and the tag is possibleMove
+
+                // Game over code
+                if (currentPiece != null && (currentPiece.getPieceName() == Chess.pieceName.wKING || currentPiece.getPieceName() == Chess.pieceName.bKING)) {
+                    Log.d("game over", "its game over man its game over");
+                    if (currentPiece.getPieceName() == Chess.pieceName.wKING) {
+                        // black wins
+                    } else if (currentPiece.getPieceName() == Chess.pieceName.bKING) {
+                        // white wins
+                    } else {
+                        Log.wtf("help", "Oh god how did this even happen? Is it a tie or something?");
+                    }
+                }
+
                 mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
 
                 currentPiece = selectedPiece; // copies old piece into new location
                 currentPiece.setPosition(square); // moves copy onto new position in piece data
 
                 //Makes the number go up of the moved piece
-                if(selectedPiece != null){
+                if (selectedPiece != null) {
                     Storage.upCount(selectedPiece.getPieceName().toString());
                 }
 
@@ -458,18 +471,6 @@ public class GameFragment extends Fragment {
     //public boolean isKingChecked(){
 
     //}
-
-
-    public boolean gameOver() {
-        if(wKing == null)
-        {
-            return true;
-        }
-        if (bKing == null){
-            return true;
-        }
-        return false;
-    }
 
     // Gets the view that a specified piece is in
     public View getViewFromPiece(ChessPiece piece) {
