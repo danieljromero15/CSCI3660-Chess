@@ -63,7 +63,8 @@ public class Storage {
         return gaming;
     }
 
-    //Heavily modified version of the newGame() from Chess.java to take the string and make pieces
+    //Heavily modified version of the newGame() from Chess.java to take the string and make pieces\
+    //TODO make this work
     public static void setBoard(){
         String[] board = theParsening(getString("Board"));
         for(int i = 0; i < board.length; i++){
