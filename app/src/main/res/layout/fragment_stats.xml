@@ -5,11 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".StatsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- It should go without saying, you should not be see bingus-->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Bingus"
-        android:id="@+id/stats_text_view"/>
+        android:id="@+id/stats_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
 </FrameLayout>

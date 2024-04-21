@@ -15,6 +15,16 @@ public class Storage {
 
     //Use this to initialize the Storage class, don't make an object
     //Call Storage.whatever() to implement things
+
+    public static void make(Context context) {
+        if (sharedPrefs == null) {
+            sharedPrefs = context.getSharedPreferences("stats", Context.MODE_PRIVATE);
+        }
+        edit = sharedPrefs.edit();
+        //mChess = bingus;
+        vibeCheck();
+    }
+
     public static void make(Context context, Chess bingus) {
         if (sharedPrefs == null) {
             sharedPrefs = context.getSharedPreferences("stats", Context.MODE_PRIVATE);
@@ -43,9 +53,14 @@ public class Storage {
             edit.putInt("wBISHOP", 0);
             edit.putInt("wKING", 0);
             edit.putInt("wQUEEN", 0);
+            edit.putInt("bPAWN", 0);
+            edit.putInt("bROOK", 0);
+            edit.putInt("bKNIGHT", 0);
+            edit.putInt("bBISHOP", 0);
+            edit.putInt("bKING", 0);
+            edit.putInt("bQUEEN", 0);
             edit.putInt("win", 0);
             edit.putInt("lose", 0);
-            //edit.putInt("ComedyCounter", 0);
             edit.apply();
         }
     }
