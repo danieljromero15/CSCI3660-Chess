@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -112,17 +111,25 @@ public class GameFragment extends Fragment {
                 // Game over code
                 if (currentPiece != null && (currentPiece.getPieceName() == Chess.pieceName.wKING || currentPiece.getPieceName() == Chess.pieceName.bKING)) {
                     Log.d("game over", "its game over man its game over");
-                    TextView textView = rootView.findViewById(R.id.game_over_text);
+
+                    AlertDialog.Builder game_over_alert = new AlertDialog.Builder(getContext())
+                            .setMessage("White wins!")
+                            .setCancelable(true)
+                            .setPositiveButton("Okay", null); // set gameover var here
+
+                    String win = "";
                     if (currentPiece.getPieceName() == Chess.pieceName.wKING) {
                         // black wins
-                        textView.setText(getString(R.string.game_over, "Black"));
+                        win = getResources().getStringArray(R.array.piece_colors)[1];
                     } else if (currentPiece.getPieceName() == Chess.pieceName.bKING) {
                         // white wins
-                        textView.setText(getString(R.string.game_over, "White"));
-
+                        win = getResources().getStringArray(R.array.piece_colors)[0];
                     } else {
                         Log.wtf("help", "Oh god how did this even happen? Is it a tie or something?");
                     }
+
+                    game_over_alert.setMessage(getString(R.string.game_over, win));
+                    game_over_alert.show();
                 }
 
                 mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
