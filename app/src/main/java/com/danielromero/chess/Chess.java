@@ -143,6 +143,63 @@ public class Chess {
         }
     }
 
+    public void setBoard(){
+        //TODO Shitass
+        String[] board = Storage.theParsening();
+        int f = 0;
+        for(int i = 7; i >= 0; i--){
+            for(int j = 0; j < 8; j++){
+                setChessPieces(null, i, j);
+                getChessSquare(j,i).setImageDrawable(null);
+
+                ChessPiece piece = null;
+                String square = Chess.getIDfromNums(j,i);
+                String position = board[f];
+                switch(position){
+                    case "wPAWN":
+                        piece = new ChessPiece(square, pieceName.wPAWN);
+                        break;
+                    case "wKNIGHT":
+                        piece = new ChessPiece(square, pieceName.wKNIGHT);
+                        break;
+                    case "wROOK":
+                        piece = new ChessPiece(square, pieceName.wROOK);
+                        break;
+                    case "wBISHOP":
+                        piece = new ChessPiece(square, pieceName.wBISHOP);
+                        break;
+                    case "wKING":
+                        piece = new ChessPiece(square, pieceName.wKING);
+                        break;
+                    case "wQUEEN":
+                        piece = new ChessPiece(square, pieceName.wQUEEN);
+                        break;
+                    case "bPAWN":
+                        piece = new ChessPiece(square, pieceName.bPAWN);
+                        break;
+                    case "bKNIGHT":
+                        piece = new ChessPiece(square, pieceName.bKNIGHT);
+                        break;
+                    case "bROOK":
+                        piece = new ChessPiece(square, pieceName.bROOK);
+                        break;
+                    case "bBISHOP":
+                        piece = new ChessPiece(square, pieceName.bBISHOP);
+                        break;
+                    case "bKING":
+                        piece = new ChessPiece(square, pieceName.bKING);
+                        break;
+                    case "bQUEEN":
+                        piece = new ChessPiece(square, pieceName.bQUEEN);
+                        break;
+                    case "00":
+                }
+                setPiece(piece);
+                f++;
+            }
+        }
+    }
+
     public void debug_printChess() {
         StringBuilder out = new StringBuilder();
         out.append("--------------------------------------------------------").append(System.lineSeparator());

@@ -82,7 +82,7 @@ public class GameFragment extends Fragment {
     private void newGame(View view) { // starts new game
         resetColors();
         clearSelections();
-        mChess.newGame();
+        mChess.setBoard();
         selectedPiece = null;
         p2turn = false;
         if (debug_printing) mChess.debug_printChess();

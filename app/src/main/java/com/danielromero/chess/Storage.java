@@ -39,14 +39,8 @@ public class Storage {
     //No, I will not rename this
     public static void vibeCheck(){
         if(getInt("wPAWN") == -1){
-            edit.putString("Board", "bROOK,bKNIGHT,bBISHOP,bQUEEN,bKING,bBISHOP,bKNIGHT,pROOK," + //my apolocheese if this is annoying to read
-                            "bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN," +
-                            "00,00,00,00,00,00,00,00," +
-                            "00,00,00,00,00,00,00,00," +
-                            "00,00,00,00,00,00,00,00," +
-                            "00,00,00,00,00,00,00,00," +
-                            "wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN," +
-                            "wROOK,wKNIGHT,wBISHOP,wQUEEN,wKING,wBISHOP,wKNIGHT,wROOK");
+            //My apolocheese if this is annoying to read
+            edit.putString("Board", "bROOK,bKNIGHT,bBISHOP,bQUEEN,bKING,bBISHOP,bKNIGHT,bROOK,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wROOK,wKNIGHT,wBISHOP,wQUEEN,wKING,wBISHOP,wKNIGHT,wROOK");
             edit.putInt("wPAWN", 0);
             edit.putInt("wROOK", 0);
             edit.putInt("wKNIGHT", 0);
@@ -66,15 +60,15 @@ public class Storage {
     }
 
     //Use to parse the "Board" sharedpref because I can't store arrays (tragic, I know)
-    public static String[] theParsening(String key){
-        String[] gaming = getString(key).split(",");
+    public static String[] theParsening(){
+        String[] gaming = getString("Board").split(",", 0);
         return gaming;
     }
 
     //Heavily modified version of the newGame() from Chess.java to take the string and make pieces\
     //TODO make this work
     public static void setBoard(){
-        String[] board = theParsening(getString("Board"));
+        String[] board = theParsening();
         for(int i = 0; i < board.length; i++){
             Log.w("test", board[i]);
         }
