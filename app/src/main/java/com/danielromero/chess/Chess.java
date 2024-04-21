@@ -78,43 +78,44 @@ public class Chess {
 
 
                 ChessPiece currentPiece = null;
+                pieceName tempPieceName = null;
                 String currentSquare = getIDfromNums(i, j);
                 switch (currentSquare) {
                     case "a1":
                     case "h1":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.wROOK);
+                        tempPieceName = pieceName.wROOK;
                         break;
                     case "a8":
                     case "h8":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.bROOK);
+                        tempPieceName = pieceName.bROOK;
                         break;
                     case "b1":
                     case "g1":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.wKNIGHT);
+                        tempPieceName = pieceName.wKNIGHT;
                         break;
                     case "b8":
                     case "g8":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.bKNIGHT);
+                        tempPieceName = pieceName.bKNIGHT;
                         break;
                     case "c1":
                     case "f1":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.wBISHOP);
+                        tempPieceName = pieceName.wBISHOP;
                         break;
                     case "c8":
                     case "f8":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.bBISHOP);
+                        tempPieceName = pieceName.bBISHOP;
                         break;
                     case "d1":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.wQUEEN);
+                        tempPieceName = pieceName.wQUEEN;
                         break;
                     case "d8":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.bQUEEN);
+                        tempPieceName = pieceName.bQUEEN;
                         break;
                     case "e1":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.wKING);
+                        tempPieceName = pieceName.wKING;
                         break;
                     case "e8":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.bKING);
+                        tempPieceName = pieceName.bKING;
                         break;
                     case "a2":
                     case "b2":
@@ -124,7 +125,7 @@ public class Chess {
                     case "f2":
                     case "g2":
                     case "h2":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.wPAWN);
+                        tempPieceName = pieceName.wPAWN;
                         break;
                     case "a7":
                     case "b7":
@@ -134,10 +135,13 @@ public class Chess {
                     case "f7":
                     case "g7":
                     case "h7":
-                        currentPiece = new ChessPiece(currentSquare, pieceName.bPAWN);
+                        tempPieceName = pieceName.bPAWN;
                         break;
                 }
 
+                if (tempPieceName != null) {
+                    currentPiece = new ChessPiece(currentSquare, tempPieceName);
+                }
                 setPiece(currentPiece); // sets piece onto board
             }
         }
