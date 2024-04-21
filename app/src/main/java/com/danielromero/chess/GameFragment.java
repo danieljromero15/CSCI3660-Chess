@@ -70,9 +70,7 @@ public class GameFragment extends Fragment {
         }
 
         //Initialized storage and leaves a test message in log to see if it works
-        // !! Log will only work on my phone rn because I was testing persistance
-        Storage.make(requireActivity().getApplicationContext());
-        //Log.w( "please",Storage.getString("test", "defaultValue"));
+        Storage.make(requireActivity().getApplicationContext(), mChess);
 
         newGame(null);
 
@@ -105,6 +103,12 @@ public class GameFragment extends Fragment {
                 mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
 
                 currentPiece = selectedPiece; // copies old piece into new location
+
+                //Makes the number go up of the moved piece
+                if(selectedPiece != null){
+                    Storage.upCount(selectedPiece.getPieceName().toString());
+                }
+
                 currentPiece.setPosition(square); // moves copy onto new position in piece data
 
                 selectedPiece = null; // removes old piece (either other color or none) from board
