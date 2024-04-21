@@ -37,14 +37,6 @@ public class Storage {
                             "00,00,00,00,00,00,00,00," +
                             "wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN," +
                             "wROOK,wKNIGHT,wBISHOP,wQUEEN,wKING,wBISHOP,wKNIGHT,wROOK");
-            edit.putString("Board", "bROOK,bKNIGHT,bBISHOP,bQUEEN,bKING,bBISHOP,bKNIGHT,pROOK," + //my apolocheese if this is annoying to read
-                    "bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN," +
-                    "00,wKING,00,00,00,00,00,00," +
-                    "00,00,00,bPAWN,00,00,00,00," +
-                    "00,00,00,00,00,wRook,00,00," +
-                    "00,00,00,00,00,00,00,00," +
-                    "wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN," +
-                    "wROOK,wKNIGHT,wBISHOP,wQUEEN,wKING,wBISHOP,wKNIGHT,wROOK");
             edit.putInt("wPAWN", 0);
             edit.putInt("wROOK", 0);
             edit.putInt("wKNIGHT", 0);
