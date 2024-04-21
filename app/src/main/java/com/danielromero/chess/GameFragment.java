@@ -103,13 +103,12 @@ public class GameFragment extends Fragment {
                 mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
 
                 currentPiece = selectedPiece; // copies old piece into new location
+                currentPiece.setPosition(square); // moves copy onto new position in piece data
 
                 //Makes the number go up of the moved piece
                 if(selectedPiece != null){
                     Storage.upCount(selectedPiece.getPieceName().toString());
                 }
-
-                currentPiece.setPosition(square); // moves copy onto new position in piece data
 
                 selectedPiece = null; // removes old piece (either other color or none) from board
 
