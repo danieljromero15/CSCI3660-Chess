@@ -9,7 +9,7 @@ public class Storage {
     private static SharedPreferences.Editor edit;
     private static Chess mChess;
 
-    //the wawa
+    //the wawa 2
     private Storage() {
     }
 
