@@ -145,9 +145,9 @@ public class Chess {
 
     public void setBoard(){
         //TODO Shitass
-        String[] board = Storage.theParsening();
+        String[] board = Storage.theParsening(); //Makes board string
         int f = 0;
-        for(int i = 7; i >= 0; i--){
+        for(int i = 7; i >= 0; i--){ //loops from top left to bottom right, important because I don't know how to make things easy on myself
             for(int j = 0; j < 8; j++){
                 setChessPieces(null, i, j);
                 getChessSquare(j,i).setImageDrawable(null);

@@ -118,7 +118,8 @@ public class GameFragment extends Fragment {
                 mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
                 mChess.updateBoard();
                 clearSelections();
-
+                Storage.saveBoard();
+                Log.w("board", Storage.getString("Board"));
                 if (debug_printing) mChess.debug_printChess();
 
                 p2turn = !p2turn;
