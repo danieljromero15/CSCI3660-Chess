@@ -20,10 +20,10 @@ import java.util.Random;
 
 public class GameFragment extends Fragment {
     private View rootView;
-
     // for logging board state after each turn
     final boolean debug_printing = false;
-
+    public ChessPiece wKing;
+    public ChessPiece bKing;
     Chess mChess;
     ChessPiece selectedPiece = null;
     ArrayList<View> possibleSelections = new ArrayList<>();
@@ -73,6 +73,13 @@ public class GameFragment extends Fragment {
         Storage.make(requireActivity().getApplicationContext(), mChess);
 
         newGame(null);
+
+        // defines kings
+        wKing = getPieceFromPos(4, 0);
+        bKing = getPieceFromPos(4, 7);
+
+        Log.d("wKing", wKing.toString());
+        Log.d("bKing", bKing.toString());
 
         if (debug_printing) mChess.debug_printChess();
 
@@ -446,6 +453,22 @@ public class GameFragment extends Fragment {
         } catch (NullPointerException e) {
             return null;
         }
+    }
+
+    //public boolean isKingChecked(){
+
+    //}
+
+
+    public boolean gameOver() {
+        if(wKing == null)
+        {
+            return true;
+        }
+        if (bKing == null){
+            return true;
+        }
+        return false;
     }
 
     // Gets the view that a specified piece is in

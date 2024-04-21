@@ -94,7 +94,6 @@ public class ChessPiece extends Chess {
     public String getPosition() {
         return Chess.getIDfromNums(this.getX(), this.getY());
     }
-
     public int getPieceColor() {
         return pieceColor;
     }
