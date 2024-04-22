@@ -27,7 +27,7 @@ public class GameFragment extends Fragment {
     public ChessPiece bKing;
     Chess mChess;
     ChessPiece selectedPiece = null;
-    ArrayList<View> possibleSelections = new ArrayList<>();
+    final ArrayList<View> possibleSelections = new ArrayList<>();
 
     // Defines colors for the selection, we should probably change these since I just chose them since they were easy to write
     final int pieceSelectColor = R.color.yellow;
@@ -140,7 +140,6 @@ public class GameFragment extends Fragment {
 
             String square = getIDfromView(view);
             //Log.d("square", square); // prints ID of square selected
-            //Log.d("withinBounds", String.valueOf(isWithinBoard(Chess.getNumsfromID(square)[0], Chess.getNumsfromID(square)[1])));
 
             ChessPiece currentPiece = mChess.getPiece(square);
 

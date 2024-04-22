@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".StatsFragment">
 
-    <!-- It should go without saying, you should not be see bingus-->
     <TextView
         android:id="@+id/stats_text_view"
         android:layout_width="match_parent"

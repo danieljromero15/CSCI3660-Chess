@@ -25,16 +25,16 @@ public class StatsFragment extends Fragment {
         String[] displayNames = getResources().getStringArray(R.array.piece_display_names);
 
         StringBuilder stats_list = new StringBuilder();
-        stats_list.append(getString(R.string.human_moves) + br);
+        stats_list.append(getString(R.string.human_moves)).append(br);
         for(int i = 0; i < pieceNames.length; i++){
             String point = displayNames[i] + ": " + Storage.getInt(pieceNames[i]) + br;
             stats_list.append(point);
             if(i == pieceNames.length/2-1) {
-                stats_list.append(br + getString(R.string.p2_moves) + br);
+                stats_list.append(br).append(getString(R.string.p2_moves)).append(br);
             }
         }
-        stats_list.append(br + getString(R.string.wins) + ": " + Storage.getInt("win"));
-        stats_list.append(br + getString(R.string.losses) + ": " + Storage.getInt("lose"));
+        stats_list.append(br).append(getString(R.string.wins)).append(": ").append(Storage.getInt("win"));
+        stats_list.append(br).append(getString(R.string.losses)).append(": ").append(Storage.getInt("lose"));
 
         Log.d("text", String.valueOf(piecesView));
         piecesView.setText(stats_list.toString());

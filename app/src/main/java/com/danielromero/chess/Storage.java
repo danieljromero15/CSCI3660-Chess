@@ -62,16 +62,15 @@ public class Storage {
 
     //Use to parse the "Board" sharedpref because I can't store arrays (tragic, I know)
     public static String[] theParsening(){
-        String[] gaming = getString("Board").split(",", 0);
-        return gaming;
+        return getString("Board").split(",", 0);
     }
 
     //Heavily modified version of the newGame() from Chess.java to take the string and make pieces\
     //TODO make this work
     public static void setBoard(){
         String[] board = theParsening();
-        for(int i = 0; i < board.length; i++){
-            Log.w("test", board[i]);
+        for (String s : board) {
+            Log.w("test", s);
         }
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
@@ -134,7 +133,7 @@ public class Storage {
                 ChessPiece curPiece = mChess.getPiece(j,i);
                 if(curPiece != null){
                     String pieceS = curPiece.toString();
-                    boardString.append(pieceS + ",");
+                    boardString.append(pieceS).append(",");
                 }else{
                     boardString.append("00,");
                 }

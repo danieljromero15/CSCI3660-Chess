@@ -4,8 +4,8 @@ import android.util.Log;
 import android.widget.ImageView;
 
 public class Chess {
-    ImageView[][] chessGrid = new ImageView[8][8];
-    ChessPiece[][] chessPieces = new ChessPiece[8][8];
+    final ImageView[][] chessGrid = new ImageView[8][8];
+    final ChessPiece[][] chessPieces = new ChessPiece[8][8];
 
     public enum pieceName {
         wPAWN, wROOK, wKNIGHT, wBISHOP, wQUEEN, wKING, bPAWN, bROOK, bKNIGHT, bBISHOP, bQUEEN, bKING
@@ -148,7 +148,6 @@ public class Chess {
     }
 
     public void setBoard(){
-        //TODO Shitass
         String[] board = Storage.theParsening(); //Makes board string
         int f = 0;
         for(int i = 7; i >= 0; i--){ //loops from top left to bottom right, important because I don't know how to make things easy on myself
