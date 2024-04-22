@@ -39,7 +39,7 @@ public class Storage {
     //Alternatively call this to reset for testing
     //No, I will not rename this
     public static void vibeCheck(){
-        //if(getInt("wPAWN") == -1){
+        if(getInt("wPAWN") == -1){
             //My apolocheese if this is annoying to read
             edit.putString("Board", "bROOK,bKNIGHT,bBISHOP,bQUEEN,bKING,bBISHOP,bKNIGHT,bROOK,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wROOK,wKNIGHT,wBISHOP,wQUEEN,wKING,wBISHOP,wKNIGHT,wROOK");
             edit.putInt("wPAWN", 0);
@@ -57,7 +57,7 @@ public class Storage {
             edit.putInt("win", 0);
             edit.putInt("lose", 0);
             edit.apply();
-        //}
+        }
     }
 
     //Use to parse the "Board" sharedpref because I can't store arrays (tragic, I know)

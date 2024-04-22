@@ -153,50 +153,55 @@ public class Chess {
         int f = 0;
         for(int i = 7; i >= 0; i--){ //loops from top left to bottom right, important because I don't know how to make things easy on myself
             for(int j = 0; j < 8; j++){
-                setChessPieces(null, i, j);
+                setChessPieces(null, j, i);
                 getChessSquare(j,i).setImageDrawable(null);
 
                 ChessPiece piece = null;
+                pieceName tempPieceName = null;
+
                 String square = Chess.getIDfromNums(j,i);
                 String position = board[f];
                 switch(position){
                     case "wPAWN":
-                        piece = new ChessPiece(square, pieceName.wPAWN);
+                        tempPieceName = pieceName.wPAWN;
                         break;
                     case "wKNIGHT":
-                        piece = new ChessPiece(square, pieceName.wKNIGHT);
+                        tempPieceName = pieceName.wKNIGHT;
                         break;
                     case "wROOK":
-                        piece = new ChessPiece(square, pieceName.wROOK);
+                        tempPieceName = pieceName.wROOK;
                         break;
                     case "wBISHOP":
-                        piece = new ChessPiece(square, pieceName.wBISHOP);
+                        tempPieceName = pieceName.wBISHOP;
                         break;
                     case "wKING":
-                        piece = new ChessPiece(square, pieceName.wKING);
+                        tempPieceName = pieceName.wKING;
                         break;
                     case "wQUEEN":
-                        piece = new ChessPiece(square, pieceName.wQUEEN);
+                        tempPieceName = pieceName.wQUEEN;
                         break;
                     case "bPAWN":
-                        piece = new ChessPiece(square, pieceName.bPAWN);
+                        tempPieceName = pieceName.bPAWN;
                         break;
                     case "bKNIGHT":
-                        piece = new ChessPiece(square, pieceName.bKNIGHT);
+                        tempPieceName = pieceName.bKNIGHT;
                         break;
                     case "bROOK":
-                        piece = new ChessPiece(square, pieceName.bROOK);
+                        tempPieceName = pieceName.bROOK;
                         break;
                     case "bBISHOP":
-                        piece = new ChessPiece(square, pieceName.bBISHOP);
+                        tempPieceName = pieceName.bBISHOP;
                         break;
                     case "bKING":
-                        piece = new ChessPiece(square, pieceName.bKING);
+                        tempPieceName = pieceName.bKING;
                         break;
                     case "bQUEEN":
-                        piece = new ChessPiece(square, pieceName.bQUEEN);
+                        tempPieceName = pieceName.bQUEEN;
                         break;
                     case "00":
+                }
+                if (tempPieceName != null) {
+                    piece = new ChessPiece(square, tempPieceName);
                 }
                 setPiece(piece);
                 f++;
