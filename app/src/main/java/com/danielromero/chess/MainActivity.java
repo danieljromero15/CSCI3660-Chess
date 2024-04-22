@@ -25,17 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-        //Testing storage stuff, plz don't touch -Aiden
-        /*
-        Storage.make(this.getApplicationContext());
-        Log.d("Before", String.valueOf(Storage.getInt("wPAWN")));
-        Storage.upCount("wPAWN");
-        Log.d("After", String.valueOf(Storage.getInt("wPAWN")));
-        */
-
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
 
