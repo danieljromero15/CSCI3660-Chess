@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -46,7 +48,7 @@ public class GameFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 //Log.w("back", "back pressed in fragment " + getParentFragment());
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext())
+                MaterialAlertDialogBuilder alertBuilder = new MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                         .setMessage(getString(R.string.check_exit))
                         .setCancelable(true)
                         .setPositiveButton(getString(R.string.yes), (dialog, which) -> requireActivity().finish())
