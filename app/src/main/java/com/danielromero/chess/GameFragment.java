@@ -241,12 +241,16 @@ public class GameFragment extends Fragment {
     // generates random numbers and checks if that square has a valid piece, otherwise runs again
     // once it finds a valid piece, it chooses a random possible selection, and moves there.
     private void player2_move() {
-        //selectSquare(getViewFromPos(0, 7));
+        boolean isInCheck = isKingChecked(bKing);
         Random randy = new Random();
-
-        int randyX = randy.nextInt(8);
-        int randyY = randy.nextInt(8);
-        ChessPiece randyPiece = mChess.getPiece(randyX, randyY);
+        ChessPiece randyPiece;
+        if (!isInCheck) {
+            int randyX = randy.nextInt(8);
+            int randyY = randy.nextInt(8);
+            randyPiece = mChess.getPiece(randyX, randyY);
+        }else{
+            randyPiece = bKing;
+        }
 
         if (randyPiece != null && randyPiece.getPieceColor() == R.color.black) {
             View currentView = getViewFromPiece(randyPiece);
