@@ -61,6 +61,9 @@ public class GameFragment extends Fragment {
         Button new_game = rootView.findViewById(R.id.new_game_button);
         new_game.setOnClickListener(this::newGame); // sets New Game button
 
+        Button load_game = rootView.findViewById(R.id.load_game_button);
+        load_game.setOnClickListener(this::loadGame); // sets New Game button
+
         // sets listeners to each tile
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -91,6 +94,16 @@ public class GameFragment extends Fragment {
         resetColors();
         clearSelections();
         mChess.newGame();
+        selectedPiece = null;
+        p2turn = false;
+        isGameOver = false;
+        if (debug_printing) mChess.debug_printChess();
+    }
+
+    private void loadGame(View view) { // starts new game
+        resetColors();
+        clearSelections();
+        mChess.setBoard();
         selectedPiece = null;
         p2turn = false;
         isGameOver = false;
@@ -152,7 +165,8 @@ public class GameFragment extends Fragment {
                     mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
                     mChess.updateBoard();
                     clearSelections();
-
+                    Storage.saveBoard();
+                    Log.w("board", Storage.getString("Board"));
                     if(isGameOver) return;
 
                     if (debug_printing) mChess.debug_printChess();

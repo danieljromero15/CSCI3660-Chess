@@ -13,8 +13,19 @@ public class Storage {
     private Storage() {
     }
 
-    //Use this to initialize the Storage class, don't make an object
+    //Use Storage.make(x,y) to initialize the Storage class, don't make an object
     //Call Storage.whatever() to implement things
+
+    //Make for title screen since mChess doesn't exist yet
+    public static void make(Context context) {
+        if (sharedPrefs == null) {
+            sharedPrefs = context.getSharedPreferences("stats", Context.MODE_PRIVATE);
+        }
+        edit = sharedPrefs.edit();
+        vibeCheck();
+    }
+
+    //Overload make for game fragment since mChess will exist
     public static void make(Context context, Chess bingus) {
         if (sharedPrefs == null) {
             sharedPrefs = context.getSharedPreferences("stats", Context.MODE_PRIVATE);
@@ -24,50 +35,41 @@ public class Storage {
         vibeCheck();
     }
 
-    //Initializing the numbers imma work with, probably boring and long
+    //Initializing the numbers imma work with, pretty boring
     //Alternatively call this to reset for testing
     //No, I will not rename this
     public static void vibeCheck(){
         if(getInt("wPAWN") == -1){
-            edit.putString("Board", "bROOK,bKNIGHT,bBISHOP,bQUEEN,bKING,bBISHOP,bKNIGHT,pROOK," + //my apolocheese if this is annoying to read
-                            "bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN," +
-                            "00,00,00,00,00,00,00,00," +
-                            "00,00,00,00,00,00,00,00," +
-                            "00,00,00,00,00,00,00,00," +
-                            "00,00,00,00,00,00,00,00," +
-                            "wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN," +
-                            "wROOK,wKNIGHT,wBISHOP,wQUEEN,wKING,wBISHOP,wKNIGHT,wROOK");
-            edit.putString("Board", "bROOK,bKNIGHT,bBISHOP,bQUEEN,bKING,bBISHOP,bKNIGHT,pROOK," + //my apolocheese if this is annoying to read
-                    "bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN," +
-                    "00,wKING,00,00,00,00,00,00," +
-                    "00,00,00,bPAWN,00,00,00,00," +
-                    "00,00,00,00,00,wRook,00,00," +
-                    "00,00,00,00,00,00,00,00," +
-                    "wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN," +
-                    "wROOK,wKNIGHT,wBISHOP,wQUEEN,wKING,wBISHOP,wKNIGHT,wROOK");
+            //My apolocheese if this is annoying to read
+            edit.putString("Board", "bROOK,bKNIGHT,bBISHOP,bQUEEN,bKING,bBISHOP,bKNIGHT,bROOK,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wROOK,wKNIGHT,wBISHOP,wQUEEN,wKING,wBISHOP,wKNIGHT,wROOK");
             edit.putInt("wPAWN", 0);
             edit.putInt("wROOK", 0);
             edit.putInt("wKNIGHT", 0);
             edit.putInt("wBISHOP", 0);
             edit.putInt("wKING", 0);
             edit.putInt("wQUEEN", 0);
+            edit.putInt("bPAWN", 0);
+            edit.putInt("bROOK", 0);
+            edit.putInt("bKNIGHT", 0);
+            edit.putInt("bBISHOP", 0);
+            edit.putInt("bKING", 0);
+            edit.putInt("bQUEEN", 0);
             edit.putInt("win", 0);
             edit.putInt("lose", 0);
-            //edit.putInt("ComedyCounter", 0);
             edit.apply();
         }
     }
 
     //Use to parse the "Board" sharedpref because I can't store arrays (tragic, I know)
-    public static String[] theParsening(String key){
-        String[] gaming = getString(key).split(",");
+    public static String[] theParsening(){
+        String[] gaming = getString("Board").split(",", 0);
         return gaming;
     }
 
     //Heavily modified version of the newGame() from Chess.java to take the string and make pieces\
     //TODO make this work
     public static void setBoard(){
-        String[] board = theParsening(getString("Board"));
+        String[] board = theParsening();
         for(int i = 0; i < board.length; i++){
             Log.w("test", board[i]);
         }
@@ -123,6 +125,23 @@ public class Storage {
 
 
         }
+    }
+
+    public static void saveBoard(){
+        StringBuilder boardString = new StringBuilder();
+        for(int i = 7; i >=0; i--){
+            for(int j = 0; j < 8; j++){
+                ChessPiece curPiece = mChess.getPiece(j,i);
+                if(curPiece != null){
+                    String pieceS = curPiece.toString();
+                    boardString.append(pieceS + ",");
+                }else{
+                    boardString.append("00,");
+                }
+            }
+        }
+        boardString.setLength(boardString.length()-1);
+        setString("Board", boardString.toString());
     }
 
     //getters, If you see the default value something is wrong (panic)
