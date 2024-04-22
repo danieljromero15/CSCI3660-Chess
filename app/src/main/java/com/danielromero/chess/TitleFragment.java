@@ -25,5 +25,8 @@ public class TitleFragment extends Fragment {
 
         Button startGameButton = view.findViewById(R.id.startGameButton);
         startGameButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.gameFragment));
+
+        Button loadGameButton = view.findViewById(R.id.loadGameButton);
+        loadGameButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.gameFragment));
     }
 }

@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,6 +62,27 @@ public class StatsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
+        TextView piecesView = rootView.findViewById(R.id.stats_text_view);
+
+        String[] pieceNames = {"wPAWN", "wKNIGHT", "wROOK", "wBISHOP", "wQUEEN", "wKING", "bPAWN", "bKNIGHT", "bROOK", "bBISHOP", "bQUEEN", "bKING"};
+        String[] displayNames = {"White Pawn", "White Knight", "White Rook", "White Bishop", "White Queen", "White King", "Black Pawn", "Black Knight", "Black Rook", "Black Bishop", "Black Queen", "Black King"};
+
+        StringBuilder stats_list = new StringBuilder();
+        stats_list.append("Human\n");
+        for(int i = 0; i < pieceNames.length; i++){
+            String point = displayNames[i] + ": " + Storage.getInt(pieceNames[i]) + "\n";
+            stats_list.append(point);
+            if(i == pieceNames.length/2-1) {
+                stats_list.append("\nGenius Robot\n");
+            }
+        }
+        stats_list.append("\nWins: " + Storage.getInt("win"));
+        stats_list.append("\nLosses: " + Storage.getInt("lose"));
+
+        Log.d("text", String.valueOf(piecesView));
+        piecesView.setText(stats_list.toString());
+        //piecesView.setText("fuck");
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
@@ -72,6 +95,6 @@ public class StatsFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_stats, container, false);
+        return rootView;
     }
 }
