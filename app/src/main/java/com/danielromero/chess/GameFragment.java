@@ -25,6 +25,7 @@ public class GameFragment extends Fragment {
     final boolean debug_printing = false;
     public ChessPiece wKing;
     public ChessPiece bKing;
+    private int wKingMove;
     Chess mChess;
     ChessPiece selectedPiece = null;
     final ArrayList<View> possibleSelections = new ArrayList<>();
@@ -107,6 +108,8 @@ public class GameFragment extends Fragment {
 
         wKing = getPieceFromPos(4, 0);
         bKing = getPieceFromPos(4, 7);
+
+        wKingMove = Storage.getInt("wKING"); // stores the value of movements the king has made so far to check if it has moved yet
     }
 
     private void loadGame() {
@@ -159,7 +162,7 @@ public class GameFragment extends Fragment {
             if (possibleSelections.contains(view)) { // if previous selection exists, then if the square is within possibleSelectionsFinal
 
                 // Game over code
-                if (currentPiece != null && (currentPiece.getPieceName() == Chess.pieceName.wKING || currentPiece.getPieceName() == Chess.pieceName.bKING)) {
+                if (view.getTag() == null && currentPiece != null && (currentPiece.getPieceName() == Chess.pieceName.wKING || currentPiece.getPieceName() == Chess.pieceName.bKING)) {
                     Log.d("game over", "game over");
 
                     AlertDialog.Builder game_over_alert = new AlertDialog.Builder(getContext())
@@ -186,19 +189,48 @@ public class GameFragment extends Fragment {
                     game_over_alert.show();
                 }
 
-                mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
+                if (view.getTag() != null && currentPiece != null) { // castling behavior
+                    Log.d("tag", String.valueOf(view.getTag()));
+                    mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
+                    mChess.setChessPieces(null, currentPiece.getColumn(), currentPiece.getRow()); // removes from array
 
-                currentPiece = selectedPiece; // copies old piece into new location
-                currentPiece.setPosition(square); // moves copy onto new position in piece data
+                    int rookX = 0; // rook is current
+                    int kingX = 0; // king is selected
+                    if (selectedPiece.getPosition().equals("a1")) {
+                        //Log.d("rook", "left rook");
+                        rookX = 3;
+                        kingX = 2;
+                    } else if (selectedPiece.getPosition().equals("h1")) {
+                        //Log.d("rook", "right rook");
+                        rookX = 5;
+                        kingX = 6;
+                    }
+                    if (rookX > 0) {
+                        mChess.setChessPieces(selectedPiece, rookX, 0);
+                        mChess.setChessPieces(currentPiece, kingX, 0);
 
-                //Makes the number go up of the moved piece
-                Storage.upCount(currentPiece.getPieceName().toString());
+                        selectedPiece.setPosition(rookX, 0);
+                        currentPiece.setPosition(kingX, 0);
+                    }
 
-                selectedPiece = null; // removes old piece (either other color or none) from board
+                    selectedPiece = null;
+                } else { // normal behavior
+                    mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
+
+                    currentPiece = selectedPiece; // copies old piece into new location
+                    currentPiece.setPosition(square); // moves copy onto new position in piece data
+
+                    //Makes the number go up of the moved piece
+                    Storage.upCount(currentPiece.getPieceName().toString());
+
+                    selectedPiece = null; // removes old piece (either other color or none) from board
+
+                    mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
+                }
 
                 // end of turn
                 resetColors();
-                mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
+                resetTags();
                 mChess.updateBoard();
                 possibleSelections.clear();
                 checkForCheck();
@@ -212,11 +244,21 @@ public class GameFragment extends Fragment {
                 if (p2turn) player2_move();
             } else if (currentPiece != null) {
                 setColor(getViewFromPiece(currentPiece), pieceSelectColor); // sets square color to yellow
+                resetTags();
                 possibleSelections.clear();
                 pieceSelection(currentPiece);
             } else {
+                resetTags();
                 possibleSelections.clear();
                 //Log.wtf("wtf", "help");
+            }
+        }
+    }
+
+    private void resetTags() {
+        for (int i = 0; i < 8; i++) { // removes any leftover tags from castling
+            for (int j = 0; j < 8; j++) {
+                getViewFromPos(i, j).setTag(null);
             }
         }
     }
@@ -248,7 +290,7 @@ public class GameFragment extends Fragment {
             int randyX = randy.nextInt(8);
             int randyY = randy.nextInt(8);
             randyPiece = mChess.getPiece(randyX, randyY);
-        }else{
+        } else {
             randyPiece = bKing;
         }
 
@@ -275,7 +317,11 @@ public class GameFragment extends Fragment {
     public void pieceSelection(ChessPiece currentPiece) {
         selectedPiece = currentPiece;
 
-        Log.d("selected", String.valueOf(selectedPiece));
+        if (!p2turn) {
+            Log.d("p1selected", String.valueOf(selectedPiece));
+        } else {
+            Log.d("p2selected", String.valueOf(selectedPiece));
+        }
 
         possibleSelections.clear(); // reset selections
 
@@ -286,6 +332,12 @@ public class GameFragment extends Fragment {
                 if (!isPieceOnView(selection) || getPieceFromView(selection).getPieceColor() != selectedPiece.getPieceColor()) {
                     setColor(selection, possibleSelectColor);
                     possibleSelections.add(selection);
+                } else if (selectedPiece.getPieceName() == Chess.pieceName.wROOK && getPieceFromView(selection).getPieceName() == Chess.pieceName.wKING) {
+                    if (!hasKingMoved() && getIDfromView(selection).equals("e1")) {
+                        setColor(selection, R.color.green);
+                        possibleSelections.add(selection);
+                        selection.setTag("castling");
+                    }
                 }
             }
         }
@@ -644,5 +696,9 @@ public class GameFragment extends Fragment {
         }
 
         return inCheck;
+    }
+
+    private boolean hasKingMoved() {
+        return Storage.getInt("wKING") > wKingMove;
     }
 }
