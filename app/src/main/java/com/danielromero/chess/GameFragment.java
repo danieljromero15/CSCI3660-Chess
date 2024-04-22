@@ -46,10 +46,10 @@ public class GameFragment extends Fragment {
             public void handleOnBackPressed() {
                 //Log.w("back", "back pressed in fragment " + getParentFragment());
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getContext())
-                        .setMessage("Are you sure you want to exit?")
+                        .setMessage(getString(R.string.check_exit))
                         .setCancelable(true)
-                        .setPositiveButton("Yes", (dialog, which) -> requireActivity().finish())
-                        .setNegativeButton("No", (dialog, which) -> dialog.cancel());
+                        .setPositiveButton(getString(R.string.yes), (dialog, which) -> requireActivity().finish())
+                        .setNegativeButton(getString(R.string.no), (dialog, which) -> dialog.cancel());
 
                 alertBuilder.show();
             }
@@ -152,7 +152,7 @@ public class GameFragment extends Fragment {
 
                     AlertDialog.Builder game_over_alert = new AlertDialog.Builder(getContext())
                             .setCancelable(true)
-                            .setPositiveButton("Okay", null);
+                            .setPositiveButton(getString(R.string.okay), null);
 
                     String win = "";
                     if (currentPiece.getPieceName() == Chess.pieceName.wKING) {
