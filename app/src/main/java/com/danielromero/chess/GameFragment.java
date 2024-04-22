@@ -71,7 +71,7 @@ public class GameFragment extends Fragment {
 
         //Initialized storage and leaves a test message in log to see if it works
         // !! Log will only work on my phone rn because I was testing persistance
-        Storage.make(requireActivity().getApplicationContext());
+        Storage.make(requireActivity().getApplicationContext(), mChess);
         //Log.w( "please",Storage.getString("test", "defaultValue"));
 
         newGame(null);
