@@ -8,7 +8,6 @@
     <string name="welcome_text">Welcome to Chess!</string>
     <string name="start_game">Start a Game!</string>
     <string name="load_game">Load Game</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_fragment_content_description">A King chess piece</string>
     <string name="made_by">Made by:</string>
     <string-array name="contributor_names">
@@ -18,11 +17,43 @@
         <item>Bailey Day</item>
     </string-array>
 
-    <string name ="game_over">Game over, %1$s wins </string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="okay">Okay</string>
+
+    <string name="check">Check!</string>
+    <string name="checkmate">Checkmate, %1$s wins </string>
     <string-array name="piece_colors">
         <item>White</item>
         <item>Black</item>
     </string-array>
+
+    <string name="prev_game_ended">The previous game has ended, starting a new one</string>
+    <string name="prev_game_loaded">Previous game loaded</string>
+
+    <string name="loading_game">Loading game…</string>
+
+    <string-array name="piece_display_names">
+        <item>White Pawn</item>
+        <item>White Knight</item>
+        <item>White Rook</item>
+        <item>White Bishop</item>
+        <item>White Queen</item>
+        <item>White King</item>
+        <item>Black Pawn</item>
+        <item>Black Knight</item>
+        <item>Black Rook</item>
+        <item>Black Bishop</item>
+        <item>Black Queen</item>
+        <item>Black King</item>
+    </string-array>
+
+    <string name="human_moves">Human Movements</string>
+    <string name="p2_moves">Genius Robot Movements</string>
+    <string name="wins">Wins</string>
+    <string name="losses">Losses</string>
+
+    <string name="check_exit">Are you sure you want to exit?</string>
 
     <!-- These strings deserve to rot in hell, they have absolutely no purpose except to remove 64 warnings about content descriptions from fragment_game.xml -->
     <string name="a1">a1</string>

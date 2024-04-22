@@ -13,76 +13,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StatsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class StatsFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public StatsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment StatsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static StatsFragment newInstance(String param1, String param2) {
-        StatsFragment fragment = new StatsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_stats, container, false);
         TextView piecesView = rootView.findViewById(R.id.stats_text_view);
+        String br = System.lineSeparator();
 
         String[] pieceNames = {"wPAWN", "wKNIGHT", "wROOK", "wBISHOP", "wQUEEN", "wKING", "bPAWN", "bKNIGHT", "bROOK", "bBISHOP", "bQUEEN", "bKING"};
-        String[] displayNames = {"White Pawn", "White Knight", "White Rook", "White Bishop", "White Queen", "White King", "Black Pawn", "Black Knight", "Black Rook", "Black Bishop", "Black Queen", "Black King"};
+        String[] displayNames = getResources().getStringArray(R.array.piece_display_names);
 
         StringBuilder stats_list = new StringBuilder();
-        stats_list.append("Human\n");
-        for(int i = 0; i < pieceNames.length; i++){
-            String point = displayNames[i] + ": " + Storage.getInt(pieceNames[i]) + "\n";
+        stats_list.append(getString(R.string.human_moves)).append(br);
+        for (int i = 0; i < pieceNames.length; i++) {
+            String point = displayNames[i] + ": " + Storage.getInt(pieceNames[i]) + br;
             stats_list.append(point);
-            if(i == pieceNames.length/2-1) {
-                stats_list.append("\nGenius Robot\n");
+            if (i == pieceNames.length / 2 - 1) {
+                stats_list.append(br).append(getString(R.string.p2_moves)).append(br);
             }
         }
-        stats_list.append("\nWins: " + Storage.getInt("win"));
-        stats_list.append("\nLosses: " + Storage.getInt("lose"));
+        stats_list.append(br).append(getString(R.string.wins)).append(": ").append(Storage.getInt("win"));
+        stats_list.append(br).append(getString(R.string.losses)).append(": ").append(Storage.getInt("lose"));
 
         Log.d("text", String.valueOf(piecesView));
         piecesView.setText(stats_list.toString());
-        //piecesView.setText("fuck");
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override

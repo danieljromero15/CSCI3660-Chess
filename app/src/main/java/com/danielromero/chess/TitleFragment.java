@@ -26,7 +26,9 @@ public class TitleFragment extends Fragment {
         Button startGameButton = view.findViewById(R.id.startGameButton);
         startGameButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.gameFragment));
 
+        Bundle load = new Bundle(); // I don't even have to put anything here for it to pass notNull lol
+        //load.putInt("load", 0);
         Button loadGameButton = view.findViewById(R.id.loadGameButton);
-        loadGameButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.gameFragment));
+        loadGameButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.gameFragment, load));
     }
 }
