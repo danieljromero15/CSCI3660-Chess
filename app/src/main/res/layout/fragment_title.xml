@@ -35,11 +35,11 @@
         android:textColor="@color/white" />
 
     <Button
+        android:id="@+id/loadGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/loadGameButton"
         android:text="@string/load_game"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

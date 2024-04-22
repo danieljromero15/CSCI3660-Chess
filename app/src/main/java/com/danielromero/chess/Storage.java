@@ -38,8 +38,8 @@ public class Storage {
     //Initializing the numbers imma work with, pretty boring
     //Alternatively call this to reset for testing
     //No, I will not rename this
-    public static void vibeCheck(){
-        if(getInt("wPAWN") == -1){
+    public static void vibeCheck() {
+        if (getInt("wPAWN") == -1) {
             //My apolocheese if this is annoying to read
             edit.putString("Board", "bROOK,bKNIGHT,bBISHOP,bQUEEN,bKING,bBISHOP,bKNIGHT,bROOK,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,bPAWN,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wPAWN,wROOK,wKNIGHT,wBISHOP,wQUEEN,wKING,wBISHOP,wKNIGHT,wROOK");
             edit.putInt("wPAWN", 0);
@@ -61,26 +61,26 @@ public class Storage {
     }
 
     //Use to parse the "Board" sharedpref because I can't store arrays (tragic, I know)
-    public static String[] theParsening(){
+    public static String[] theParsening() {
         return getString("Board").split(",", 0);
     }
 
     //Heavily modified version of the newGame() from Chess.java to take the string and make pieces\
     //TODO make this work
-    public static void setBoard(){
+    public static void setBoard() {
         String[] board = theParsening();
         for (String s : board) {
             Log.w("test", s);
         }
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-                int pos = i+j;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                int pos = i + j;
                 //mChess.setChessPieces(null, i, j);
                 //mChess.getChessSquare(i,j).setImageDrawable(null);
 
                 ChessPiece piece = null;
-                String square = Chess.getIDfromNums(i,j);
-                switch(board[pos]){
+                String square = Chess.getIDfromNums(i, j);
+                switch (board[pos]) {
                     case "wPAWN":
                         piece = new ChessPiece(square, Chess.pieceName.wPAWN);
                         break;
@@ -126,20 +126,20 @@ public class Storage {
         }
     }
 
-    public static void saveBoard(){
+    public static void saveBoard() {
         StringBuilder boardString = new StringBuilder();
-        for(int i = 7; i >=0; i--){
-            for(int j = 0; j < 8; j++){
-                ChessPiece curPiece = mChess.getPiece(j,i);
-                if(curPiece != null){
+        for (int i = 7; i >= 0; i--) {
+            for (int j = 0; j < 8; j++) {
+                ChessPiece curPiece = mChess.getPiece(j, i);
+                if (curPiece != null) {
                     String pieceS = curPiece.toString();
                     boardString.append(pieceS).append(",");
-                }else{
+                } else {
                     boardString.append("00,");
                 }
             }
         }
-        boardString.setLength(boardString.length()-1);
+        boardString.setLength(boardString.length() - 1);
         setString("Board", boardString.toString());
     }
 
@@ -148,23 +148,25 @@ public class Storage {
     public static String getString(String key) {
         return sharedPrefs.getString(key, "Jumpscare");
     }
+
     public static int getInt(String key) {
         return sharedPrefs.getInt(key, -1);
     }
 
     //setters, don't use the int one thxvm
-    public static void setString(String key, String string){
+    public static void setString(String key, String string) {
         edit.putString(key, string);
         edit.apply();
     }
-    public static void setInt(String key, int value){
+
+    public static void setInt(String key, int value) {
         edit.putInt(key, value);
         edit.apply();
     }
 
     //counter, use this to bump integers
-    public static void upCount(String piece){
-        edit.putInt(piece, getInt(piece)+1);
+    public static void upCount(String piece) {
+        edit.putInt(piece, getInt(piece) + 1);
         edit.apply();
     }
 }

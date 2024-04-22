@@ -26,10 +26,10 @@ public class StatsFragment extends Fragment {
 
         StringBuilder stats_list = new StringBuilder();
         stats_list.append(getString(R.string.human_moves)).append(br);
-        for(int i = 0; i < pieceNames.length; i++){
+        for (int i = 0; i < pieceNames.length; i++) {
             String point = displayNames[i] + ": " + Storage.getInt(pieceNames[i]) + br;
             stats_list.append(point);
-            if(i == pieceNames.length/2-1) {
+            if (i == pieceNames.length / 2 - 1) {
                 stats_list.append(br).append(getString(R.string.p2_moves)).append(br);
             }
         }

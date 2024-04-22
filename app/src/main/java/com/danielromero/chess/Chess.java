@@ -147,20 +147,20 @@ public class Chess {
         }
     }
 
-    public void setBoard(){
+    public void setBoard() {
         String[] board = Storage.theParsening(); //Makes board string
         int f = 0;
-        for(int i = 7; i >= 0; i--){ //loops from top left to bottom right, important because I don't know how to make things easy on myself
-            for(int j = 0; j < 8; j++){
+        for (int i = 7; i >= 0; i--) { //loops from top left to bottom right, important because I don't know how to make things easy on myself
+            for (int j = 0; j < 8; j++) {
                 setChessPieces(null, j, i);
-                getChessSquare(j,i).setImageDrawable(null);
+                getChessSquare(j, i).setImageDrawable(null);
 
                 ChessPiece piece = null;
                 pieceName tempPieceName = null;
 
-                String square = Chess.getIDfromNums(j,i);
+                String square = Chess.getIDfromNums(j, i);
                 String position = board[f];
-                switch(position){
+                switch (position) {
                     case "wPAWN":
                         tempPieceName = pieceName.wPAWN;
                         break;
