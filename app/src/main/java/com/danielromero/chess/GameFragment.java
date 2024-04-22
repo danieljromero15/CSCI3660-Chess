@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -28,11 +28,11 @@ public class GameFragment extends Fragment {
     Chess mChess;
     ChessPiece selectedPiece = null;
     ArrayList<View> possibleSelections = new ArrayList<>();
-    ArrayList<View> possibleSelectionsFinal = new ArrayList<>();
 
     // Defines colors for the selection, we should probably change these since I just chose them since they were easy to write
     final int pieceSelectColor = R.color.yellow;
     final int possibleSelectColor = R.color.blue;
+    final int checkColor = R.color.red;
     // defines whether or not it's the second player's turn
     boolean p2turn;
     boolean isGameOver;
@@ -79,10 +79,6 @@ public class GameFragment extends Fragment {
 
         newGame(null);
 
-        // defines kings
-        wKing = getPieceFromPos(4, 0);
-        bKing = getPieceFromPos(4, 7);
-
         Log.d("wKing", wKing.toString());
         Log.d("bKing", bKing.toString());
 
@@ -93,28 +89,54 @@ public class GameFragment extends Fragment {
 
     private void newGame(View view) { // starts new game
         resetColors();
-        clearSelections();
+        possibleSelections.clear();
         mChess.newGame();
         selectedPiece = null;
         p2turn = false;
         isGameOver = false;
         if (debug_printing) mChess.debug_printChess();
+
+        wKing = getPieceFromPos(4, 0);
+        bKing = getPieceFromPos(4, 7);
     }
 
     private void loadGame(View view) { // starts new game
         resetColors();
-        clearSelections();
+        possibleSelections.clear();
         mChess.setBoard();
         selectedPiece = null;
         p2turn = false;
         isGameOver = false;
         if (debug_printing) mChess.debug_printChess();
+
+        wKing = null;
+        bKing = null;
+
+        for (int i = 0; i < 8; i++) { // can't just assign based on position so searches array
+            for (int j = 0; j < 8; j++) {
+                if (isPieceOnView(getViewFromPos(i, j))) {
+                    ChessPiece piece = getPieceFromPos(i, j);
+                    if (piece.getPieceName() == Chess.pieceName.wKING) {
+                        wKing = piece;
+                    }
+                    if (piece.getPieceName() == Chess.pieceName.bKING) {
+                        bKing = piece;
+                    }
+                }
+            }
+        }
+
+        if (wKing == null || bKing == null) {
+            Toast.makeText(getContext(), R.string.prev_game_ended, Toast.LENGTH_LONG).show();
+            newGame(null);
+        } else {
+            Toast.makeText(getContext(), R.string.prev_game_loaded, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void selectSquare(View view) { // code for when a square is tapped
         if (!isGameOver) {
             resetColors();
-            setColor(view, pieceSelectColor); // sets square color to yellow
 
             String square = getIDfromView(view);
             //Log.d("square", square); // prints ID of square selected
@@ -122,80 +144,67 @@ public class GameFragment extends Fragment {
 
             ChessPiece currentPiece = mChess.getPiece(square);
 
-            if (selectedPiece != null && (currentPiece == null || selectedPiece.getPieceColor() != currentPiece.getPieceColor())) { // if previous selection exists, then if the square is either empty or a different color than previous selection
-                if ((view.getTag() != null) && (view.getTag() == "possibleMove")) { // if it has a tag and the tag is possibleMove
+            if (possibleSelections.contains(view)) { // if previous selection exists, then if the square is within possibleSelectionsFinal
 
-                    // Game over code
-                    if (currentPiece != null && (currentPiece.getPieceName() == Chess.pieceName.wKING || currentPiece.getPieceName() == Chess.pieceName.bKING)) {
-                        Log.d("game over", "game over");
+                // Game over code
+                if (currentPiece != null && (currentPiece.getPieceName() == Chess.pieceName.wKING || currentPiece.getPieceName() == Chess.pieceName.bKING)) {
+                    Log.d("game over", "game over");
 
-                        AlertDialog.Builder game_over_alert = new AlertDialog.Builder(getContext())
-                                .setCancelable(true)
-                                .setPositiveButton("Okay", null); // set gameover var here
+                    AlertDialog.Builder game_over_alert = new AlertDialog.Builder(getContext())
+                            .setCancelable(true)
+                            .setPositiveButton("Okay", null);
 
-                        String win = "";
-                        if (currentPiece.getPieceName() == Chess.pieceName.wKING) {
-                            // black wins
-                            win = getResources().getStringArray(R.array.piece_colors)[1];
-                        } else if (currentPiece.getPieceName() == Chess.pieceName.bKING) {
-                            // white wins
-                            win = getResources().getStringArray(R.array.piece_colors)[0];
-                        } else {
-                            Log.wtf("help", "Oh god how did this even happen? Is it a tie or something?");
-                        }
-
-                        isGameOver = true;
-                        game_over_alert.setMessage(getString(R.string.game_over, win));
-                        game_over_alert.show();
+                    String win = "";
+                    if (currentPiece.getPieceName() == Chess.pieceName.wKING) {
+                        // black wins
+                        Log.d("black win", "black win");
+                        win = getResources().getStringArray(R.array.piece_colors)[1];
+                        Storage.upCount("lose");
+                    } else if (currentPiece.getPieceName() == Chess.pieceName.bKING) {
+                        // white wins
+                        Log.d("white win", "white win");
+                        win = getResources().getStringArray(R.array.piece_colors)[0];
+                        Storage.upCount("win");
+                    } else {
+                        Log.wtf("help", "Oh god how did this even happen? Is it a tie or something?");
                     }
 
-                    mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
-
-                    currentPiece = selectedPiece; // copies old piece into new location
-                    currentPiece.setPosition(square); // moves copy onto new position in piece data
-
-                    //Makes the number go up of the moved piece
-                    if (selectedPiece != null) {
-                        Storage.upCount(selectedPiece.getPieceName().toString());
-                    }
-
-                    selectedPiece = null; // removes old piece (either other color or none) from board
-
-                    // end of turn
-                    resetColors();
-                    mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
-                    mChess.updateBoard();
-                    clearSelections();
-                    Storage.saveBoard();
-                    Log.w("board", Storage.getString("Board"));
-                    if(isGameOver) return;
-
-                    if (debug_printing) mChess.debug_printChess();
-
-                    p2turn = !p2turn;
-                    if (p2turn) player2_move();
-
-                    // Testing some stuff out. This code takes the piece at 0, 1 (the pawn at a2) and prints out the selections.
-                    // In theory, we could take this code, use it for the king with the path of a queen, and check every tile to see if there's a piece, then test that piece's possible selections to see if a king is there.
-                    // It would be a bit convoluted but it's just an idea.
-                /*
-                pieceSelectionPath(getPieceFromPos(0, 1));
-                for (View view1 : possibleSelectionsFinal) {
-                    try {
-                        Log.d("path", getIDfromView(view1));
-                    } catch (NullPointerException e) {
-                        Log.w("path", "null");
-                    }
+                    isGameOver = true;
+                    game_over_alert.setMessage(getString(R.string.checkmate, win));
+                    game_over_alert.show();
                 }
-                clearSelections();
-                */
 
-                } else clearSelections();
+                mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
+
+                currentPiece = selectedPiece; // copies old piece into new location
+                currentPiece.setPosition(square); // moves copy onto new position in piece data
+
+                //Makes the number go up of the moved piece
+                Storage.upCount(currentPiece.getPieceName().toString());
+
+                selectedPiece = null; // removes old piece (either other color or none) from board
+
+                // end of turn
+                resetColors();
+                mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
+                mChess.updateBoard();
+                possibleSelections.clear();
+                isKingChecked();
+                Storage.saveBoard();
+                //Log.w("board", Storage.getString("Board"));
+                if (isGameOver) return;
+
+                if (debug_printing) mChess.debug_printChess();
+
+                p2turn = !p2turn;
+                if (p2turn) player2_move();
             } else if (currentPiece != null) {
-                pieceSelectionPath(currentPiece);
+                setColor(getViewFromPiece(currentPiece), pieceSelectColor); // sets square color to yellow
+                possibleSelections.clear();
+                pieceSelection(currentPiece);
             } else {
-                clearSelections();
-                Log.wtf("wtf", "help");
+                possibleSelections.clear();
+                //Log.wtf("wtf", "help");
             }
         }
     }
@@ -224,19 +233,10 @@ public class GameFragment extends Fragment {
         if (view != null) view.setBackgroundColor(ContextCompat.getColor(requireActivity(), color));
     }
 
-    public void clearSelections() { // clears selections arrays and resets all tags
-        for (View view : possibleSelections) {
-            if (view != null) view.setTag(null);
-        }
-        possibleSelections.clear();
-        possibleSelectionsFinal.clear();
-    }
-
     // player 2 movement method
     // generates random numbers and checks if that square has a valid piece, otherwise runs again
     // once it finds a valid piece, it chooses a random possible selection, and moves there.
     private void player2_move() {
-        Log.d("p2", "p2 move");
         //selectSquare(getViewFromPos(0, 7));
         Random randy = new Random();
 
@@ -249,9 +249,11 @@ public class GameFragment extends Fragment {
             //setColor(currentView, R.color.red);
             selectSquare(currentView);
 
-            if (!possibleSelectionsFinal.isEmpty()) { // if there are possible moves
-                int rand = randy.nextInt(possibleSelectionsFinal.size());
-                selectSquare(possibleSelectionsFinal.get(rand));
+            if (!possibleSelections.isEmpty()) { // if there are possible moves
+                Log.d("p2", "p2 move");
+
+                int rand = randy.nextInt(possibleSelections.size());
+                selectSquare(possibleSelections.get(rand));
             } else {
                 player2_move(); // if there are no possible moves with that piece run again
             }
@@ -270,29 +272,47 @@ public class GameFragment extends Fragment {
     }
 
     // Selection path code (the thing that shows the colored path of possible locations)
-    public void pieceSelectionPath(ChessPiece currentPiece) {
+    public void pieceSelection(ChessPiece currentPiece) {
         selectedPiece = currentPiece;
 
         Log.d("selected", String.valueOf(selectedPiece));
 
-        clearSelections(); // reset selections
-        int x = selectedPiece.getX();
-        int y = selectedPiece.getY();
+        possibleSelections.clear(); // reset selections
 
-        switch (selectedPiece.getPieceName()) { // highlights where the piece can move
+        ArrayList<View> piecePath = pieceSelectionPath(selectedPiece);
+
+        for (View selection : piecePath) { // sets all views in the arraylist to be a certain color and selectable
+            if (selection != null) {
+                if (getPieceFromView(selection) == null || getPieceFromView(selection).getPieceColor() != selectedPiece.getPieceColor()) {
+                    setColor(selection, possibleSelectColor);
+                    possibleSelections.add(selection);
+                }
+            }
+        }
+    }
+
+    public ArrayList<View> pieceSelectionPath(ChessPiece pieceToFindPath) {
+        if (pieceToFindPath == null) return null;
+
+        ArrayList<View> viewsSelection = new ArrayList<>();
+
+        int x = pieceToFindPath.getX();
+        int y = pieceToFindPath.getY();
+
+        switch (pieceToFindPath.getPieceName()) { // highlights where the piece can move
             case wPAWN:
                 int wMovement = 1;
                 if (y == 1) wMovement = 2;
                 for (int i = 1; i <= wMovement; i++) {
                     if (getPieceFromPos(x, y + i) == null) {
-                        possibleSelections.add(getViewFromPos(x, y + i));
+                        viewsSelection.add(getViewFromPos(x, y + i));
                     } else break;
                 }
 
                 ChessPiece[] wPiecesToKill = {getPieceFromPos(x + 1, y + 1), getPieceFromPos(x - 1, y + 1)};
                 for (ChessPiece piece : wPiecesToKill) {
                     if (piece != null)
-                        possibleSelections.add(getViewFromPos(piece.getX(), piece.getY()));
+                        viewsSelection.add(getViewFromPos(piece.getX(), piece.getY()));
                 }
                 break;
             case bPAWN:
@@ -300,14 +320,14 @@ public class GameFragment extends Fragment {
                 if (y == 6) bMovement = 2;
                 for (int i = 1; i <= bMovement; i++) {
                     if (getPieceFromPos(x, y - i) == null) {
-                        possibleSelections.add(getViewFromPos(x, y - i));
+                        viewsSelection.add(getViewFromPos(x, y - i));
                     } else break;
                 }
 
                 ChessPiece[] bPiecesToKill = {getPieceFromPos(x + 1, y - 1), getPieceFromPos(x - 1, y - 1)};
                 for (ChessPiece piece : bPiecesToKill) {
                     if (piece != null)
-                        possibleSelections.add(getViewFromPos(piece.getX(), piece.getY()));
+                        viewsSelection.add(getViewFromPos(piece.getX(), piece.getY()));
                 }
                 break;
             case wKNIGHT:
@@ -317,8 +337,8 @@ public class GameFragment extends Fragment {
                     if (i == 0) continue;
                     if (Math.abs(i) == 2) j = 1;
                     if (Math.abs(i) == 1) j = 2;
-                    possibleSelections.add(getViewFromPos(x - i, y - j));
-                    possibleSelections.add(getViewFromPos(x - i, y + j));
+                    viewsSelection.add(getViewFromPos(x - i, y - j));
+                    viewsSelection.add(getViewFromPos(x - i, y + j));
                 }
                 break;
             case wBISHOP:
@@ -339,22 +359,22 @@ public class GameFragment extends Fragment {
                         }
                     }
 
-                    int currentIndex = possible.indexOf(getViewFromPiece(currentPiece));
+                    int currentIndex = possible.indexOf(getViewFromPiece(pieceToFindPath));
 
                     int a = currentIndex - 1;
                     int b = currentIndex + 1;
 
                     while (a > 0 && getPieceFromView(possible.get(a)) == null) {
-                        possibleSelections.add(possible.get(a));
+                        viewsSelection.add(possible.get(a));
                         a--;
                     }
                     while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
-                        possibleSelections.add(possible.get(b));
+                        viewsSelection.add(possible.get(b));
                         b++;
                     }
 
-                    if (a >= 0) possibleSelections.add(possible.get(a));
-                    if (b < possible.size()) possibleSelections.add(possible.get(b));
+                    if (a >= 0) viewsSelection.add(possible.get(a));
+                    if (b < possible.size()) viewsSelection.add(possible.get(b));
                 }
 
                 break;
@@ -381,22 +401,22 @@ public class GameFragment extends Fragment {
                         }
                     }
 
-                    int currentIndex = possible.indexOf(getViewFromPiece(currentPiece));
+                    int currentIndex = possible.indexOf(getViewFromPiece(pieceToFindPath));
 
                     int a = currentIndex - 1;
                     int b = currentIndex + 1;
 
                     while (a > 0 && getPieceFromView(possible.get(a)) == null) {
-                        possibleSelections.add(possible.get(a));
+                        viewsSelection.add(possible.get(a));
                         a--;
                     }
                     while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
-                        possibleSelections.add(possible.get(b));
+                        viewsSelection.add(possible.get(b));
                         b++;
                     }
 
-                    if (a >= 0) possibleSelections.add(possible.get(a));
-                    if (b < possible.size()) possibleSelections.add(possible.get(b));
+                    if (a >= 0) viewsSelection.add(possible.get(a));
+                    if (b < possible.size()) viewsSelection.add(possible.get(b));
                 }
                 break;
             case wQUEEN:
@@ -432,52 +452,36 @@ public class GameFragment extends Fragment {
                         }
                     }
 
-                    int currentIndex = possible.indexOf(getViewFromPiece(currentPiece));
+                    int currentIndex = possible.indexOf(getViewFromPiece(pieceToFindPath));
 
                     int a = currentIndex - 1;
                     int b = currentIndex + 1;
 
                     while (a > 0 && getPieceFromView(possible.get(a)) == null) {
-                        possibleSelections.add(possible.get(a));
+                        viewsSelection.add(possible.get(a));
                         a--;
                     }
                     while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
-                        possibleSelections.add(possible.get(b));
+                        viewsSelection.add(possible.get(b));
                         b++;
                     }
 
-                    if (a >= 0) possibleSelections.add(possible.get(a));
-                    if (b < possible.size()) possibleSelections.add(possible.get(b));
+                    if (a >= 0) viewsSelection.add(possible.get(a));
+                    if (b < possible.size()) viewsSelection.add(possible.get(b));
                 }
                 break;
             case wKING:
             case bKING:
                 for (int offsetX = -1; offsetX <= 1; offsetX++) {
                     for (int offsetY = -1; offsetY <= 1; offsetY++) {
-                        possibleSelections.add(getViewFromPos(x + offsetX, y + offsetY));
+                        viewsSelection.add(getViewFromPos(x + offsetX, y + offsetY));
                     }
                 }
                 break;
-            default:
-                clearSelections();
-                selectedPiece = null;
-                return;
         }
 
-        for (View selection : possibleSelections) { // sets all views in the arraylist to be a certain color and selectable
-            if (selection != null) {
-                if (getPieceFromView(selection) == null || getPieceFromView(selection).getPieceColor() != selectedPiece.getPieceColor()) {
-                    setColor(selection, possibleSelectColor);
-                    selection.setTag("possibleMove");
-                    possibleSelectionsFinal.add(selection);
-                }
-            }
-        }
+        return viewsSelection;
     }
-
-    //
-    // Getter methods
-    //
 
     // gets the ID of a certain view, ex. "a1" or "e5"
     public static String getIDfromView(View view) {
@@ -501,34 +505,41 @@ public class GameFragment extends Fragment {
         }
     }
 
-    public boolean isKingChecked() {
+    public void isKingChecked() {
         //Use getPieceFromView to find what piece is in the sight of the king,
         //then pull the possible selection of that piece to make sure it can check the king.
         ChessPiece[] kings = new ChessPiece[]{wKing, bKing};//Creates an array of the two kings
         for (ChessPiece king : kings) {
-            //Checks a queens movement from the king to see if there is a piece in sight
+            boolean inCheck = false;
+
+            int x = king.getX();
+            int y = king.getY();
+
+            ArrayList<View> possibleAttackers = new ArrayList<>();
+            ArrayList<View> possibleKnightSpaces = new ArrayList<>(); // Knights don't follow normal movement
+
             for (int i = 0; i < 4; i++) {
                 ArrayList<View> possible = new ArrayList<>();
                 for (int j = -8; j < 8; j++) {
-                    int posX = king.getX();
-                    int posY = king.getY();
+                    int posX = x;
+                    int posY = y;
 
                     switch (i) {
                         case 0: // rook code
                             //posX = x;
-                            posY = king.getY() + j;
+                            posY = y + j;
                             break;
                         case 1: // rook code
-                            posX = king.getX() + j;
+                            posX = x + j;
                             //posY = y;
                             break;
                         case 2: // bishop code
-                            posX = king.getX() + j;
-                            posY = king.getY() + j;
+                            posX = x + j;
+                            posY = y + j;
                             break;
                         case 3: // bishop code
-                            posX = king.getX() - j;
-                            posY = king.getY() + j;
+                            posX = x - j;
+                            posY = y + j;
                             break;
                     }
 
@@ -544,23 +555,70 @@ public class GameFragment extends Fragment {
                 int b = currentIndex + 1;
 
                 while (a > 0 && getPieceFromView(possible.get(a)) == null) {
-                    possibleSelections.add(possible.get(a));
+                    //possibleAttackers.add(possible.get(a));
                     a--;
                 }
                 while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
-                    possibleSelections.add(possible.get(b));
+                    //possibleAttackers.add(possible.get(b));
                     b++;
                 }
 
-                if (a >= 0) possibleSelections.add(possible.get(a));
-                if (b < possible.size()) possibleSelections.add(possible.get(b));
+                if (a >= 0) {
+                    possibleAttackers.add(possible.get(a));
+                    //setColor(possible.get(a), R.color.brown);
+                }
+                if (b < possible.size()) {
+                    possibleAttackers.add(possible.get(b));
+                    //setColor(possible.get(b), R.color.brown);
+                }
             }
-            return true;
+
+            for (int i = -2; i <= 2; i++) {
+                int j = 0;
+                if (i == 0) continue;
+                if (Math.abs(i) == 2) j = 1;
+                if (Math.abs(i) == 1) j = 2;
+                possibleKnightSpaces.add(getViewFromPos(x - i, y - j));
+                possibleKnightSpaces.add(getViewFromPos(x - i, y + j));
+            }
+
+            for (View attackers : possibleAttackers) {
+                if (isPieceOnView(attackers) && getPieceFromView(attackers).getPieceColor() != king.getPieceColor()) {
+                    ArrayList<View> possibleAttackerPath = pieceSelectionPath(getPieceFromView(attackers));
+                    if (possibleAttackerPath.contains(getViewFromPiece(king))) {
+                        setColor(attackers, checkColor);
+                        inCheck = true;
+                    }
+                }
+            }
+
+            for (View knightSpace : possibleKnightSpaces) {
+                if (isPieceOnView(knightSpace) &&
+                        (getPieceFromView(knightSpace).getPieceName() == Chess.pieceName.wKNIGHT || getPieceFromView(knightSpace).getPieceName() == Chess.pieceName.bKNIGHT)) {
+                    if (getPieceFromView(knightSpace).getPieceColor() != king.getPieceColor()) {
+                        setColor(knightSpace, checkColor);
+                        inCheck = true;
+                    }
+                }
+            }
+
+            if (inCheck) {
+                setColor(getViewFromPiece(king), checkColor);
+                if (!p2turn) { // Toast should only go off once
+                    Log.d("makeToast", "toast generated");
+                    Toast.makeText(getContext(), R.string.check, Toast.LENGTH_SHORT).show();
+                }
+            }
         }
-        return false;
     }
-        // Gets the view that a specified piece is in
-        public View getViewFromPiece (ChessPiece piece){
-            return getViewFromPos(piece.getX(), piece.getY());
-        }
+
+    // Gets the view that a specified piece is in
+    public View getViewFromPiece(ChessPiece piece) {
+        return getViewFromPos(piece.getX(), piece.getY());
+    }
+
+    //TODO replace all "getPieceFromView(.*) *= null" with this function
+    public boolean isPieceOnView(View view) { // checks if a certain view has a piece or not
+        return view != null && getPieceFromView(view) != null;
+    }
 }

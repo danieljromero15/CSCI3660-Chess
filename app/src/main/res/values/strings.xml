@@ -18,11 +18,15 @@
         <item>Bailey Day</item>
     </string-array>
 
-    <string name ="game_over">Game over, %1$s wins </string>
+    <string name="check">Check!</string>
+    <string name="checkmate">Checkmate, %1$s wins </string>
     <string-array name="piece_colors">
         <item>White</item>
         <item>Black</item>
     </string-array>
+
+    <string name="prev_game_ended">The previous game has ended, starting a new one</string>
+    <string name="prev_game_loaded">Previous game loaded</string>
 
     <!-- These strings deserve to rot in hell, they have absolutely no purpose except to remove 64 warnings about content descriptions from fragment_game.xml -->
     <string name="a1">a1</string>
