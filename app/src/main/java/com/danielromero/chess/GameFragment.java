@@ -1,7 +1,6 @@
 package com.danielromero.chess;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -49,7 +48,7 @@ public class GameFragment extends Fragment {
             public void handleOnBackPressed() {
                 //Log.w("back", "back pressed in fragment " + getParentFragment());
                 MaterialAlertDialogBuilder alertBuilder = new MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
-                        .setMessage(getString(R.string.check_exit))
+                        .setTitle(getString(R.string.check_exit))
                         .setCancelable(true)
                         .setPositiveButton(getString(R.string.yes), (dialog, which) -> requireActivity().finish())
                         .setNegativeButton(getString(R.string.no), (dialog, which) -> dialog.cancel());
@@ -167,7 +166,7 @@ public class GameFragment extends Fragment {
                 if (view.getTag() == null && currentPiece != null && (currentPiece.getPieceName() == Chess.pieceName.wKING || currentPiece.getPieceName() == Chess.pieceName.bKING)) {
                     Log.d("game over", "game over");
 
-                    AlertDialog.Builder game_over_alert = new AlertDialog.Builder(getContext())
+                    MaterialAlertDialogBuilder game_over_alert = new MaterialAlertDialogBuilder(requireContext(), R.style.AlertDialogTheme)
                             .setCancelable(true)
                             .setPositiveButton(getString(R.string.okay), null);
 
@@ -187,7 +186,7 @@ public class GameFragment extends Fragment {
                     }
 
                     isGameOver = true;
-                    game_over_alert.setMessage(getString(R.string.checkmate, win));
+                    game_over_alert.setTitle(getString(R.string.checkmate, win));
                     game_over_alert.show();
                 }
 
