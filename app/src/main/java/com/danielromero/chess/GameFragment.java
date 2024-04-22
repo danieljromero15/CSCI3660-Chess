@@ -201,7 +201,7 @@ public class GameFragment extends Fragment {
                 mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
                 mChess.updateBoard();
                 possibleSelections.clear();
-                isKingChecked();
+                checkForCheck();
                 Storage.saveBoard();
                 //Log.w("board", Storage.getString("Board"));
                 if (isGameOver) return;
@@ -526,110 +526,119 @@ public class GameFragment extends Fragment {
         return y <= 7;
     }
 
-    public void isKingChecked() {
+    public void checkForCheck() {
         //Use getPieceFromView to find what piece is in the sight of the king,
         //then pull the possible selection of that piece to make sure it can check the king.
-        ChessPiece[] kings = new ChessPiece[]{wKing, bKing};//Creates an array of the two kings
-        for (ChessPiece king : kings) {
-            boolean inCheck = false;
+        ChessPiece[] kings = {wKing, bKing};//Creates an array of the two kings
+        boolean[] inCheck = {false, false};
+        //for (ChessPiece king : kings) {
+        for (int i = 0; i < kings.length; i++) {
+            inCheck[i] = isKingChecked(kings[i]);
+        }
 
-            int x = king.getX();
-            int y = king.getY();
+        if ((inCheck[0] || inCheck[1]) && !p2turn) { // checks if the bKing is in check
+            Log.d("makeToast", "toast generated");
+            Toast.makeText(getContext(), R.string.check, Toast.LENGTH_SHORT).show();
+        }
+    }
 
-            ArrayList<View> possibleAttackers = new ArrayList<>();
-            ArrayList<View> possibleKnightSpaces = new ArrayList<>(); // Knights don't follow normal movement
+    public boolean isKingChecked(ChessPiece king) {
+        boolean inCheck = false;
 
-            for (int i = 0; i < 4; i++) {
-                ArrayList<View> possible = new ArrayList<>();
-                for (int j = -8; j < 8; j++) {
-                    int posX = x;
-                    int posY = y;
+        int x = king.getX();
+        int y = king.getY();
 
-                    switch (i) {
-                        case 0: // rook code
-                            //posX = x;
-                            posY = y + j;
-                            break;
-                        case 1: // rook code
-                            posX = x + j;
-                            //posY = y;
-                            break;
-                        case 2: // bishop code
-                            posX = x + j;
-                            posY = y + j;
-                            break;
-                        case 3: // bishop code
-                            posX = x - j;
-                            posY = y + j;
-                            break;
-                    }
+        ArrayList<View> possibleAttackers = new ArrayList<>();
+        ArrayList<View> possibleKnightSpaces = new ArrayList<>(); // Knights don't follow normal movement
 
-                    if (isWithinBoard(posX, posY)) {
-                        View tempView = getViewFromPos(posX, posY);
-                        possible.add(tempView);
-                    }
+        for (int i = 0; i < 4; i++) {
+            ArrayList<View> possible = new ArrayList<>();
+            for (int j = -8; j < 8; j++) {
+                int posX = x;
+                int posY = y;
+
+                switch (i) {
+                    case 0: // rook code
+                        //posX = x;
+                        posY = y + j;
+                        break;
+                    case 1: // rook code
+                        posX = x + j;
+                        //posY = y;
+                        break;
+                    case 2: // bishop code
+                        posX = x + j;
+                        posY = y + j;
+                        break;
+                    case 3: // bishop code
+                        posX = x - j;
+                        posY = y + j;
+                        break;
                 }
 
-                int currentIndex = possible.indexOf(getViewFromPiece(king));
-
-                int a = currentIndex - 1;
-                int b = currentIndex + 1;
-
-                while (a > 0 && !isPieceOnView(possible.get(a))) {
-                    //possibleAttackers.add(possible.get(a));
-                    a--;
-                }
-                while (b < possible.size() && !isPieceOnView(possible.get(b))) {
-                    //possibleAttackers.add(possible.get(b));
-                    b++;
-                }
-
-                if (a >= 0) {
-                    possibleAttackers.add(possible.get(a));
-                    //setColor(possible.get(a), R.color.brown);
-                }
-                if (b < possible.size()) {
-                    possibleAttackers.add(possible.get(b));
-                    //setColor(possible.get(b), R.color.brown);
+                if (isWithinBoard(posX, posY)) {
+                    View tempView = getViewFromPos(posX, posY);
+                    possible.add(tempView);
                 }
             }
 
-            for (int i = -2; i <= 2; i++) {
-                int j = 0;
-                if (i == 0) continue;
-                if (Math.abs(i) == 2) j = 1;
-                if (Math.abs(i) == 1) j = 2;
-                possibleKnightSpaces.add(getViewFromPos(x - i, y - j));
-                possibleKnightSpaces.add(getViewFromPos(x - i, y + j));
+            int currentIndex = possible.indexOf(getViewFromPiece(king));
+
+            int a = currentIndex - 1;
+            int b = currentIndex + 1;
+
+            while (a > 0 && !isPieceOnView(possible.get(a))) {
+                //possibleAttackers.add(possible.get(a));
+                a--;
+            }
+            while (b < possible.size() && !isPieceOnView(possible.get(b))) {
+                //possibleAttackers.add(possible.get(b));
+                b++;
             }
 
-            for (View attackers : possibleAttackers) {
-                if (isPieceOnView(attackers) && getPieceFromView(attackers).getPieceColor() != king.getPieceColor()) {
-                    ArrayList<View> possibleAttackerPath = pieceSelectionPath(getPieceFromView(attackers));
-                    if (possibleAttackerPath.contains(getViewFromPiece(king))) {
-                        setColor(attackers, checkColor);
-                        inCheck = true;
-                    }
-                }
+            if (a >= 0) {
+                possibleAttackers.add(possible.get(a));
+                //setColor(possible.get(a), R.color.brown);
             }
-
-            for (View knightSpace : possibleKnightSpaces) {
-                if (isPieceOnView(knightSpace) &&
-                        (getPieceFromView(knightSpace).getPieceName() == Chess.pieceName.wKNIGHT || getPieceFromView(knightSpace).getPieceName() == Chess.pieceName.bKNIGHT)) {
-                    if (getPieceFromView(knightSpace).getPieceColor() != king.getPieceColor()) {
-                        setColor(knightSpace, checkColor);
-                        inCheck = true;
-                    }
-                }
+            if (b < possible.size()) {
+                possibleAttackers.add(possible.get(b));
+                //setColor(possible.get(b), R.color.brown);
             }
+        }
 
-            if (inCheck) {
-                setColor(getViewFromPiece(king), checkColor);
-                if (!p2turn) { // Toast should only go off once
-                    Log.d("makeToast", "toast generated");
-                    Toast.makeText(getContext(), R.string.check, Toast.LENGTH_SHORT).show();
+        for (int i = -2; i <= 2; i++) {
+            int j = 0;
+            if (i == 0) continue;
+            if (Math.abs(i) == 2) j = 1;
+            if (Math.abs(i) == 1) j = 2;
+            possibleKnightSpaces.add(getViewFromPos(x - i, y - j));
+            possibleKnightSpaces.add(getViewFromPos(x - i, y + j));
+        }
+
+        for (View attackers : possibleAttackers) {
+            if (isPieceOnView(attackers) && getPieceFromView(attackers).getPieceColor() != king.getPieceColor()) {
+                ArrayList<View> possibleAttackerPath = pieceSelectionPath(getPieceFromView(attackers));
+                if (possibleAttackerPath.contains(getViewFromPiece(king))) {
+                    setColor(attackers, checkColor);
+                    inCheck = true;
                 }
             }
         }
+
+        for (View knightSpace : possibleKnightSpaces) {
+            if (isPieceOnView(knightSpace) &&
+                    (getPieceFromView(knightSpace).getPieceName() == Chess.pieceName.wKNIGHT || getPieceFromView(knightSpace).getPieceName() == Chess.pieceName.bKNIGHT)) {
+                if (getPieceFromView(knightSpace).getPieceColor() != king.getPieceColor()) {
+                    setColor(knightSpace, checkColor);
+                    inCheck = true;
+                }
+            }
+        }
+
+        if (inCheck) {
+            setColor(getViewFromPiece(king), checkColor);
+        }
+
+        return inCheck;
     }
 }
