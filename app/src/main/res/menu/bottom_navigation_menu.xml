@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/gameFragment"
+        android:icon="@drawable/icon_game"
+        android:title="@string/game" />
+    <item
+        android:id="@+id/statsFragment"
+        android:icon="@drawable/icon_stats"
+        android:title="@string/stats" />
+    <item
+        android:id="@+id/aboutFragment"
+        android:icon="@drawable/icon_about"
+        android:title="@string/about" />
+</menu>
