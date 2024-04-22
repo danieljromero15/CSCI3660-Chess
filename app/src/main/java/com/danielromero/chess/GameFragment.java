@@ -78,7 +78,7 @@ public class GameFragment extends Fragment {
         Storage.make(requireActivity().getApplicationContext(), mChess);
 
         if (getArguments() != null) {
-            Toast.makeText(getContext(), "Loading game...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.loading_game), Toast.LENGTH_SHORT).show();
             loadGame();
         } else {
             newGame();
@@ -95,6 +95,7 @@ public class GameFragment extends Fragment {
     private void newGame() { // I'm tired of typing null
         newGame(null);
     }
+
     private void newGame(View view) { // starts new game
         resetColors();
         possibleSelections.clear();
@@ -108,9 +109,10 @@ public class GameFragment extends Fragment {
         bKing = getPieceFromPos(4, 7);
     }
 
-    private void loadGame(){
+    private void loadGame() {
         loadGame(null);
     }
+
     private void loadGame(View view) { // starts new game
         resetColors();
         possibleSelections.clear();
@@ -219,12 +221,8 @@ public class GameFragment extends Fragment {
         }
     }
 
-    // awful method using a discouraged API but it works well so I don't wanna touch it
-    @SuppressLint("DiscouragedApi")
-    public ImageView getViewFromPos(int x, int y) { // gets the square from activity main, used for adding all views to the array
-        if (x < 8 && y < 8)
-            return rootView.findViewById(getResources().getIdentifier(Chess.getIDfromNums(x, y), "id", requireActivity().getPackageName()));
-        else return null;
+    public void setColor(View view, int color) { // sets the color for a single view
+        if (view != null) view.setBackgroundColor(ContextCompat.getColor(requireActivity(), color));
     }
 
     private void resetColors() { // resets all colors to the standard black and white
@@ -237,10 +235,6 @@ public class GameFragment extends Fragment {
                 }
             }
         }
-    }
-
-    public void setColor(View view, int color) { // sets the color for a single view
-        if (view != null) view.setBackgroundColor(ContextCompat.getColor(requireActivity(), color));
     }
 
     // player 2 movement method
@@ -271,14 +265,6 @@ public class GameFragment extends Fragment {
             player2_move();
         }
         p2turn = false;
-    }
-
-    // Checks if a certain position is within the appropriate bounds of a Chess board, and returns a boolean value
-    public boolean isWithinBoard(int x, int y) {
-        if (x < 0) return false;
-        if (y < 0) return false;
-        if (x > 7) return false;
-        return y <= 7;
     }
 
     // Selection path code (the thing that shows the colored path of possible locations)
@@ -493,6 +479,14 @@ public class GameFragment extends Fragment {
         return viewsSelection;
     }
 
+    // awful method using a discouraged API but it works well so I don't wanna touch it
+    @SuppressLint("DiscouragedApi")
+    public ImageView getViewFromPos(int x, int y) { // gets the square from activity main, used for adding all views to the array
+        if (x < 8 && y < 8)
+            return rootView.findViewById(getResources().getIdentifier(Chess.getIDfromNums(x, y), "id", requireActivity().getPackageName()));
+        else return null;
+    }
+
     // gets the ID of a certain view, ex. "a1" or "e5"
     public static String getIDfromView(View view) {
         String viewString = view.toString();
@@ -513,6 +507,23 @@ public class GameFragment extends Fragment {
         } catch (NullPointerException e) {
             return null;
         }
+    }
+
+    // Gets the view that a specified piece is in
+    public View getViewFromPiece(ChessPiece piece) {
+        return getViewFromPos(piece.getX(), piece.getY());
+    }
+
+    public boolean isPieceOnView(View view) { // checks if a certain view has a piece or not
+        return view != null && getPieceFromView(view) != null;
+    }
+
+    // Checks if a certain position is within the appropriate bounds of a Chess board, and returns a boolean value
+    public boolean isWithinBoard(int x, int y) {
+        if (x < 0) return false;
+        if (y < 0) return false;
+        if (x > 7) return false;
+        return y <= 7;
     }
 
     public void isKingChecked() {
@@ -620,14 +631,5 @@ public class GameFragment extends Fragment {
                 }
             }
         }
-    }
-
-    // Gets the view that a specified piece is in
-    public View getViewFromPiece(ChessPiece piece) {
-        return getViewFromPos(piece.getX(), piece.getY());
-    }
-
-    public boolean isPieceOnView(View view) { // checks if a certain view has a piece or not
-        return view != null && getPieceFromView(view) != null;
     }
 }

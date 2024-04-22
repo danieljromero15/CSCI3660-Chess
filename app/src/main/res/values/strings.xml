@@ -31,6 +31,8 @@
     <string name="prev_game_ended">The previous game has ended, starting a new one</string>
     <string name="prev_game_loaded">Previous game loaded</string>
 
+    <string name="loading_game">Loading game…</string>
+
     <string-array name="piece_display_names">
         <item>White Pawn</item>
         <item>White Knight</item>
