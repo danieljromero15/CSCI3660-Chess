@@ -77,7 +77,12 @@ public class GameFragment extends Fragment {
         //Initialized storage and leaves a test message in log to see if it works
         Storage.make(requireActivity().getApplicationContext(), mChess);
 
-        newGame(null);
+        if (getArguments() != null) {
+            Toast.makeText(getContext(), "Loading game...", Toast.LENGTH_SHORT).show();
+            loadGame();
+        } else {
+            newGame();
+        }
 
         Log.d("wKing", wKing.toString());
         Log.d("bKing", bKing.toString());
@@ -87,6 +92,9 @@ public class GameFragment extends Fragment {
         return rootView;
     }
 
+    private void newGame() { // I'm tired of typing null
+        newGame(null);
+    }
     private void newGame(View view) { // starts new game
         resetColors();
         possibleSelections.clear();
@@ -100,6 +108,9 @@ public class GameFragment extends Fragment {
         bKing = getPieceFromPos(4, 7);
     }
 
+    private void loadGame(){
+        loadGame(null);
+    }
     private void loadGame(View view) { // starts new game
         resetColors();
         possibleSelections.clear();
@@ -128,7 +139,7 @@ public class GameFragment extends Fragment {
 
         if (wKing == null || bKing == null) {
             Toast.makeText(getContext(), R.string.prev_game_ended, Toast.LENGTH_LONG).show();
-            newGame(null);
+            newGame();
         } else {
             Toast.makeText(getContext(), R.string.prev_game_loaded, Toast.LENGTH_SHORT).show();
         }
