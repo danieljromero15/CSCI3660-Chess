@@ -283,7 +283,7 @@ public class GameFragment extends Fragment {
 
         for (View selection : piecePath) { // sets all views in the arraylist to be a certain color and selectable
             if (selection != null) {
-                if (getPieceFromView(selection) == null || getPieceFromView(selection).getPieceColor() != selectedPiece.getPieceColor()) {
+                if (!isPieceOnView(selection) || getPieceFromView(selection).getPieceColor() != selectedPiece.getPieceColor()) {
                     setColor(selection, possibleSelectColor);
                     possibleSelections.add(selection);
                 }
@@ -364,11 +364,11 @@ public class GameFragment extends Fragment {
                     int a = currentIndex - 1;
                     int b = currentIndex + 1;
 
-                    while (a > 0 && getPieceFromView(possible.get(a)) == null) {
+                    while (a > 0 && !isPieceOnView(possible.get(a))) {
                         viewsSelection.add(possible.get(a));
                         a--;
                     }
-                    while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
+                    while (b < possible.size() && !isPieceOnView(possible.get(b))) {
                         viewsSelection.add(possible.get(b));
                         b++;
                     }
@@ -406,11 +406,11 @@ public class GameFragment extends Fragment {
                     int a = currentIndex - 1;
                     int b = currentIndex + 1;
 
-                    while (a > 0 && getPieceFromView(possible.get(a)) == null) {
+                    while (a > 0 && !isPieceOnView(possible.get(a))) {
                         viewsSelection.add(possible.get(a));
                         a--;
                     }
-                    while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
+                    while (b < possible.size() && !isPieceOnView(possible.get(b))) {
                         viewsSelection.add(possible.get(b));
                         b++;
                     }
@@ -457,11 +457,11 @@ public class GameFragment extends Fragment {
                     int a = currentIndex - 1;
                     int b = currentIndex + 1;
 
-                    while (a > 0 && getPieceFromView(possible.get(a)) == null) {
+                    while (a > 0 && !isPieceOnView(possible.get(a))) {
                         viewsSelection.add(possible.get(a));
                         a--;
                     }
-                    while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
+                    while (b < possible.size() && !isPieceOnView(possible.get(b))) {
                         viewsSelection.add(possible.get(b));
                         b++;
                     }
@@ -554,11 +554,11 @@ public class GameFragment extends Fragment {
                 int a = currentIndex - 1;
                 int b = currentIndex + 1;
 
-                while (a > 0 && getPieceFromView(possible.get(a)) == null) {
+                while (a > 0 && !isPieceOnView(possible.get(a))) {
                     //possibleAttackers.add(possible.get(a));
                     a--;
                 }
-                while (b < possible.size() && getPieceFromView(possible.get(b)) == null) {
+                while (b < possible.size() && !isPieceOnView(possible.get(b))) {
                     //possibleAttackers.add(possible.get(b));
                     b++;
                 }
@@ -617,7 +617,6 @@ public class GameFragment extends Fragment {
         return getViewFromPos(piece.getX(), piece.getY());
     }
 
-    //TODO replace all "getPieceFromView(.*) *= null" with this function
     public boolean isPieceOnView(View view) { // checks if a certain view has a piece or not
         return view != null && getPieceFromView(view) != null;
     }
