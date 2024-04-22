@@ -20,10 +20,10 @@ import java.util.Random;
 
 public class GameFragment extends Fragment {
     private View rootView;
-
     // for logging board state after each turn
     final boolean debug_printing = false;
-
+    public ChessPiece wKing;
+    public ChessPiece bKing;
     Chess mChess;
     ChessPiece selectedPiece = null;
     ArrayList<View> possibleSelections = new ArrayList<>();
@@ -34,6 +34,7 @@ public class GameFragment extends Fragment {
     final int possibleSelectColor = R.color.blue;
     // defines whether or not it's the second player's turn
     boolean p2turn;
+    boolean isGameOver;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +75,13 @@ public class GameFragment extends Fragment {
 
         newGame(null);
 
+        // defines kings
+        wKing = getPieceFromPos(4, 0);
+        bKing = getPieceFromPos(4, 7);
+
+        Log.d("wKing", wKing.toString());
+        Log.d("bKing", bKing.toString());
+
         if (debug_printing) mChess.debug_printChess();
 
         return rootView;
@@ -82,52 +90,80 @@ public class GameFragment extends Fragment {
     private void newGame(View view) { // starts new game
         resetColors();
         clearSelections();
-        mChess.setBoard();
+        mChess.newGame();
         selectedPiece = null;
         p2turn = false;
+        isGameOver = false;
         if (debug_printing) mChess.debug_printChess();
     }
 
     private void selectSquare(View view) { // code for when a square is tapped
-        resetColors();
-        setColor(view, pieceSelectColor); // sets square color to yellow
+        if (!isGameOver) {
+            resetColors();
+            setColor(view, pieceSelectColor); // sets square color to yellow
 
-        String square = getIDfromView(view);
-        //Log.d("square", square); // prints ID of square selected
-        //Log.d("withinBounds", String.valueOf(isWithinBoard(Chess.getNumsfromID(square)[0], Chess.getNumsfromID(square)[1])));
+            String square = getIDfromView(view);
+            //Log.d("square", square); // prints ID of square selected
+            //Log.d("withinBounds", String.valueOf(isWithinBoard(Chess.getNumsfromID(square)[0], Chess.getNumsfromID(square)[1])));
 
-        ChessPiece currentPiece = mChess.getPiece(square);
+            ChessPiece currentPiece = mChess.getPiece(square);
 
-        if (selectedPiece != null && (currentPiece == null || selectedPiece.getPieceColor() != currentPiece.getPieceColor())) { // if previous selection exists, then if the square is either empty or a different color than previous selection
-            if ((view.getTag() != null) && (view.getTag() == "possibleMove")) { // if it has a tag and the tag is possibleMove
-                mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
+            if (selectedPiece != null && (currentPiece == null || selectedPiece.getPieceColor() != currentPiece.getPieceColor())) { // if previous selection exists, then if the square is either empty or a different color than previous selection
+                if ((view.getTag() != null) && (view.getTag() == "possibleMove")) { // if it has a tag and the tag is possibleMove
 
-                currentPiece = selectedPiece; // copies old piece into new location
+                    // Game over code
+                    if (currentPiece != null && (currentPiece.getPieceName() == Chess.pieceName.wKING || currentPiece.getPieceName() == Chess.pieceName.bKING)) {
+                        Log.d("game over", "game over");
 
-                //Makes the number go up of the moved piece
-                if(selectedPiece != null){
-                    Storage.upCount(selectedPiece.getPieceName().toString());
-                }
+                        AlertDialog.Builder game_over_alert = new AlertDialog.Builder(getContext())
+                                .setCancelable(true)
+                                .setPositiveButton("Okay", null); // set gameover var here
 
-                currentPiece.setPosition(square); // moves copy onto new position in piece data
+                        String win = "";
+                        if (currentPiece.getPieceName() == Chess.pieceName.wKING) {
+                            // black wins
+                            win = getResources().getStringArray(R.array.piece_colors)[1];
+                        } else if (currentPiece.getPieceName() == Chess.pieceName.bKING) {
+                            // white wins
+                            win = getResources().getStringArray(R.array.piece_colors)[0];
+                        } else {
+                            Log.wtf("help", "Oh god how did this even happen? Is it a tie or something?");
+                        }
 
-                selectedPiece = null; // removes old piece (either other color or none) from board
+                        isGameOver = true;
+                        game_over_alert.setMessage(getString(R.string.game_over, win));
+                        game_over_alert.show();
+                    }
 
-                // end of turn
-                resetColors();
-                mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
-                mChess.updateBoard();
-                clearSelections();
-                Storage.saveBoard();
-                Log.w("board", Storage.getString("Board"));
-                if (debug_printing) mChess.debug_printChess();
+                    mChess.setChessPieces(null, selectedPiece.getColumn(), selectedPiece.getRow()); // removes from array
 
-                p2turn = !p2turn;
-                if (p2turn) player2_move();
+                    currentPiece = selectedPiece; // copies old piece into new location
+                    currentPiece.setPosition(square); // moves copy onto new position in piece data
 
-                // Testing some stuff out. This code takes the piece at 0, 1 (the pawn at a2) and prints out the selections.
-                // In theory, we could take this code, use it for the king with the path of a queen, and check every tile to see if there's a piece, then test that piece's possible selections to see if a king is there.
-                // It would be a bit convoluted but it's just an idea.
+                    //Makes the number go up of the moved piece
+                    if (selectedPiece != null) {
+                        Storage.upCount(selectedPiece.getPieceName().toString());
+                    }
+
+                    selectedPiece = null; // removes old piece (either other color or none) from board
+
+                    // end of turn
+                    resetColors();
+                    mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
+                    mChess.updateBoard();
+                    clearSelections();
+                    Storage.saveBoard();
+                    Log.w("board", Storage.getString("Board"));
+                    if(isGameOver) return;
+
+                    if (debug_printing) mChess.debug_printChess();
+
+                    p2turn = !p2turn;
+                    if (p2turn) player2_move();
+
+                    // Testing some stuff out. This code takes the piece at 0, 1 (the pawn at a2) and prints out the selections.
+                    // In theory, we could take this code, use it for the king with the path of a queen, and check every tile to see if there's a piece, then test that piece's possible selections to see if a king is there.
+                    // It would be a bit convoluted but it's just an idea.
                 /*
                 pieceSelectionPath(getPieceFromPos(0, 1));
                 for (View view1 : possibleSelectionsFinal) {
@@ -140,12 +176,13 @@ public class GameFragment extends Fragment {
                 clearSelections();
                 */
 
-            } else clearSelections();
-        } else if (currentPiece != null) {
-            pieceSelectionPath(currentPiece);
-        } else {
-            clearSelections();
-            Log.wtf("wtf", "help");
+                } else clearSelections();
+            } else if (currentPiece != null) {
+                pieceSelectionPath(currentPiece);
+            } else {
+                clearSelections();
+                Log.wtf("wtf", "help");
+            }
         }
     }
 
@@ -449,6 +486,10 @@ public class GameFragment extends Fragment {
             return null;
         }
     }
+
+    //public boolean isKingChecked(){
+
+    //}
 
     // Gets the view that a specified piece is in
     public View getViewFromPiece(ChessPiece piece) {
