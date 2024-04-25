@@ -229,6 +229,13 @@ public class GameFragment extends Fragment {
                     mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
                 }
 
+                // Pawn at end behavior
+                if (currentPiece.getPieceName() == Chess.pieceName.wPAWN && currentPiece.getY() == 7) {
+                    currentPiece.setPieceName(Chess.pieceName.wQUEEN);
+                } else if (currentPiece.getPieceName() == Chess.pieceName.bPAWN && currentPiece.getY() == 0) {
+                    currentPiece.setPieceName(Chess.pieceName.bQUEEN);
+                }
+
                 // end of turn
                 resetColors();
                 resetTags();

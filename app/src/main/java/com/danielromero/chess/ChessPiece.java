@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 public class ChessPiece extends Chess {
     private int column;
     private int row;
-    private final pieceName name;
+    private pieceName name;
     private int pieceImage;
     private int pieceColor;
 
@@ -14,44 +14,7 @@ public class ChessPiece extends Chess {
         this.row = row;
         this.name = name;
         setPieceColor();
-        switch (this.name) { // white
-            case wPAWN:
-                this.pieceImage = R.drawable.chess_piece_pawn_white;
-                break;
-            case wROOK:
-                this.pieceImage = R.drawable.chess_piece_rook_white;
-                break;
-            case wKNIGHT:
-                this.pieceImage = R.drawable.chess_piece_knight_white;
-                break;
-            case wBISHOP:
-                this.pieceImage = R.drawable.chess_piece_bishop_white;
-                break;
-            case wQUEEN:
-                this.pieceImage = R.drawable.chess_piece_queen_white;
-                break;
-            case wKING:
-                this.pieceImage = R.drawable.chess_piece_king_white;
-                break;
-            case bPAWN:
-                this.pieceImage = R.drawable.chess_piece_pawn_black;
-                break;
-            case bROOK:
-                this.pieceImage = R.drawable.chess_piece_rook_black;
-                break;
-            case bKNIGHT:
-                this.pieceImage = R.drawable.chess_piece_knight_black;
-                break;
-            case bBISHOP:
-                this.pieceImage = R.drawable.chess_piece_bishop_black;
-                break;
-            case bQUEEN:
-                this.pieceImage = R.drawable.chess_piece_queen_black;
-                break;
-            case bKING:
-                this.pieceImage = R.drawable.chess_piece_king_black;
-                break;
-        }
+        setPieceImage();
     }
 
     ChessPiece(String pos, pieceName name) {
@@ -130,6 +93,52 @@ public class ChessPiece extends Chess {
             case bQUEEN:
             case bKING:
                 this.pieceColor = R.color.black;
+                break;
+        }
+    }
+
+    public void setPieceName(pieceName name) {
+        this.name = name;
+        setPieceImage();
+    }
+
+    private void setPieceImage() {
+        switch (this.getPieceName()) {
+            case wPAWN:
+                this.pieceImage = R.drawable.chess_piece_pawn_white;
+                break;
+            case wROOK:
+                this.pieceImage = R.drawable.chess_piece_rook_white;
+                break;
+            case wKNIGHT:
+                this.pieceImage = R.drawable.chess_piece_knight_white;
+                break;
+            case wBISHOP:
+                this.pieceImage = R.drawable.chess_piece_bishop_white;
+                break;
+            case wQUEEN:
+                this.pieceImage = R.drawable.chess_piece_queen_white;
+                break;
+            case wKING:
+                this.pieceImage = R.drawable.chess_piece_king_white;
+                break;
+            case bPAWN:
+                this.pieceImage = R.drawable.chess_piece_pawn_black;
+                break;
+            case bROOK:
+                this.pieceImage = R.drawable.chess_piece_rook_black;
+                break;
+            case bKNIGHT:
+                this.pieceImage = R.drawable.chess_piece_knight_black;
+                break;
+            case bBISHOP:
+                this.pieceImage = R.drawable.chess_piece_bishop_black;
+                break;
+            case bQUEEN:
+                this.pieceImage = R.drawable.chess_piece_queen_black;
+                break;
+            case bKING:
+                this.pieceImage = R.drawable.chess_piece_king_black;
                 break;
         }
     }
