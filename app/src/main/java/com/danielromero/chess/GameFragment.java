@@ -291,7 +291,7 @@ public class GameFragment extends Fragment {
     // player 2 movement method
     // generates random numbers and checks if that square has a valid piece, otherwise runs again
     // once it finds a valid piece, it chooses a random possible selection, and moves there.
-    private void p2move() {
+    private void p2move() { // TODO: make king move into a non-check space
         boolean isInCheck = isKingChecked(bKing).first;
         Pair<Boolean, ArrayList<View>> hasCheck = isKingChecked(wKing);
         ChessPiece randyPiece;
