@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -229,6 +230,13 @@ public class GameFragment extends Fragment {
                     mChess.setChessPieces(currentPiece, square); // sets piece to new place in array
                 }
 
+                // Pawn at end behavior
+                if (currentPiece.getPieceName() == Chess.pieceName.wPAWN && currentPiece.getY() == 7) {
+                    currentPiece.setPieceName(Chess.pieceName.wQUEEN);
+                } else if (currentPiece.getPieceName() == Chess.pieceName.bPAWN && currentPiece.getY() == 0) {
+                    currentPiece.setPieceName(Chess.pieceName.bQUEEN);
+                }
+
                 // end of turn
                 resetColors();
                 resetTags();
@@ -242,7 +250,7 @@ public class GameFragment extends Fragment {
                 if (debug_printing) mChess.debug_printChess();
 
                 p2turn = !p2turn;
-                if (p2turn) player2_move();
+                if (p2turn) p2move();
             } else if (currentPiece != null) {
                 setColor(getViewFromPiece(currentPiece), pieceSelectColor); // sets square color to yellow
                 resetTags();
@@ -283,35 +291,43 @@ public class GameFragment extends Fragment {
     // player 2 movement method
     // generates random numbers and checks if that square has a valid piece, otherwise runs again
     // once it finds a valid piece, it chooses a random possible selection, and moves there.
-    private void player2_move() {
-        boolean isInCheck = isKingChecked(bKing);
-        Random randy = new Random();
+    private void p2move() { // TODO: make king move into a non-check space
+        boolean isInCheck = isKingChecked(bKing).first;
+        Pair<Boolean, ArrayList<View>> hasCheck = isKingChecked(wKing);
         ChessPiece randyPiece;
-        if (!isInCheck) {
-            int randyX = randy.nextInt(8);
-            int randyY = randy.nextInt(8);
-            randyPiece = mChess.getPiece(randyX, randyY);
-        } else {
+
+        if (isInCheck) {
             randyPiece = bKing;
+        } else if (hasCheck.first) {
+            Log.d("check", "black has check");
+            randyPiece = getPieceFromView(hasCheck.second.get(0));
+        }else{
+            randyPiece = getRandomPiece();
         }
 
-        if (randyPiece != null && randyPiece.getPieceColor() == R.color.black) {
-            View currentView = getViewFromPiece(randyPiece);
-            //setColor(currentView, R.color.red);
-            selectSquare(currentView);
+        while(p2turn){
+            if(randyPiece != null && randyPiece.getPieceColor() == R.color.black){
+                View currentView = getViewFromPiece(randyPiece);
+                selectSquare(currentView);
 
-            if (!possibleSelections.isEmpty()) { // if there are possible moves
-                Log.d("p2", "p2 move");
+                if (!possibleSelections.isEmpty()) { // if there are possible moves
+                    Log.d("p2", "p2 move");
 
-                int rand = randy.nextInt(possibleSelections.size());
-                selectSquare(possibleSelections.get(rand));
-            } else {
-                player2_move(); // if there are no possible moves with that piece run again
+                    View spaceToMoveTo;
+                    if(possibleSelections.contains(getViewFromPiece(wKing))){
+                        spaceToMoveTo = getViewFromPiece(wKing);
+                    }else{
+                        spaceToMoveTo = possibleSelections.get(new Random().nextInt(possibleSelections.size()));
+                    }
+                    selectSquare(spaceToMoveTo);
+                    p2turn = false;
+                } else {
+                    randyPiece = getRandomPiece(); // if there are no possible moves with that piece run again
+                }
+            }else{
+                randyPiece = getRandomPiece();
             }
-        } else {
-            player2_move();
         }
-        p2turn = false;
     }
 
     // Selection path code (the thing that shows the colored path of possible locations)
@@ -590,7 +606,7 @@ public class GameFragment extends Fragment {
         boolean[] inCheck = {false, false};
         //for (ChessPiece king : kings) {
         for (int i = 0; i < kings.length; i++) {
-            inCheck[i] = isKingChecked(kings[i]);
+            inCheck[i] = isKingChecked(kings[i]).first;
         }
 
         if ((inCheck[0] || inCheck[1]) && !p2turn) { // checks if the bKing is in check
@@ -599,8 +615,10 @@ public class GameFragment extends Fragment {
         }
     }
 
-    public boolean isKingChecked(ChessPiece king) {
+    // Returns a pair containing a boolean whether or not the King is checked, and an ArrayList of the pieces checking it
+    public Pair<Boolean, ArrayList<View>> isKingChecked(ChessPiece king) {
         boolean inCheck = false;
+        ArrayList<View> piecesChecking = new ArrayList<>();
 
         int x = king.getX();
         int y = king.getY();
@@ -676,8 +694,7 @@ public class GameFragment extends Fragment {
             if (isPieceOnView(attackers) && getPieceFromView(attackers).getPieceColor() != king.getPieceColor()) {
                 ArrayList<View> possibleAttackerPath = pieceSelectionPath(getPieceFromView(attackers));
                 if (possibleAttackerPath.contains(getViewFromPiece(king))) {
-                    setColor(attackers, checkColor);
-                    inCheck = true;
+                    piecesChecking.add(attackers);
                 }
             }
         }
@@ -686,20 +703,27 @@ public class GameFragment extends Fragment {
             if (isPieceOnView(knightSpace) &&
                     (getPieceFromView(knightSpace).getPieceName() == Chess.pieceName.wKNIGHT || getPieceFromView(knightSpace).getPieceName() == Chess.pieceName.bKNIGHT)) {
                 if (getPieceFromView(knightSpace).getPieceColor() != king.getPieceColor()) {
-                    setColor(knightSpace, checkColor);
-                    inCheck = true;
+                    piecesChecking.add(knightSpace);
                 }
             }
         }
 
-        if (inCheck) {
-            setColor(getViewFromPiece(king), checkColor);
+        for (View pieces : piecesChecking) {
+            setColor(pieces, checkColor);
+            inCheck = true;
         }
 
-        return inCheck;
+        if (inCheck) setColor(getViewFromPiece(king), checkColor);
+
+        return new Pair<>(inCheck, piecesChecking);
     }
 
     private boolean hasKingMoved() {
         return Storage.getInt("wKING") > wKingMove;
+    }
+
+    public ChessPiece getRandomPiece(){
+        Random randy = new Random();
+        return mChess.getPiece(randy.nextInt(8), randy.nextInt(8));
     }
 }
