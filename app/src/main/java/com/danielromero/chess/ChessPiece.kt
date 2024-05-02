@@ -1,6 +1,6 @@
 package com.danielromero.chess
 
-class ChessPiece internal constructor(var column: Int, var row: Int, private var name: pieceName) :
+class ChessPiece internal constructor(var column: Int, var row: Int, private var name: PieceName) :
     Chess() {
     var pieceImage: Int = 0
         private set
@@ -12,8 +12,8 @@ class ChessPiece internal constructor(var column: Int, var row: Int, private var
         setPieceImage()
     }
 
-    internal constructor(pos: String, name: pieceName) : this(
-        Chess.Companion.getNumsfromID(pos).get(0), Chess.Companion.getNumsfromID(pos).get(1), name
+    internal constructor(pos: String, name: PieceName) : this(
+        getNumsfromID(pos)[0], getNumsfromID(pos)[1], name
     )
 
     val x: Int
@@ -28,15 +28,15 @@ class ChessPiece internal constructor(var column: Int, var row: Int, private var
     }
 
     var position: String
-        get() = Chess.Companion.getIDfromNums(this.x, this.y)
+        get() = getIDfromNums(this.x, this.y)
         set(pos) {
             setPosition(
-                Chess.Companion.getNumsfromID(pos).get(0),
-                Chess.Companion.getNumsfromID(pos).get(1)
+                getNumsfromID(pos)[0],
+                getNumsfromID(pos)[1]
             )
         }
 
-    var pieceName: pieceName
+    var pieceName: PieceName
         get() = name
         set(name) {
             this.name = name
@@ -45,33 +45,33 @@ class ChessPiece internal constructor(var column: Int, var row: Int, private var
 
     override fun toString(): String {
         //return Chess.pieceName.toString()
-        return this.pieceName.toString();
+        return this.pieceName.toString()
     }
 
-    fun setPieceColor() {
+    private fun setPieceColor() {
         when (this.pieceName) {
-            Chess.pieceName.wPAWN, Chess.pieceName.wROOK, Chess.pieceName.wKNIGHT, Chess.pieceName.wBISHOP, Chess.pieceName.wQUEEN, Chess.pieceName.wKING -> this.pieceColor =
+            PieceName.WPawn, PieceName.WRook, PieceName.WKnight, PieceName.WBishop, PieceName.WQueen, PieceName.WKing -> this.pieceColor =
                 R.color.white
 
-            Chess.pieceName.bPAWN, Chess.pieceName.bROOK, Chess.pieceName.bKNIGHT, Chess.pieceName.bBISHOP, Chess.pieceName.bQUEEN, Chess.pieceName.bKING -> this.pieceColor =
+            PieceName.BPawn, PieceName.BRook, PieceName.BKnight, PieceName.BBishop, PieceName.BQueen, PieceName.BKing -> this.pieceColor =
                 R.color.black
         }
     }
 
     private fun setPieceImage() {
         when (this.pieceName) {
-            Chess.pieceName.wPAWN -> this.pieceImage = R.drawable.chess_piece_pawn_white
-            Chess.pieceName.wROOK -> this.pieceImage = R.drawable.chess_piece_rook_white
-            Chess.pieceName.wKNIGHT -> this.pieceImage = R.drawable.chess_piece_knight_white
-            Chess.pieceName.wBISHOP -> this.pieceImage = R.drawable.chess_piece_bishop_white
-            Chess.pieceName.wQUEEN -> this.pieceImage = R.drawable.chess_piece_queen_white
-            Chess.pieceName.wKING -> this.pieceImage = R.drawable.chess_piece_king_white
-            Chess.pieceName.bPAWN -> this.pieceImage = R.drawable.chess_piece_pawn_black
-            Chess.pieceName.bROOK -> this.pieceImage = R.drawable.chess_piece_rook_black
-            Chess.pieceName.bKNIGHT -> this.pieceImage = R.drawable.chess_piece_knight_black
-            Chess.pieceName.bBISHOP -> this.pieceImage = R.drawable.chess_piece_bishop_black
-            Chess.pieceName.bQUEEN -> this.pieceImage = R.drawable.chess_piece_queen_black
-            Chess.pieceName.bKING -> this.pieceImage = R.drawable.chess_piece_king_black
+            PieceName.WPawn -> this.pieceImage = R.drawable.chess_piece_pawn_white
+            PieceName.WRook -> this.pieceImage = R.drawable.chess_piece_rook_white
+            PieceName.WKnight -> this.pieceImage = R.drawable.chess_piece_knight_white
+            PieceName.WBishop -> this.pieceImage = R.drawable.chess_piece_bishop_white
+            PieceName.WQueen -> this.pieceImage = R.drawable.chess_piece_queen_white
+            PieceName.WKing -> this.pieceImage = R.drawable.chess_piece_king_white
+            PieceName.BPawn -> this.pieceImage = R.drawable.chess_piece_pawn_black
+            PieceName.BRook -> this.pieceImage = R.drawable.chess_piece_rook_black
+            PieceName.BKnight -> this.pieceImage = R.drawable.chess_piece_knight_black
+            PieceName.BBishop -> this.pieceImage = R.drawable.chess_piece_bishop_black
+            PieceName.BQueen -> this.pieceImage = R.drawable.chess_piece_queen_black
+            PieceName.BKing -> this.pieceImage = R.drawable.chess_piece_king_black
         }
     }
 }

@@ -10,9 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 
 class TitleFragment : Fragment() {
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_title, container, false)
     }
@@ -21,19 +19,15 @@ class TitleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val startGameButton = view.findViewById<Button>(R.id.startGameButton)
-        startGameButton.setOnClickListener { v: View? ->
-            NavHostFragment.findNavController(
-                this
-            ).navigate(R.id.gameFragment)
+        startGameButton.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.gameFragment)
         }
 
         val load = Bundle() // I don't even have to put anything here for it to pass notNull lol
         //load.putInt("load", 0);
         val loadGameButton = view.findViewById<Button>(R.id.loadGameButton)
-        loadGameButton.setOnClickListener { v: View? ->
-            NavHostFragment.findNavController(
-                this
-            ).navigate(R.id.gameFragment, load)
+        loadGameButton.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.gameFragment, load)
         }
     }
 }

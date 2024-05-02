@@ -21,39 +21,39 @@ class StatsFragment : Fragment() {
         val br = System.lineSeparator()
 
         val pieceNames = arrayOf(
-            "wPAWN",
-            "wKNIGHT",
-            "wROOK",
-            "wBISHOP",
-            "wQUEEN",
-            "wKING",
-            "bPAWN",
-            "bKNIGHT",
-            "bROOK",
-            "bBISHOP",
-            "bQUEEN",
-            "bKING"
+            "WPawn",
+            "WKnight",
+            "WRook",
+            "WBishop",
+            "WQueen",
+            "WKing",
+            "BPawn",
+            "BKnight",
+            "BRook",
+            "BBishop",
+            "BQueen",
+            "BKing"
         )
         val displayNames = resources.getStringArray(R.array.piece_display_names)
 
-        val stats_list = StringBuilder()
-        stats_list.append(getString(R.string.human_moves)).append(br)
+        val statsList = StringBuilder()
+        statsList.append(getString(R.string.human_moves)).append(br)
         for (i in pieceNames.indices) {
             val point = displayNames[i] + ": " + Storage.getInt(pieceNames[i]) + br
-            stats_list.append(point)
+            statsList.append(point)
             if (i == pieceNames.size / 2 - 1) {
-                stats_list.append(br).append(getString(R.string.p2_moves)).append(br)
+                statsList.append(br).append(getString(R.string.p2_moves)).append(br)
             }
         }
-        stats_list.append(br).append(getString(R.string.wins)).append(": ")
+        statsList.append(br).append(getString(R.string.wins)).append(": ")
             .append(Storage.getInt("win"))
-        stats_list.append(br).append(getString(R.string.losses)).append(": ")
+        statsList.append(br).append(getString(R.string.losses)).append(": ")
             .append(Storage.getInt("lose"))
 
         Log.d("text", piecesView.toString())
-        piecesView.text = stats_list.toString()
+        piecesView.text = statsList.toString()
 
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
             val navController = findNavController(requireActivity(), R.id.nav_host_fragment)
             navController.navigate(R.id.gameFragment)
         }

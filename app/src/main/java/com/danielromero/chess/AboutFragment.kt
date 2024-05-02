@@ -16,17 +16,17 @@ class AboutFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_about, container, false)
 
         // simply gets the string array and puts it all into the textview
-        val contributor_names = resources.getStringArray(R.array.contributor_names)
+        val contributorNames = resources.getStringArray(R.array.contributor_names)
         val namesView = rootView.findViewById<TextView>(R.id.contributor_names)
 
-        val names_list = StringBuilder()
-        for (name in contributor_names) {
-            names_list.append(name).append(System.lineSeparator()).append(System.lineSeparator())
+        val namesList = StringBuilder()
+        for (name in contributorNames) {
+            namesList.append(name).append(System.lineSeparator()).append(System.lineSeparator())
         }
 
-        namesView.text = names_list.toString()
+        namesView.text = namesList.toString()
 
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             val navController = findNavController(requireActivity(), R.id.nav_host_fragment)
             navController.navigate(R.id.gameFragment)
         }

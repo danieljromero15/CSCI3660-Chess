@@ -4,11 +4,11 @@ import android.util.Log
 import android.widget.ImageView
 
 open class Chess {
-    val chessGrid: Array<Array<ImageView?>> = Array(8) { arrayOfNulls(8) }
-    val chessPieces: Array<Array<ChessPiece?>> = Array(8) { arrayOfNulls(8) }
+    private val chessGrid: Array<Array<ImageView?>> = Array(8) { arrayOfNulls(8) }
+    private val chessPieces: Array<Array<ChessPiece?>> = Array(8) { arrayOfNulls(8) }
 
-    enum class pieceName {
-        wPAWN, wROOK, wKNIGHT, wBISHOP, wQUEEN, wKING, bPAWN, bROOK, bKNIGHT, bBISHOP, bQUEEN, bKING
+    enum class PieceName {
+        WPawn, WRook, WKnight, WBishop, WQueen, WKing, BPawn, BRook, BKnight, BBishop, BQueen, BKing
     }
 
     fun updateBoard() {
@@ -43,7 +43,7 @@ open class Chess {
         setChessPieces(piece, getNumsfromID(pos)[0], getNumsfromID(pos)[1])
     }
 
-    fun setPiece(piece: ChessPiece?) { // sets a piece to a specific square
+    private fun setPiece(piece: ChessPiece?) { // sets a piece to a specific square
         if (piece != null) {
             val x = piece.column
             val y = piece.row
@@ -72,24 +72,24 @@ open class Chess {
 
 
                 var currentPiece: ChessPiece? = null
-                var tempPieceName: pieceName? = null
+                var tempPieceName: PieceName? = null
                 val currentSquare = getIDfromNums(i, j)
                 when (currentSquare) {
-                    "a1", "h1" -> tempPieceName = pieceName.wROOK
-                    "a8", "h8" -> tempPieceName = pieceName.bROOK
-                    "b1", "g1" -> tempPieceName = pieceName.wKNIGHT
-                    "b8", "g8" -> tempPieceName = pieceName.bKNIGHT
-                    "c1", "f1" -> tempPieceName = pieceName.wBISHOP
-                    "c8", "f8" -> tempPieceName = pieceName.bBISHOP
-                    "d1" -> tempPieceName = pieceName.wQUEEN
-                    "d8" -> tempPieceName = pieceName.bQUEEN
-                    "e1" -> tempPieceName = pieceName.wKING
-                    "e8" -> tempPieceName = pieceName.bKING
+                    "a1", "h1" -> tempPieceName = PieceName.WRook
+                    "a8", "h8" -> tempPieceName = PieceName.BRook
+                    "b1", "g1" -> tempPieceName = PieceName.WKnight
+                    "b8", "g8" -> tempPieceName = PieceName.BKnight
+                    "c1", "f1" -> tempPieceName = PieceName.WBishop
+                    "c8", "f8" -> tempPieceName = PieceName.BBishop
+                    "d1" -> tempPieceName = PieceName.WQueen
+                    "d8" -> tempPieceName = PieceName.BQueen
+                    "e1" -> tempPieceName = PieceName.WKing
+                    "e8" -> tempPieceName = PieceName.BKing
                     "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2" -> tempPieceName =
-                        pieceName.wPAWN
+                        PieceName.WPawn
 
                     "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7" -> tempPieceName =
-                        pieceName.bPAWN
+                        PieceName.BPawn
                 }
                 if (tempPieceName != null) {
                     currentPiece = ChessPiece(currentSquare, tempPieceName)
@@ -101,30 +101,40 @@ open class Chess {
 
     fun setBoard() {
         val board = Storage.theParsening() //Makes board string
+
+        var boardString = ""
+
+        for (piece in board) {
+            boardString += "$piece "
+        }
+
+        Log.d("Board", boardString)
+
         var f = 0
         for (i in 7 downTo 0) { //loops from top left to bottom right, important because I don't know how to make things easy on myself
             for (j in 0..7) {
                 setChessPieces(null, j, i)
-                getChessSquare(j, i)!!.setImageDrawable(null)
+                getChessSquare(j, i)?.setImageDrawable(null)
 
                 var piece: ChessPiece? = null
-                var tempPieceName: pieceName? = null
+                var tempPieceName: PieceName? = null
 
                 val square = getIDfromNums(j, i)
-                val position = board!![f]
+                val position = board[f]
+                Log.w("hi", position)
                 when (position) {
-                    "wPAWN" -> tempPieceName = pieceName.wPAWN
-                    "wKNIGHT" -> tempPieceName = pieceName.wKNIGHT
-                    "wROOK" -> tempPieceName = pieceName.wROOK
-                    "wBISHOP" -> tempPieceName = pieceName.wBISHOP
-                    "wKING" -> tempPieceName = pieceName.wKING
-                    "wQUEEN" -> tempPieceName = pieceName.wQUEEN
-                    "bPAWN" -> tempPieceName = pieceName.bPAWN
-                    "bKNIGHT" -> tempPieceName = pieceName.bKNIGHT
-                    "bROOK" -> tempPieceName = pieceName.bROOK
-                    "bBISHOP" -> tempPieceName = pieceName.bBISHOP
-                    "bKING" -> tempPieceName = pieceName.bKING
-                    "bQUEEN" -> tempPieceName = pieceName.bQUEEN
+                    "WPawn" -> tempPieceName = PieceName.WPawn
+                    "WKnight" -> tempPieceName = PieceName.WKnight
+                    "WRook" -> tempPieceName = PieceName.WRook
+                    "WBishop" -> tempPieceName = PieceName.WBishop
+                    "WKing" -> tempPieceName = PieceName.WKing
+                    "WQueen" -> tempPieceName = PieceName.WQueen
+                    "BPawn" -> tempPieceName = PieceName.BPawn
+                    "BKnight" -> tempPieceName = PieceName.BKnight
+                    "BRook" -> tempPieceName = PieceName.BRook
+                    "BBishop" -> tempPieceName = PieceName.BBishop
+                    "BKing" -> tempPieceName = PieceName.BKing
+                    "BQueen" -> tempPieceName = PieceName.BQueen
                     "00" -> {}
                 }
                 if (tempPieceName != null) {
@@ -136,7 +146,7 @@ open class Chess {
         }
     }
 
-    fun debug_printChess() {
+    fun debugPrintChess() {
         val out = StringBuilder()
         out.append("--------------------------------------------------------")
             .append(System.lineSeparator())
@@ -172,12 +182,12 @@ open class Chess {
             return (x + 97).toChar().toString() + (y + 1)
         }
 
-        fun getNumsfromID(ID: String): IntArray { // converts string to ints, eg. "h8" to {7, 7}
-            Log.d("ID", "$ID");
-            if (ID.length > 2) {
-                return intArrayOf(ID[26].code - 97, ID[27].toString().toInt() - 1)
+        fun getNumsfromID(id: String): IntArray { // converts string to ints, eg. "h8" to {7, 7}
+            //Log.d("ID", "$ID");
+            return if (id.length > 2) {
+                intArrayOf(id[26].code - 97, id[27].toString().toInt() - 1)
             } else {
-                return intArrayOf(ID[0].code - 97, ID[1].toString().toInt() - 1)
+                intArrayOf(id[0].code - 97, id[1].toString().toInt() - 1)
             }
         }
     }
