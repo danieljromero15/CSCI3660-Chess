@@ -1,145 +1,77 @@
-package com.danielromero.chess;
+package com.danielromero.chess
 
-import androidx.annotation.NonNull;
+class ChessPiece internal constructor(var column: Int, var row: Int, private var name: pieceName) :
+    Chess() {
+    var pieceImage: Int = 0
+        private set
+    var pieceColor: Int = 0
+        private set
 
-public class ChessPiece extends Chess {
-    private int column;
-    private int row;
-    private pieceName name;
-    private int pieceImage;
-    private int pieceColor;
-
-    ChessPiece(int column, int row, pieceName name) {
-        this.column = column;
-        this.row = row;
-        this.name = name;
-        setPieceColor();
-        setPieceImage();
+    init {
+        setPieceColor()
+        setPieceImage()
     }
 
-    ChessPiece(String pos, pieceName name) {
-        this(Chess.getNumsfromID(pos)[0], Chess.getNumsfromID(pos)[1], name);
+    internal constructor(pos: String, name: pieceName) : this(
+        Chess.Companion.getNumsfromID(pos).get(0), Chess.Companion.getNumsfromID(pos).get(1), name
+    )
+
+    val x: Int
+        get() = column
+
+    val y: Int
+        get() = row
+
+    fun setPosition(x: Int, y: Int) {
+        this.column = x
+        this.row = y
     }
 
-    public int getColumn() {
-        return column;
+    var position: String
+        get() = Chess.Companion.getIDfromNums(this.x, this.y)
+        set(pos) {
+            setPosition(
+                Chess.Companion.getNumsfromID(pos).get(0),
+                Chess.Companion.getNumsfromID(pos).get(1)
+            )
+        }
+
+    var pieceName: pieceName
+        get() = name
+        set(name) {
+            this.name = name
+            setPieceImage()
+        }
+
+    override fun toString(): String {
+        //return Chess.pieceName.toString()
+        return this.pieceName.toString();
     }
 
-    public int getX() {
-        return getColumn();
-    }
+    fun setPieceColor() {
+        when (this.pieceName) {
+            Chess.pieceName.wPAWN, Chess.pieceName.wROOK, Chess.pieceName.wKNIGHT, Chess.pieceName.wBISHOP, Chess.pieceName.wQUEEN, Chess.pieceName.wKING -> this.pieceColor =
+                R.color.white
 
-    private void setColumn(int x) {
-        this.column = x;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public int getY() {
-        return getRow();
-    }
-
-    private void setRow(int y) {
-        this.row = y;
-    }
-
-    public void setPosition(int x, int y) {
-        this.setColumn(x);
-        this.setRow(y);
-    }
-
-    public void setPosition(String pos) {
-        setPosition(getNumsfromID(pos)[0], getNumsfromID(pos)[1]);
-    }
-
-    public String getPosition() {
-        return Chess.getIDfromNums(this.getX(), this.getY());
-    }
-
-    public int getPieceColor() {
-        return pieceColor;
-    }
-
-    public int getPieceImage() {
-        return pieceImage;
-    }
-
-    public pieceName getPieceName() {
-        return name;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return String.valueOf(this.getPieceName());
-    }
-
-    public void setPieceColor() {
-        switch (this.getPieceName()) {
-            case wPAWN:
-            case wROOK:
-            case wKNIGHT:
-            case wBISHOP:
-            case wQUEEN:
-            case wKING:
-                this.pieceColor = R.color.white;
-                break;
-            case bPAWN:
-            case bROOK:
-            case bKNIGHT:
-            case bBISHOP:
-            case bQUEEN:
-            case bKING:
-                this.pieceColor = R.color.black;
-                break;
+            Chess.pieceName.bPAWN, Chess.pieceName.bROOK, Chess.pieceName.bKNIGHT, Chess.pieceName.bBISHOP, Chess.pieceName.bQUEEN, Chess.pieceName.bKING -> this.pieceColor =
+                R.color.black
         }
     }
 
-    public void setPieceName(pieceName name) {
-        this.name = name;
-        setPieceImage();
-    }
-
-    private void setPieceImage() {
-        switch (this.getPieceName()) {
-            case wPAWN:
-                this.pieceImage = R.drawable.chess_piece_pawn_white;
-                break;
-            case wROOK:
-                this.pieceImage = R.drawable.chess_piece_rook_white;
-                break;
-            case wKNIGHT:
-                this.pieceImage = R.drawable.chess_piece_knight_white;
-                break;
-            case wBISHOP:
-                this.pieceImage = R.drawable.chess_piece_bishop_white;
-                break;
-            case wQUEEN:
-                this.pieceImage = R.drawable.chess_piece_queen_white;
-                break;
-            case wKING:
-                this.pieceImage = R.drawable.chess_piece_king_white;
-                break;
-            case bPAWN:
-                this.pieceImage = R.drawable.chess_piece_pawn_black;
-                break;
-            case bROOK:
-                this.pieceImage = R.drawable.chess_piece_rook_black;
-                break;
-            case bKNIGHT:
-                this.pieceImage = R.drawable.chess_piece_knight_black;
-                break;
-            case bBISHOP:
-                this.pieceImage = R.drawable.chess_piece_bishop_black;
-                break;
-            case bQUEEN:
-                this.pieceImage = R.drawable.chess_piece_queen_black;
-                break;
-            case bKING:
-                this.pieceImage = R.drawable.chess_piece_king_black;
-                break;
+    private fun setPieceImage() {
+        when (this.pieceName) {
+            Chess.pieceName.wPAWN -> this.pieceImage = R.drawable.chess_piece_pawn_white
+            Chess.pieceName.wROOK -> this.pieceImage = R.drawable.chess_piece_rook_white
+            Chess.pieceName.wKNIGHT -> this.pieceImage = R.drawable.chess_piece_knight_white
+            Chess.pieceName.wBISHOP -> this.pieceImage = R.drawable.chess_piece_bishop_white
+            Chess.pieceName.wQUEEN -> this.pieceImage = R.drawable.chess_piece_queen_white
+            Chess.pieceName.wKING -> this.pieceImage = R.drawable.chess_piece_king_white
+            Chess.pieceName.bPAWN -> this.pieceImage = R.drawable.chess_piece_pawn_black
+            Chess.pieceName.bROOK -> this.pieceImage = R.drawable.chess_piece_rook_black
+            Chess.pieceName.bKNIGHT -> this.pieceImage = R.drawable.chess_piece_knight_black
+            Chess.pieceName.bBISHOP -> this.pieceImage = R.drawable.chess_piece_bishop_black
+            Chess.pieceName.bQUEEN -> this.pieceImage = R.drawable.chess_piece_queen_black
+            Chess.pieceName.bKING -> this.pieceImage = R.drawable.chess_piece_king_black
         }
     }
 }

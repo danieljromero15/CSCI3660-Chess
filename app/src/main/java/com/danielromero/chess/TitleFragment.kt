@@ -1,34 +1,39 @@
-package com.danielromero.chess;
+package com.danielromero.chess
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-public class TitleFragment extends Fragment {
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_title, container, false);
+class TitleFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_title, container, false)
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        Button startGameButton = view.findViewById(R.id.startGameButton);
-        startGameButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.gameFragment));
+        val startGameButton = view.findViewById<Button>(R.id.startGameButton)
+        startGameButton.setOnClickListener { v: View? ->
+            NavHostFragment.findNavController(
+                this
+            ).navigate(R.id.gameFragment)
+        }
 
-        Bundle load = new Bundle(); // I don't even have to put anything here for it to pass notNull lol
+        val load = Bundle() // I don't even have to put anything here for it to pass notNull lol
         //load.putInt("load", 0);
-        Button loadGameButton = view.findViewById(R.id.loadGameButton);
-        loadGameButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.gameFragment, load));
+        val loadGameButton = view.findViewById<Button>(R.id.loadGameButton)
+        loadGameButton.setOnClickListener { v: View? ->
+            NavHostFragment.findNavController(
+                this
+            ).navigate(R.id.gameFragment, load)
+        }
     }
 }

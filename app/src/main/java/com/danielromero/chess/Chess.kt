@@ -1,256 +1,184 @@
-package com.danielromero.chess;
+package com.danielromero.chess
 
-import android.util.Log;
-import android.widget.ImageView;
+import android.util.Log
+import android.widget.ImageView
 
-public class Chess {
-    final ImageView[][] chessGrid = new ImageView[8][8];
-    final ChessPiece[][] chessPieces = new ChessPiece[8][8];
+open class Chess {
+    val chessGrid: Array<Array<ImageView?>> = Array(8) { arrayOfNulls(8) }
+    val chessPieces: Array<Array<ChessPiece?>> = Array(8) { arrayOfNulls(8) }
 
-    public enum pieceName {
+    enum class pieceName {
         wPAWN, wROOK, wKNIGHT, wBISHOP, wQUEEN, wKING, bPAWN, bROOK, bKNIGHT, bBISHOP, bQUEEN, bKING
     }
 
-    public void updateBoard() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                ImageView view = getChessSquare(i, j);
-                ChessPiece piece = getPiece(i, j);
+    fun updateBoard() {
+        for (i in 0..7) {
+            for (j in 0..7) {
+                val view = getChessSquare(i, j)
+                val piece = getPiece(i, j)
                 if (piece != null) {
-                    setPiece(piece);
+                    setPiece(piece)
                 } else {
-                    view.setImageDrawable(null);
+                    view!!.setImageDrawable(null)
                 }
             }
         }
     }
 
-    public void setChessSquare(ImageView view, int x, int y) { // adds view to the array
-        chessGrid[x][y] = view;
+    fun setChessSquare(view: ImageView?, x: Int, y: Int) { // adds view to the array
+        //Log.d("view", view.toString())
+        chessGrid[x][y] = view
     }
 
-    public ImageView getChessSquare(int x, int y) { // gets a view from the array
-        return chessGrid[x][y];
+    fun getChessSquare(x: Int, y: Int): ImageView? { // gets a view from the array
+        //Log.d("view", chessGrid[x][y].toString())
+        return chessGrid[x][y]
     }
 
-    public void setChessPieces(ChessPiece piece, int x, int y) { // adds piece to the array
-        chessPieces[x][y] = piece;
+    fun setChessPieces(piece: ChessPiece?, x: Int, y: Int) { // adds piece to the array
+        chessPieces[x][y] = piece
     }
 
-    public void setChessPieces(ChessPiece piece, String pos) {
-        setChessPieces(piece, getNumsfromID(pos)[0], getNumsfromID(pos)[1]);
+    fun setChessPieces(piece: ChessPiece?, pos: String) {
+        setChessPieces(piece, getNumsfromID(pos)[0], getNumsfromID(pos)[1])
     }
 
-    public static String getIDfromNums(int x, int y) { // converts ints to string, eg. 0, 0 to "a1"
-        return String.valueOf((char) (x + 97)) + (y + 1);
-    }
-
-    public static int[] getNumsfromID(String ID) { // converts string to ints, eg. "h8" to {7, 7}
-        return new int[]{ID.charAt(0) - 97, Integer.parseInt(String.valueOf(ID.charAt(1))) - 1};
-    }
-
-    public void setPiece(ChessPiece piece) { // sets a piece to a specific square
+    fun setPiece(piece: ChessPiece?) { // sets a piece to a specific square
         if (piece != null) {
-            int x = piece.getColumn();
-            int y = piece.getRow();
-            setChessPieces(piece, x, y); // sets into array
-            getChessSquare(x, y).setImageResource(piece.getPieceImage()); // sets onto imageview
+            val x = piece.column
+            val y = piece.row
+            setChessPieces(piece, x, y) // sets into array
+            getChessSquare(x, y)?.setImageResource(piece.pieceImage) // sets onto imageview
         }
     }
 
-    public ChessPiece getPiece(int x, int y) {
-        return chessPieces[x][y];
+    fun getPiece(x: Int, y: Int): ChessPiece? {
+        return chessPieces[x][y]
     }
 
-    public ChessPiece getPiece(String pos) {
-        return getPiece(getNumsfromID(pos)[0], getNumsfromID(pos)[1]);
+    fun getPiece(pos: String): ChessPiece? {
+        return getPiece(getNumsfromID(pos)[0], getNumsfromID(pos)[1])
     }
 
-    public void newGame() {
-        Log.d("newGame", "New Game started");
+    fun newGame() {
+        Log.d("newGame", "New Game started")
 
         // initial setup, adds all pieces to board
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (i in 0..7) {
+            for (j in 0..7) {
                 // clears any previous pieces on selected tiles in the loop (so every tile)
-                setChessPieces(null, i, j); // sets into array
-                getChessSquare(i, j).setImageDrawable(null); // sets onto imageview
+                setChessPieces(null, i, j) // sets into array
+                getChessSquare(i, j)?.setImageDrawable(null) // sets onto imageview
 
 
-                ChessPiece currentPiece = null;
-                pieceName tempPieceName = null;
-                String currentSquare = getIDfromNums(i, j);
-                switch (currentSquare) {
-                    case "a1":
-                    case "h1":
-                        tempPieceName = pieceName.wROOK;
-                        break;
-                    case "a8":
-                    case "h8":
-                        tempPieceName = pieceName.bROOK;
-                        break;
-                    case "b1":
-                    case "g1":
-                        tempPieceName = pieceName.wKNIGHT;
-                        break;
-                    case "b8":
-                    case "g8":
-                        tempPieceName = pieceName.bKNIGHT;
-                        break;
-                    case "c1":
-                    case "f1":
-                        tempPieceName = pieceName.wBISHOP;
-                        break;
-                    case "c8":
-                    case "f8":
-                        tempPieceName = pieceName.bBISHOP;
-                        break;
-                    case "d1":
-                        tempPieceName = pieceName.wQUEEN;
-                        break;
-                    case "d8":
-                        tempPieceName = pieceName.bQUEEN;
-                        break;
-                    case "e1":
-                        tempPieceName = pieceName.wKING;
-                        break;
-                    case "e8":
-                        tempPieceName = pieceName.bKING;
-                        break;
-                    case "a2":
-                    case "b2":
-                    case "c2":
-                    case "d2":
-                    case "e2":
-                    case "f2":
-                    case "g2":
-                    case "h2":
-                        tempPieceName = pieceName.wPAWN;
-                        break;
-                    case "a7":
-                    case "b7":
-                    case "c7":
-                    case "d7":
-                    case "e7":
-                    case "f7":
-                    case "g7":
-                    case "h7":
-                        tempPieceName = pieceName.bPAWN;
-                        break;
+                var currentPiece: ChessPiece? = null
+                var tempPieceName: pieceName? = null
+                val currentSquare = getIDfromNums(i, j)
+                when (currentSquare) {
+                    "a1", "h1" -> tempPieceName = pieceName.wROOK
+                    "a8", "h8" -> tempPieceName = pieceName.bROOK
+                    "b1", "g1" -> tempPieceName = pieceName.wKNIGHT
+                    "b8", "g8" -> tempPieceName = pieceName.bKNIGHT
+                    "c1", "f1" -> tempPieceName = pieceName.wBISHOP
+                    "c8", "f8" -> tempPieceName = pieceName.bBISHOP
+                    "d1" -> tempPieceName = pieceName.wQUEEN
+                    "d8" -> tempPieceName = pieceName.bQUEEN
+                    "e1" -> tempPieceName = pieceName.wKING
+                    "e8" -> tempPieceName = pieceName.bKING
+                    "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2" -> tempPieceName =
+                        pieceName.wPAWN
+
+                    "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7" -> tempPieceName =
+                        pieceName.bPAWN
                 }
-
                 if (tempPieceName != null) {
-                    currentPiece = new ChessPiece(currentSquare, tempPieceName);
+                    currentPiece = ChessPiece(currentSquare, tempPieceName)
                 }
-                setPiece(currentPiece); // sets piece onto board
+                setPiece(currentPiece) // sets piece onto board
             }
         }
     }
 
-    public void setBoard() {
-        String[] board = Storage.theParsening(); //Makes board string
-        int f = 0;
-        for (int i = 7; i >= 0; i--) { //loops from top left to bottom right, important because I don't know how to make things easy on myself
-            for (int j = 0; j < 8; j++) {
-                setChessPieces(null, j, i);
-                getChessSquare(j, i).setImageDrawable(null);
+    fun setBoard() {
+        val board = Storage.theParsening() //Makes board string
+        var f = 0
+        for (i in 7 downTo 0) { //loops from top left to bottom right, important because I don't know how to make things easy on myself
+            for (j in 0..7) {
+                setChessPieces(null, j, i)
+                getChessSquare(j, i)!!.setImageDrawable(null)
 
-                ChessPiece piece = null;
-                pieceName tempPieceName = null;
+                var piece: ChessPiece? = null
+                var tempPieceName: pieceName? = null
 
-                String square = Chess.getIDfromNums(j, i);
-                String position = board[f];
-                switch (position) {
-                    case "wPAWN":
-                        tempPieceName = pieceName.wPAWN;
-                        break;
-                    case "wKNIGHT":
-                        tempPieceName = pieceName.wKNIGHT;
-                        break;
-                    case "wROOK":
-                        tempPieceName = pieceName.wROOK;
-                        break;
-                    case "wBISHOP":
-                        tempPieceName = pieceName.wBISHOP;
-                        break;
-                    case "wKING":
-                        tempPieceName = pieceName.wKING;
-                        break;
-                    case "wQUEEN":
-                        tempPieceName = pieceName.wQUEEN;
-                        break;
-                    case "bPAWN":
-                        tempPieceName = pieceName.bPAWN;
-                        break;
-                    case "bKNIGHT":
-                        tempPieceName = pieceName.bKNIGHT;
-                        break;
-                    case "bROOK":
-                        tempPieceName = pieceName.bROOK;
-                        break;
-                    case "bBISHOP":
-                        tempPieceName = pieceName.bBISHOP;
-                        break;
-                    case "bKING":
-                        tempPieceName = pieceName.bKING;
-                        break;
-                    case "bQUEEN":
-                        tempPieceName = pieceName.bQUEEN;
-                        break;
-                    case "00":
+                val square = getIDfromNums(j, i)
+                val position = board!![f]
+                when (position) {
+                    "wPAWN" -> tempPieceName = pieceName.wPAWN
+                    "wKNIGHT" -> tempPieceName = pieceName.wKNIGHT
+                    "wROOK" -> tempPieceName = pieceName.wROOK
+                    "wBISHOP" -> tempPieceName = pieceName.wBISHOP
+                    "wKING" -> tempPieceName = pieceName.wKING
+                    "wQUEEN" -> tempPieceName = pieceName.wQUEEN
+                    "bPAWN" -> tempPieceName = pieceName.bPAWN
+                    "bKNIGHT" -> tempPieceName = pieceName.bKNIGHT
+                    "bROOK" -> tempPieceName = pieceName.bROOK
+                    "bBISHOP" -> tempPieceName = pieceName.bBISHOP
+                    "bKING" -> tempPieceName = pieceName.bKING
+                    "bQUEEN" -> tempPieceName = pieceName.bQUEEN
+                    "00" -> {}
                 }
                 if (tempPieceName != null) {
-                    piece = new ChessPiece(square, tempPieceName);
+                    piece = ChessPiece(square, tempPieceName)
                 }
-                setPiece(piece);
-                f++;
+                setPiece(piece)
+                f++
             }
         }
     }
 
-    public void debug_printChess() {
-        StringBuilder out = new StringBuilder();
-        out.append("--------------------------------------------------------").append(System.lineSeparator());
-        for (int i = 7; i >= 0; i--) {
-            for (int j = 0; j < 8; j++) {
-                ChessPiece piece = chessPieces[j][i];
+    fun debug_printChess() {
+        val out = StringBuilder()
+        out.append("--------------------------------------------------------")
+            .append(System.lineSeparator())
+        for (i in 7 downTo 0) {
+            for (j in 0..7) {
+                val piece = chessPieces[j][i]
                 if (piece != null) {
                     //out.append(chessPieces[j][i].getPieceName()).append(" ");
-                    String name = String.valueOf(piece.getPieceName());
-                    switch (name.length()) { // awful code btw
-                        case 0:
-                            out.append("").append(name).append("       ");
-                            break;
-                        case 1:
-                            out.append("   ").append(name).append("   ");
-                            break;
-                        case 2:
-                            out.append("  ").append(name).append("   ");
-                            break;
-                        case 3:
-                            out.append("  ").append(name).append("  ");
-                            break;
-                        case 4:
-                            out.append(" ").append(name).append("  ");
-                            break;
-                        case 5:
-                            out.append(" ").append(name).append(" ");
-                            break;
-                        case 6:
-                            out.append("").append(name).append(" ");
-                            break;
-                        case 7:
-                            out.append(name);
-                            break;
+                    val name = piece.pieceName.toString()
+                    when (name.length) {
+                        0 -> out.append("").append(name).append("       ")
+                        1 -> out.append("   ").append(name).append("   ")
+                        2 -> out.append("  ").append(name).append("   ")
+                        3 -> out.append("  ").append(name).append("  ")
+                        4 -> out.append(" ").append(name).append("  ")
+                        5 -> out.append(" ").append(name).append(" ")
+                        6 -> out.append("").append(name).append(" ")
+                        7 -> out.append(name)
                     }
                 } else {
-                    out.append("       ");
+                    out.append("       ")
                 }
             }
-            out.append(System.lineSeparator());
+            out.append(System.lineSeparator())
         }
 
-        out.append("--------------------------------------------------------");
-        Log.d("Chess", out.toString());
+        out.append("--------------------------------------------------------")
+        Log.d("Chess", out.toString())
+    }
+
+    companion object {
+        fun getIDfromNums(x: Int, y: Int): String { // converts ints to string, eg. 0, 0 to "a1"
+            return (x + 97).toChar().toString() + (y + 1)
+        }
+
+        fun getNumsfromID(ID: String): IntArray { // converts string to ints, eg. "h8" to {7, 7}
+            Log.d("ID", "$ID");
+            if (ID.length > 2) {
+                return intArrayOf(ID[26].code - 97, ID[27].toString().toInt() - 1)
+            } else {
+                return intArrayOf(ID[0].code - 97, ID[1].toString().toInt() - 1)
+            }
+        }
     }
 }
