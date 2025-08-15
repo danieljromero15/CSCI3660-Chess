@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.danielromero.chess"
         minSdk = 28
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 4
         versionName = "0.1.2"
 
